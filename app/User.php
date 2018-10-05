@@ -29,4 +29,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+// esta funccion sirve para relacionar la users con la tabla rol
+    public function rol(){
+        return $this->hasMany('SisVideo\Rol',' idRol','id');
+        
+    }
 }

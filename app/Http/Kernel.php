@@ -56,5 +56,13 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \SisVideo\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+
+
+
+
+
+           'is_admn'=> \SisVideo\Http\Middleware\AdminMiddleware::class,
+            'is_user'=> \SisVideo\Http\Middleware\UsuarioMiddleware::class,
     ];
 }

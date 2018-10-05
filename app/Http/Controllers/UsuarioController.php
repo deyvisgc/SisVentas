@@ -92,6 +92,7 @@ class UsuarioController extends Controller
             $user->email=$request->get('email');
             $user->password=bcrypt($request->get('password'));
             $user->username=$request->get('username');
+                $usuarios->idRol= $request->get('rol');
             if(Input::hasFile('imagen')){
                 $file=Input::file('imagen');
                 $file->move(public_path().'/Imagenes/Usuario/',$file->getClientOriginalName());
