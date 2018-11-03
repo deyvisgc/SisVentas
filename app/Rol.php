@@ -1,13 +1,13 @@
 <?php
 
-namespace SisVideo;
+namespace SisVentas;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Rol extends Model
 {
     protected $table='roles';
-    protected $primaryKey='idroles';
+    protected $primaryKey='rol_idrol';
 
     public $timestamps=false;
 

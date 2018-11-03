@@ -1,8 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.header')
 @section('contenido')
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
 @include('Perfil.updatePer')
     @if (Session::has('message'))
         <div class="text-danger">
@@ -270,7 +269,7 @@
                                     <div class="text-center">
 
 
-                                        <a data-target="#modal-editPersona-{{$user->idPersona}}" data-toggle="modal">
+                                        <a data-target="#modal-editPersona-{{$user->idpersona}}" data-toggle="modal">
                                             <button class="btn btn-warning">Editar datos de: {{$user->nombre}} </button>
                                         </a>
                                     </div>

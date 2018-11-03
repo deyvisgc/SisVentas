@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.header')
 @section('contenido')
 
 
@@ -47,7 +47,7 @@
                         </tr>
 
                         @include('Usuario.eliminar')
-
+                        @include('Usuario.update')
                     @endforeach
 
                 </table>

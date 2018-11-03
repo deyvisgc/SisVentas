@@ -21,7 +21,7 @@
             "database"
         ],
         "psr-4": {
-            "SisVideo\\": "app/"
+            "SisVentas\\": "app/"
         }
     },
     "autoload-dev": {

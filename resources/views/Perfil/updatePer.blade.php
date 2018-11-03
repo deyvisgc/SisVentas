@@ -1,6 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-     role="dialog" tabindex="-1" id="modal-editPersona-{{$user->idPersona}}">
-    {{Form::Open(array('action'=>array('PerfilController@updatePersona',$user->idPersona),'method'=>'patch','files'=>true))}}
+     role="dialog" tabindex="-1" id="modal-editPersona-{{$user->idpersona}}">
+    {{Form::Open(array('action'=>array('PerfilController@updatePersona',$user->idpersona),'method'=>'patch','files'=>true))}}
 
     <div class="modal-dialog" >
         <div class="modal-content">

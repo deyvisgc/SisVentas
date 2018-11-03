@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(SisVideo\User::class, function (Faker\Generator $faker) {
+$factory->define(SisVentas\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

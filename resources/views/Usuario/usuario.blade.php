@@ -1,7 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.header')
 @section('contenido')
     <!--  Made With Material Kit  -->
     <link href="{{asset('assets/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
+
 
     @if (count($errors)>0)
         <div class="alert alert-danger">
@@ -13,9 +14,10 @@
         </div>
     @endif
     <!--   Big container   -->
-    <div class="container">
+
+    <div class="container" style="padding-left: 100px">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
+            <div class="col-sm-11 col-sm-offset-2">
                 <!--      Wizard container        -->
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="green" id="wizardProfile">
@@ -55,7 +57,7 @@
 														<i class="material-icons">face</i>
 													</span>
                                                 <div class="form-group label-floating">
-                                                    <label class="control-label">email <small>(formato example@.com)</small></label>
+                                                    <label class="control-label">email <small>(example@.com)</small></label>
                                           <input value="{{old('email')}}" name="email" required type="email"  class="form-control">
                                                 </div>
                                             </div>

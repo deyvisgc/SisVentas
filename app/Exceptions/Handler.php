@@ -1,6 +1,6 @@
 <?php
 
-namespace SisVideo\Exceptions;
+namespace SisVentas\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

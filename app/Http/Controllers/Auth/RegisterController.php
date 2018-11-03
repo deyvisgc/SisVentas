@@ -1,9 +1,9 @@
 <?php
 
-namespace SisVideo\Http\Controllers\Auth;
+namespace SisVentas\Http\Controllers\Auth;
 
-use SisVideo\User;
-use SisVideo\Http\Controllers\Controller;
+use SisVentas\User;
+use SisVentas\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -58,7 +58,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \SisVideo\User
+     * @return \SisVentas\User
      */
     protected function create(array $data)
     {

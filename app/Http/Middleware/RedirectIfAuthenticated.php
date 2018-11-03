@@ -1,6 +1,6 @@
 <?php
 
-namespace SisVideo\Http\Middleware;
+namespace SisVentas\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

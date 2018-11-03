@@ -1,6 +1,6 @@
 <?php
 
-namespace SisVideo\Providers;
+namespace SisVentas\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'SisVideo\Model' => 'SisVideo\Policies\ModelPolicy',
+        'SisVentas\Model' => 'SisVentas\Policies\ModelPolicy',
     ];
 
     /**

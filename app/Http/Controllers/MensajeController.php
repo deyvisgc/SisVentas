@@ -1,6 +1,6 @@
 <?php
 
-namespace SisVideo\Http\Controllers;
+namespace SisVentas\Http\Controllers;
 
 use Illuminate\Http\Request;
 

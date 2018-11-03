@@ -1,12 +1,12 @@
 <?php
 
-namespace SisVideo\Http\Controllers\Auth;
+namespace SisVentas\Http\Controllers\Auth;
 
-use SisVideo\Http\Controllers\Controller;
+use SisVentas\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Http\Request;
-use SisVideo\User;
+use SisVentas\User;
 class LoginController extends Controller
 {
     /*

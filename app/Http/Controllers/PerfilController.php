@@ -1,11 +1,11 @@
 <?php
 
-namespace SisVideo\Http\Controllers;
+namespace SisVentas\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SisVideo\User;
-use SisVideo\Rol;
-use SisVideo\Persona;
+use SisVentas\User;
+use SisVentas\Rol;
+use SisVentas\Persona;
 use Validator;
 use Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +16,13 @@ use  Illuminate\Support\Facades\Input;
 class PerfilController extends Controller
 {public function index(Request $request)
     {
-        $id_tra = Auth::user()->Persona_idPersona;
+        $id_tra = Auth::user()->persona_idpersona;
         $rol = Rol::all();
         $use = DB::table('users as us')
-                ->join('persona as p', 'us.Persona_idPersona', '=', 'p.idpersona')
-                ->join('roles as r', 'p.roles_idroles', '=', 'r.idroles')
+                ->join('persona as p', 'us.persona_idpersona', '=', 'p.idpersona')
+                ->join('roles as r', 'p.rol_idrol', '=', 'r.idroles')
                 ->select(['us.id', 'us.email', 'us.username', 'us.imagen', 'p.nombre', 'p.Apellido_Pater', 'p.Apellido_Mater', 'p.dni', 'p.Fecha_nacimiento',
-                    'p.Direccion', 'p.telefono', 'p.edad', 'p.idPersona', 'r.idroles', 'r.nombre_rol'])
+                    'p.Direccion', 'p.telefono', 'p.edad', 'p.idpersona', 'r.idroles', 'r.nombre_rol'])
         ->where('p.idPersona', '=', $id_tra)
         ->first();
 
@@ -56,7 +56,7 @@ class PerfilController extends Controller
             $persona->dni=$request->get('dni');
             $persona->Direccion=$request->get('direccion');
             $persona->Fecha_nacimiento=$request->get('Fecha_cumple');
-            $persona->roles_idroles=$request->get('rol');
+            $persona->rol_idrol=$request->get('rol');
             $persona->edad=$request->get('edad');
 
 

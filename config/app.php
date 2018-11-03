@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'SisVentas'),
 
     /*
     |--------------------------------------------------------------------------
@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        SisVideo\Providers\AppServiceProvider::class,
-        SisVideo\Providers\AuthServiceProvider::class,
-        // SisVideo\Providers\BroadcastServiceProvider::class,
-        SisVideo\Providers\EventServiceProvider::class,
-        SisVideo\Providers\RouteServiceProvider::class,
+        SisVentas\Providers\AppServiceProvider::class,
+        SisVentas\Providers\AuthServiceProvider::class,
+         SisVentas\Providers\BroadcastServiceProvider::class,
+        SisVentas\Providers\EventServiceProvider::class,
+        SisVentas\Providers\RouteServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 

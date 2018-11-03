@@ -1,6 +1,6 @@
 <?php
 
-namespace SisVideo;
+namespace SisVentas;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,7 +31,7 @@ class User extends Authenticatable
     ];
 // esta funccion sirve para relacionar la users con la tabla rol
     public function rol(){
-        return $this->hasMany('SisVideo\Rol',' idRol','id');
+        return $this->hasMany('SisVentas\Rol',' idRol','id');
         
     }
 }

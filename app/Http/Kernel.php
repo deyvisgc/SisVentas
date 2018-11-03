@@ -1,6 +1,6 @@
 <?php
 
-namespace SisVideo\Http;
+namespace SisVentas\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,7 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \SisVideo\Http\Middleware\TrimStrings::class,
+        \SisVentas\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
@@ -27,12 +27,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \SisVideo\Http\Middleware\EncryptCookies::class,
+            \SisVentas\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \SisVideo\Http\Middleware\VerifyCsrfToken::class,
+            \SisVentas\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -54,7 +54,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \SisVideo\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \SisVentas\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
 
@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
 
 
 
-           'is_admn'=> \SisVideo\Http\Middleware\AdminMiddleware::class,
-            'is_user'=> \SisVideo\Http\Middleware\UsuarioMiddleware::class,
+           'is_admn'=> \SisVentas\Http\Middleware\AdminMiddleware::class,
+            'is_user'=> \SisVentas\Http\Middleware\UsuarioMiddleware::class,
     ];
 }

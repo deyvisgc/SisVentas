@@ -1,10 +1,10 @@
 <?php
 
-namespace SisVideo\Http\Controllers;
+namespace SisVentas\Http\Controllers;
 use Illuminate\Notifications\Channels\MailChannel;
-use SisVideo\Rol;
-use SisVideo\User;
-use SisVideo\Persona;
+use SisVentas\Rol;
+use SisVentas\User;
+use SisVentas\Persona;
 use Validator;
 use DB;
 use Mockery\Exception;
@@ -28,13 +28,12 @@ class UsuarioController extends Controller
             $query=trim($request->get('buscar'));
             $users=DB::table('users as us')
                 ->join('persona as p','us.Persona_idPersona','=' ,'p.idpersona')
-                ->join('roles as r','p.roles_idroles','=','r.idroles')
+                ->join('roles as r','p.rol_idrol','=','r.idroles')
                 ->select(['us.id','us.email','us.username','us.imagen','p.nombre','p.Apellido_Pater','p.Apellido_Mater','p.dni','p.Fecha_nacimiento',
-                    'p.Direccion','p.telefono','p.edad','p.idPersona','r.idroles','r.nombre_rol'])
+                    'p.Direccion','p.telefono','p.idPersona','r.idroles','r.nombre_rol'])
                 ->where('nombre','like','%'.$query.'%')
                 ->orwhere('us.email','like','%'.$query.'%')
                 ->orwhere('p.Apellido_Pater','like','%'.$query.'%')
-                ->orwhere('p.edad','like','%'.$query.'%')
                 ->orwhere('p.dni','LIKE','%'.$query.'%')
                 ->orderBy('p.nombre','desc')
                 ->paginate(7);
@@ -76,7 +75,7 @@ class UsuarioController extends Controller
             $per->direccion=$request->get('direccion');
             $per->telefono=$request->get('telefono');
             $per->edad=$request->get('edad');
-            $per->roles_idroles=$request->get('rol');
+            $per->rol_idrol=$request->get('rol');
             $per->nombre=$request->get('nombre');
             $per->save();
             /**
@@ -88,11 +87,11 @@ class UsuarioController extends Controller
              */
 
             $user=new User();
-            $user->Persona_idPersona = $per->idPersona;
+            $user->persona_idpersona = $per->idpersona;
             $user->email=$request->get('email');
             $user->password=bcrypt($request->get('password'));
             $user->username=$request->get('username');
-                $usuarios->idRol= $request->get('rol');
+            $user->idRol= $request->get('rol');
             if(Input::hasFile('imagen')){
                 $file=Input::file('imagen');
                 $file->move(public_path().'/Imagenes/Usuario/',$file->getClientOriginalName());
@@ -137,6 +136,7 @@ public function destroy($id){
     return Redirect('Usuario');
 
 }
+
 
     }
 
