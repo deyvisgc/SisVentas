@@ -55,7 +55,6 @@ class UsuarioController extends Controller
                 'dni'=>'required | max:50',
                 'direccion'=>'required | max:50',
                 'telefono'=>'required | max:50',
-                'edad'=>'required | max:50',
                 'Fecha_cumple'=>'required | max:50',
                 'rol'=>'required | max:50',
 
@@ -74,7 +73,6 @@ class UsuarioController extends Controller
             $per->Fecha_nacimiento=$request->get('Fecha_cumple');
             $per->direccion=$request->get('direccion');
             $per->telefono=$request->get('telefono');
-            $per->edad=$request->get('edad');
             $per->rol_idrol=$request->get('rol');
             $per->nombre=$request->get('nombre');
             $per->save();

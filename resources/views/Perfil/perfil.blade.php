@@ -241,13 +241,6 @@
                             <center>
                                 <div class="row">
 
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Edad</label>
-                                            <input type="text" class="form-control text-center" value="{{$user->edad}}"
-                                                   disabled>
-                                        </div>
-                                    </div>
 
 
                                         <div class="col-md-4">

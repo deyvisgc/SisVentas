@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Rol extends Model
 {
     protected $table='roles';
-    protected $primaryKey='rol_idrol';
+    protected $primaryKey='idroles';
 
     public $timestamps=false;
 
     protected $fillable=[
         'nombre_rol',
+        'rol_estado',
     ];
 
     public function user()

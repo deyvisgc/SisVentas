@@ -46,13 +46,6 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Edad</label>
-                            <input type="number" class="form-control" id="edad" required="Campo Obligatorio" value="{{$user->edad}}" name="edad"  placeholder="">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                        <div class="form-group">
                             <label for="exampleInputEmail1">Direccion</label>
                             <input type="text" class="form-control" id="direccion" required="Campo Obligatorio" value="{{$user->Direccion}}" name="direccion"  placeholder="">
                         </div>

@@ -154,17 +154,6 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                            <div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">record_voice_over</i>
-													</span>
-                                                <div class="form-group ">
-                                                    <label class="control-label">EDAD<small>(Campo obligatorio)</small></label>
-                                                    <input value="{{old('edad')}}"  name="edad" required="" type="number" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                             <label for="exampleInputEmail1">Fecha Cumpleaños<small>(Campo obligatorio)</small></label>
                                             <div class="input-group date"  data-provide="datepicker">
                                                 <input type="text" value="{{old("Fecha_cumple")}}" name="Fecha_cumple"  id="date" class="form-control">

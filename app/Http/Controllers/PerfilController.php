@@ -22,7 +22,7 @@ class PerfilController extends Controller
                 ->join('persona as p', 'us.persona_idpersona', '=', 'p.idpersona')
                 ->join('roles as r', 'p.rol_idrol', '=', 'r.idroles')
                 ->select(['us.id', 'us.email', 'us.username', 'us.imagen', 'p.nombre', 'p.Apellido_Pater', 'p.Apellido_Mater', 'p.dni', 'p.Fecha_nacimiento',
-                    'p.Direccion', 'p.telefono', 'p.edad', 'p.idpersona', 'r.idroles', 'r.nombre_rol'])
+                    'p.Direccion', 'p.telefono',  'p.idpersona', 'r.idroles', 'r.nombre_rol'])
         ->where('p.idPersona', '=', $id_tra)
         ->first();
 
@@ -38,7 +38,6 @@ class PerfilController extends Controller
             'dni'=>'required | max:50',
             'direccion'=>'required | max:50',
             'telefono'=>'required | max:50',
-            'edad'=>'required | max:50',
             'Fecha_cumple'=>'required | max:50',
             'rol'=>'required | max:50',
 
@@ -57,7 +56,7 @@ class PerfilController extends Controller
             $persona->Direccion=$request->get('direccion');
             $persona->Fecha_nacimiento=$request->get('Fecha_cumple');
             $persona->rol_idrol=$request->get('rol');
-            $persona->edad=$request->get('edad');
+
 
 
             $persona->update();

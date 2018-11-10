@@ -25,9 +25,9 @@ class ProductoController extends Controller
             return Datatables::of($producto)
                 ->addColumn('action', function ($id){
 
-                    return '<a data-toggle="modal" data-target="#modal-editProve"  onclick="editar('. $id->idproducto . ')" >
+                    return '<a data-toggle="modal" data-target="#formEdir"  onclick="editarPro('. $id->idproducto . ')" >
 <button type="button" class="btn btn-outline-success btn-social-icon-text"><i class="fas fa-pencil-alt btn-icon-append"></i></button></a>
-                       <a data-toggle="modal" data-target="#deletProv"   onclick="eliminar('. $id->idproducto . ')" >
+                       <a data-toggle="modal" data-target="#deletPro"   onclick="eliminarPro('. $id->idproducto . ')" >
                         <button type="button" class="btn btn-outline-success ">
                           <i class="fas fa-trash text-danger"></i>                          
                         </button>
@@ -84,6 +84,40 @@ class ProductoController extends Controller
         $producto->save();
         }
          $data=array('hecho'=>'si','campos'=>$producto);
+         echo json_encode($data);
+     }
+     public function cargarPro($id){
+       $cate=Categoria:: all();
+     /*  $product=DB::select("SELECT p.idproducto,p.idcategoria,p.codigo,p.nombre_pro,p.descripcion,p.imagen,p.estado,p.cantidad,p.Fecha_Registro,categoria.nombre_cate FROM producto as p , categoria  WHERE p.idcategoria=categoria.idcategoria and p.idproducto=$id");
+     */
+     $product=Producto::find($id);
+       $data=array('categoria'=>$cate,'prod'=>$product);
+         return response()->json($data);
+     }
+     public function editarpro(Request $request,$id){
+        $regla=[
+
+            'nombre_pro'=>'required',
+            'Codigo'=>'required',
+            'cantidad'=>'required',
+            'descripccion'=>'required',
+            'categoria'=>'required',
+            'Fecha_Ingreso'=>'required',
+        ];
+        $valida=Validator::make(Input::all(),$regla);
+        if($valida->fails()){
+            return response()->json(array('errors' => $valida->getMessageBag()->toArray()));
+        } else{
+            $produc=Producto::find($id);
+            $produc->nombre_pro=$request->get('nombre_pro');
+            $produc->codigo=$request->get('Codigo');
+            $produc->descripcion=$request->get('descripccion');
+            $produc->idcategoria=$request->get('categoria');
+            $produc->Fecha_Registro=$request->get('Fecha_Ingreso');
+            $produc->cantidad=$request->get('cantidad');
+            $produc->update();
+        }
+         $data=array('hecho'=>'si','campos'=>$produc);
          echo json_encode($data);
      }
 

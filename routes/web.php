@@ -20,19 +20,39 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => ['auth','is_admn']], function () {
-    Route::POST('regis/provedor','ProvedorController@registrar');
+    Route::post('User/create','UsuarioController@creauser');
+    Route::patch('User/update/{idPersona}','UsuarioController@updatePersona');
     Route::get('update/prove/{idprovedor}','ProvedorController@editPro');
     Route::post('editar/prove/{idprovedor}','ProvedorController@editarprovedor');
     Route::get('delete/prove/{idprovedor}','ProvedorController@eliminarProve');
-    Route::post('User/create','UsuarioController@creauser');
+    Route::post('editar/{idproducto}','ProductoController@editarpro');
+    Route::get('edit/Produ/{idproducto}','ProductoController@cargarPro');
+    Route::get('cargar/rol/{idroles}','rolController@cargar');
+    Route::post('update/rol/{idroles}','rolController@update');
+    Route::post('crear','ProvedorController@registro');
+    Route::get('edit/clien/{idcliente}','clienteController@cargar');
+    Route::post('editar/cliente/{idcliente}','clienteController@actualizar');
     Route::get('User/redirec','UsuarioController@redirec');
-    Route::post('User/create','UsuarioController@creauser');
+    Route::get('Estado/{idroles}','rolController@canDesactivo');
+    Route::get('Estado/Activar/{idroles}','rolController@canActivo');
     Route::patch('Perfil/per/{idPersona}','PerfilController@updatePersona');
     Route::patch('perfil/user/{idusuarios}','PerfilController@updateUser');
-    Route::patch('User/update/{idPersona}','UsuarioController@updatePersona');
-    Route::resource('Usuario','UsuarioController');
     Route::resource('Provedor','ProvedorController');
     Route::Resource('Producto','ProductoController');
+    Route::Resource('Roles','rolController');
+    Route::post('registro/cliente','clienteController@crear');
+    Route::resource('Usuario','UsuarioController');
+    Route::Resource('Cliente','clienteController');
+    Route::resource('Categorias','categoriaController');
+    Route::get('delete/{idcategoria}','CategoriaController@eliminar');
+    Route::get('Cate/Desactivar/{idcategoria}','CategoriaController@canDesactivo');
+    Route::get('Cate/Activar/{idroles}','CategoriaController@canActivo');
+    Route::resource('Vendedor','vendedorController');
+    Route::get('cargar/Vende/{idVendedor}','vendedorController@cargar');
+    Route::post('Update/Vende/{idVendedor}','vendedorController@actualizar');
+    Route::post('Activar/{idVendedor}','vendedorController@Activar');
+    Route::post('Desactivar/{idVendedor}','vendedorController@Desactivar');
+    Route::get('Delete/{idVendedor}','vendedorController@Eliminar');
 
     //
 });
@@ -54,8 +74,9 @@ Route::get('auth','UsuarioController@login');
 
 
 
-
 Auth::routes();
 Route::get('Mensajes','MensajeController@Mensaje')->name('mensaje');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('Perfil','PerfilController');
+
+

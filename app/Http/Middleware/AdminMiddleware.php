@@ -16,7 +16,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         $usuario_actual=\Auth::user();
-        if($usuario_actual->idRol!=2){
+        if($usuario_actual->idRol!=1){
             return redirect()->route('mensaje');
         }
         return $next($request);

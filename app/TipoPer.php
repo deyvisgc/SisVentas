@@ -12,7 +12,7 @@ class TipoPer extends Model
 
     protected $fillable=[
         'nombre',
-        'Apellido_paterno',
+        'Apellido_pat',
         'Apellido_Materno',
         'Direccion',
         'dni',

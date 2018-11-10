@@ -145,14 +145,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {!! Form::open(array('url'=>'regis/provedor','method'=>'POST','autocomplete'=>'off')) !!}
+                    {!! Form::open(array('url'=>'crear','method'=>'POST','autocomplete'=>'off')) !!}
                     {{Form::token()}}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row">
                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombre" placeholder="nombre" >
+                                <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombress" placeholder="nombre" >
                             </div>
                         </div>
 
@@ -160,14 +160,14 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Apellido Paterno</label>
                                 <input type="text" class="form-control" id="apellido_pa" required="Campo Obligatorio"
-                                  name="Apellido_paterno"  placeholder="Apellido Paterno">
+                                  name="Apellido_pat"  placeholder="Apellido Paterno">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Apellido Materno</label>
                                 <input type="text" class="form-control" id="apellido_ma" required="Campo Obligatorio"
-                                        name="Apellido_Materno" placeholder="Apellido Materno" >
+                                        name="Apellido_Mat" placeholder="Apellido Materno" >
                             </div>
                         </div>
 
@@ -262,13 +262,14 @@
                     <h1 class="modal-title">Actualizar Provedor</h1>
                 </div>
                 <div class="modal-body">
-                  <form id="formularioprovedor">
+                  <form id="formularioprovedor" method="post">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <div class="row">
                           <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                               <div class="form-group">
                                   <label for="exampleInputEmail1">Nombre</label>
                                   <input type="text" class="form-control" id="nombre_pro" required="Campo Obligatorio" name="nombress" >
+                                  <input type="text" hidden class="form-control" id="idprove" required="Campo Obligatorio" name="idprove" >
                               </div>
                           </div>
 
@@ -391,11 +392,12 @@
 
 @section('footer_scripts')
     <script>
+        var  table;
         $(document).ready(function () {
 
-            var  table;
 
-            table =   $('#produc-table').DataTable({
+
+            table =$('#produc-table').DataTable({
                 stateSave: true,
                 responsive: true,
                 processing: false,
@@ -479,10 +481,10 @@
 
 
 
-            });
+            })
 
 
-        });
+        })
 
 
         function editar(idprovedor) {
@@ -494,7 +496,7 @@
                     dataType:'json',
                     success:function (response) {
                         $('#nombre_pro').val(response.nombre);
-                        $('#apellido_pro').val(response.Apellido_paterno);
+                        $('#apellido_pro').val(response.Apellido_pat);
                         $('#apellido_ma_pro').val(response.Apellido_Materno);
                         $('#telefono_pro').val(response.telefono);
                         $('#dni_pro').val(response.dni);
@@ -503,9 +505,11 @@
                         $('#fecha_ingre').val(response.Fecha_Ingreso);
                         $('#fecha_naci').val(response.Fecha_nacimiento);
                         $('#estado').val(response.estado);
+                        $('#idprove').val(response.idtipoPersona);
 
 
-                        $('#editar').click(function () {
+                        $('#editar').click(function (e) {
+                            event.preventDefault();
                             $.ajaxSetup({
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -520,7 +524,17 @@
                                 type:'post',
                                 dataType:'json',
                                 success: function (response) {
-                                    alert(response);
+
+                                    form.trigger('reset');
+                                    $('#modal-editProve').modal('hide');
+                                    swal({
+                                        position: 'center',
+                                        type: 'success',
+                                        title: 'Actualizado Correctamente',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    table.ajax.reload(null,false);
 
                                 }
                             });
