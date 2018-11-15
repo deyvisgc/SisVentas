@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 
-
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
@@ -38,117 +39,6 @@
 
             <ul class="navbar-nav navbar-nav-right">
 
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                        <i class="fas fa-bell mx-0"></i>
-                        <span class="count">16</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                        <a class="dropdown-item">
-                            <p class="mb-0 font-weight-normal float-left">You have 16 new notifications
-                            </p>
-                            <span class="badge badge-pill badge-warning float-right">View all</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-danger">
-                                    <i class="fas fa-exclamation-circle mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium">Application Error</h6>
-                                <p class="font-weight-light small-text">
-                                    Just now
-                                </p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-warning">
-                                    <i class="fas fa-wrench mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium">Settings</h6>
-                                <p class="font-weight-light small-text">
-                                    Private message
-                                </p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-info">
-                                    <i class="far fa-envelope mx-0"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-medium">New user registration</h6>
-                                <p class="font-weight-light small-text">
-                                    2 days ago
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-envelope mx-0"></i>
-                        <span class="count">25</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                        <div class="dropdown-item">
-                            <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
-                            </p>
-                            <span class="badge badge-info badge-pill float-right">View all</span>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                            </div>
-                            <div class="preview-item-content flex-grow">
-                                <h6 class="preview-subject ellipsis font-weight-medium">David Grey
-                                    <span class="float-right font-weight-light small-text">1 Minutes ago</span>
-                                </h6>
-                                <p class="font-weight-light small-text">
-                                    The meeting is cancelled
-                                </p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                            </div>
-                            <div class="preview-item-content flex-grow">
-                                <h6 class="preview-subject ellipsis font-weight-medium">Tim Cook
-                                    <span class="float-right font-weight-light small-text">15 Minutes ago</span>
-                                </h6>
-                                <p class="font-weight-light small-text">
-                                    New product launch
-                                </p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                            </div>
-                            <div class="preview-item-content flex-grow">
-                                <h6 class="preview-subject ellipsis font-weight-medium"> Johnson
-                                    <span class="float-right font-weight-light small-text">18 Minutes ago</span>
-                                </h6>
-                                <p class="font-weight-light small-text">
-                                    Upcoming board meetin
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </li>
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                         <img src="{{asset('Imagenes/Usuario/'.Auth::user()->imagen)}}" alt="profile"/>
@@ -361,11 +251,12 @@
                 <li class="nav-item nav-profile">
                     <div class="nav-link">
                         <div class="profile-image">
-                            <img src="images/faces/face5.jpg" alt="image"/>
+                            <img src="{{asset('Imagenes/Usuario/'.Auth::user()->imagen)}}" alt="image"/>
+
                         </div>
                         <div class="profile-name">
                             <p class="name">
-                                Welcome Jane
+                                Welcome {{ Auth::user()->username }}
                             </p>
                             <p class="designation">
                                 Super Admin
@@ -454,50 +345,18 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
                         <i class="fas fa-pen-square menu-icon"></i>
-                        <span class="menu-title">Editors</span>
+                        <span class="menu-title">Movimiento</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="editors">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="pages/forms/text_editor.html">Text editors</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pages/forms/code_editor.html">Code editors</a></li>
+                            <li class="nav-item"><a class="nav-link" href="pages/forms/text_editor.html">Compra</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{url('Venta')}}">Venta</a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                        <i class="fas fa-chart-pie menu-icon"></i>
-                        <span class="menu-title">Charts</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="charts">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/morris.html">Morris</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/flot-chart.html">Flot</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/google-charts.html">Google charts</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/sparkline.html">Sparkline js</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/c3.html">C3 charts</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/chartist.html">Chartists</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/charts/justGage.html">JustGage</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-                        <i class="fas fa-table menu-icon"></i>
-                        <span class="menu-title">Tables</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="tables">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/tables/data-table.html">Data table</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/tables/js-grid.html">Js-grid</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/tables/sortable-table.html">Sortable table</a></li>
-                        </ul>
-                    </div>
-                </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="pages/ui-features/popups.html">
                         <i class="fas fa-minus-square menu-icon"></i>
@@ -555,73 +414,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-                        <i class="fas fa-exclamation-circle menu-icon"></i>
-                        <span class="menu-title">Error pages</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="error">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                        <i class="fas fa-file menu-icon"></i>
-                        <span class="menu-title">General Pages</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="general-pages">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/profile.html"> Profile </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/faq.html"> FAQ </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/faq-2.html"> FAQ 2 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/news-grid.html"> News grid </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/timeline.html"> Timeline </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/search-results.html"> Search Results </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/portfolio.html"> Portfolio </a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#apps" aria-expanded="false" aria-controls="apps">
-                        <i class="fas fa-briefcase menu-icon"></i>
-                        <span class="menu-title">Apps</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="apps">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/apps/email.html"> Email </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/apps/calendar.html"> Calendar </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/apps/todo.html"> Todo </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/apps/gallery.html"> Gallery </a></li>
-                        </ul>`
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#e-commerce" aria-expanded="false" aria-controls="e-commerce">
-                        <i class="fas fa-shopping-cart menu-icon"></i>
-                        <span class="menu-title">E-commerce</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="e-commerce">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/invoice.html"> Invoice </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/pricing-table.html"> Pricing Table </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/orders.html"> Orders </a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/documentation.html">
-                        <i class="far fa-file-alt menu-icon"></i>
-                        <span class="menu-title">Documentation</span>
-                    </a>
-                </li>
+
             </ul>
         </nav>
         <!-- partial -->
@@ -667,6 +460,8 @@
 
 <!--  Plugin for the Wizard -->
 <script src="{{asset('assets/js/material-bootstrap-wizard.js')}}"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>

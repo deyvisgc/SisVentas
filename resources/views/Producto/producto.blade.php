@@ -115,9 +115,10 @@
                                         <th>Codigo</th>
                                         <th>Categoria</th>
                                         <th>Cantidad</th>
+                                        <th>Precio</th>
                                         <th>Imagen</th>
                                         <th>Estado</th>
-                                        <th size="20px">Fecha Registro</th>
+                                        <th>Fecha </th>
                                         <th>Opciones</th>
                                     </thead>
                                     </tr>
@@ -207,7 +208,12 @@
                             </div>
 
                         </div>
-
+                        <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
+                            <div class="form-group">
+                              <center><label for="exampleInputEmail1">Prcio Producto</label></center>
+                                <input type="number" name="precio_pro"  id="precio_pro"  class="form-control">
+                            </div>
+                        </div>
 
 
                         <center>
@@ -308,6 +314,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Prcio Producto</label></center>
+                                    <input type="number" name="precio_pro"  id="pre_pro"  class="form-control">
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -400,6 +413,7 @@
                     {data: 'codigo', name:'codigo'},
                     {data: 'nombre_cate',name:'nombre_cate'},
                     {data: 'cantidad', name:'cantidad'},
+                    {data: 'Precio_Pro', name:'Precio_Pro'},
                     {data: 'imagen', name: 'imagen', orderable: true, searchable: true},
                 {data: 'estado',name:'estado'},
                     {data: 'Fecha_Registro',name:'Fecha_Registro'},
@@ -464,6 +478,7 @@ $('#inser').click(function (e) {
                            $('#descripccion_pro').val(response.prod.descripcion);
                            $('#estado_pro').val(response.prod.estado);
                            $('#fecha_ingre_pro').val(response.prod.Fecha_Registro);
+                           $('#pre_pro').val(response.prod.	Precio_Pro);
 
                            $.each(response.categoria, function (index, val) {
                                if (val.idcategoria === response.prod.idcategoria) {
@@ -498,6 +513,9 @@ $('#inser').click(function (e) {
                                 });
                                 $('#formEdir').modal('hide');
 
+                            },
+                            Error:function () {
+                                alert('Falla en actualizar tus datos');
                             }
 
                         });

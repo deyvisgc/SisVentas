@@ -78,5 +78,8 @@ Auth::routes();
 Route::get('Mensajes','MensajeController@Mensaje')->name('mensaje');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('Perfil','PerfilController');
+Route::resource('Venta','ventaController');
+Route::get('cargarPro','ventaController@cargar');
+Route::get('cargarClie','ventaController@cargarClie');
 
 
