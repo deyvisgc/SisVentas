@@ -58,10 +58,18 @@
                                                 </div>
                                                 <input type="text" id="codigop" name="codigop" hidden>
                                                 <input type="text" id="idproducto" name="idproducto" hidden>
-                                                <input type="text" id="cantidad" name="cantidad" required="required" onkeypress='validate(event)' class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
+                                                <input type="text" id="cantidad" name="cantidad" required="required" onkeyup="calcularSubTotal();" onkeypress='validate(event)' class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-inverse-success btn-fw float-right" id="btn_agregar">Agregar</button><br><br>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Sub Total</span>
+                                                </div>
+                                                <input type="text" id="subtotal" name="subtotal" required="required"  readonly  class="form-control" placeholder="$$$" aria-label="Username">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-inverse-success btn-fw float-right" onclick="RegistrarProductos();" id="btn_agregar">Agregar</button><br><br>
                                     </div>
                                 </div>
                               <div class="col-md-6">
@@ -321,9 +329,10 @@
                 console.log('newtotal:'+newtotal);
             });
 
+
             //Registrar venta
             $('#btn_insert_venta').click(function () {
-
+/*
               var data=[];
 
                 $(".fila").each(function() {
@@ -348,7 +357,7 @@
                     }
                 });
                 $.ajax({
-                    url:'{{url('shop')}}',
+                    url:'{}}',
                     dataType:'json',
                     type:'post',
                     data:{'array1':JSON.stringify(data),'array2':JSON.stringify(dataVenta)},
@@ -364,7 +373,7 @@
                     error: function(){
                         alert("error en tu proceso");
                     }
-                });
+                });*/
             });
         });
         function calcularVuelto(){
@@ -398,6 +407,48 @@
                 theEvent.returnValue = false;
                 if(theEvent.preventDefault) theEvent.preventDefault();
             }
+        }
+        function calcularSubTotal(){
+            var cantidad = document.getElementById("cantidad").value;
+            var precio = document.getElementById("precio").value;
+            var monto = parseFloat(cantidad)*parseFloat(precio);
+
+            $('#subtotal').val(monto.toFixed(2));
+        }
+        //Registrar Productos
+        function  RegistrarProductos() {
+            var idproducto = $('#idproducto').val();
+            var cantidad = $('#cantidad').val();
+            var monto = $('#subtotal').val();
+            var data ={};
+
+            data.idproducto = idproducto;
+            data.cantidad = cantidad;
+            data.monto = monto;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'{{url('shop')}}',
+                dataType:'json',
+                type:'post',
+                data:{'array1':JSON.stringify(data)},
+                success:function (response) {
+                    swal({
+                        position: 'center',
+                        type: 'success',
+                        title: 'Registro Exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function(){
+                    alert("error en tu proceso");
+                }
+            });
         }
 
     </script>

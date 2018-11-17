@@ -53,20 +53,14 @@ class ventaController extends Controller
         echo json_encode($data);
     }
 
-    public function RegistrarVenta(){
-        $dataVenta = array();
+    public function RegistrarProductos(){
 
-        $data1 = json_decode(stripslashes($_POST['array1']));
-        $data2 = json_decode($_POST['array2']);
+        $data = $_POST['array1'];
 
-        for($i=0; $i <$data1 ;$i++){
-          $dataVenta=array(
-            'idproducto'=>$data1[$i],
-            'cantidad'=>$data1[$i],
-            'monto'=>$data1[$i]
-          );
-        }
+        $dataProducto = json_decode(json_encode($data),true);
 
-        echo (implode($dataVenta));
+        foreach ($dataProducto as $key=>$value)
+            $idproducto = $value->idproducto;
+        echo $idproducto;
     }
 }

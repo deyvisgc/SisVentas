@@ -52,7 +52,7 @@ Route::get('Cate/Desactivar/{idcategoria}','CategoriaController@canDesactivo');
 Route::get('Cate/Activar/{idroles}','CategoriaController@canActivo');
 Route::resource('Vendedor','vendedorController');
 
-Route::post('shop','ventaController@RegistrarVenta');
+Route::post('shop','ventaController@RegistrarProductos');
 
 Route::get('cargar/Vende/{idVendedor}','vendedorController@cargar');
 Route::post('Update/Vende/{idVendedor}','vendedorController@actualizar');

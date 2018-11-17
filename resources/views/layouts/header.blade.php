@@ -209,7 +209,7 @@
 
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
-g
+
             <!-- partial -->
         </div>
         <!-- main-panel ends -->
