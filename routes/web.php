@@ -66,12 +66,6 @@ Route::group(['middleware'=>'is_user'],function(){
 
 
 
-/**
-Route::get('listar','UsuarioController@get');
-Route::get('lista.user','UsuarioController@listar')->name('listar');
- */
-
-
 Route::get('auth','UsuarioController@login');
 
 
@@ -91,5 +85,7 @@ Route::get('oden_compra','ordencomController@index');
 Route::get('prodfal','ordencomController@ProdFalantes');
 Route::get('cargarPro/{idorden_conpra}','ordencomController@cargarProd');
 Route::post('ActualizPro/{idorden_conpra}','ordencomController@actualizarprod');
-
+Route::resource('compra','compraController');
+Route::get('cargarPrdo','compraController@cargarPrdo');
+Route::get('cargarProve','compraController@cargarProve');
 

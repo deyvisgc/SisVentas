@@ -277,7 +277,7 @@
                               <div class="form-group">
                                   <label for="exampleInputEmail1">Apellido Paterno</label>
                                   <input type="text" class="form-control" id="apellido_pro" required="Campo Obligatorio"
-                                         name="Apellido_paterno"  >
+                                         name="Apellido_pat">
                               </div>
                           </div>
                           <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -402,35 +402,6 @@
                 responsive: true,
                 processing: false,
                 serverSide : true,
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'excelHtml5',
-                        title: "Listado de Mobiliario",
-                        exportOptions: {
-                            columns: [ 0, 1,2, 3, 4, 5,6,7,8 ]
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        title: "Listado de Mobiliario",
-                        exportOptions: {
-                            columns: [ 0, 1,2, 3, 4, 5,6,7,8 ]
-                        }
-
-                    },
-                    {
-                        extend: 'print',
-                        title: "Listado de Mobiliario",
-                        exportOptions: {
-                            columns: [ 0, 1,2, 3, 4, 5,6,7,8 ]
-                        }
-
-                    }
-
-
-
-                ],
                 language: {
 
 
@@ -591,7 +562,7 @@
 
                      });
 
-                    setTimeout(window.location.reload.bind(window.location), 4000);
+                    table.api().ajax.reload();
 
                 })
 
