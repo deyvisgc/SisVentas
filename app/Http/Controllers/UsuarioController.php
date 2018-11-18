@@ -100,7 +100,7 @@ class UsuarioController extends Controller
             $user->save();
             DB::commit();
         }
-        return Redirect('Usuario');
+
 
 
     }

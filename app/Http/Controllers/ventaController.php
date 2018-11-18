@@ -75,12 +75,13 @@ class ventaController extends Controller
         $model = new venta();
         $data =$_POST['array2'];
         $dataVenta = json_decode($data);
-        print_r($dataVenta);
-        //$totalventa=$dataVenta->{"ventatotal"};
-        //$cliente_idcliente=$dataVenta->{"idcliente"};
 
-        //$model->total_venta=$totalventa;
-        //$model->cliente_idcliente=$cliente_idcliente;
-        //$model->save();
+        $totalventa=$dataVenta->{"ventatotal"};
+        $cliente_idcliente=$dataVenta->{"idcliente"};
+
+        $model->total_venta=$totalventa;
+        $model->cliente_idcliente=$cliente_idcliente;
+        $model->save();
     }
+
 }

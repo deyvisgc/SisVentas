@@ -332,21 +332,14 @@
 
             //Registrar venta
             $('#btn_insert_venta').click(function () {
-              var data=[];
+                var dataVenta={};
 
-                $(".fila").each(function() {
-                    var idproducto = $(this).find("#idproducto").text();
-                    var cantidad = $(this).find("#cantidad").text();
-                    var monto = $(this).find("#monto").text();
-                    data.push(idproducto,cantidad,monto);
-                });
-
-                console.log(data);
-
-                var dataVenta=[];
                 var idcliente=$('#idcliente').val();
                 var ventatotal=$('.total').html();
-                dataVenta=[idcliente,ventatotal];
+
+                dataVenta.idcliente = idcliente;
+                dataVenta.ventatotal=ventatotal;
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
