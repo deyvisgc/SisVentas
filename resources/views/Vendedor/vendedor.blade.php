@@ -500,7 +500,7 @@
                     alert("error en tu proceso");
                 }
 
-            })
+            });
 
         })
         function editarV(idVendedor) {
