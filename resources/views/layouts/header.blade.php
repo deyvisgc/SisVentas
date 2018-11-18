@@ -454,6 +454,8 @@
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
 @yield('footer_scripts')
 <!-- End custom js for this page-->
 </body>

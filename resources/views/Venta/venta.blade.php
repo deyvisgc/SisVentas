@@ -55,7 +55,7 @@
                                                     <span class="input-group-text">Cantidad</span>
                                                 </div>
                                                 <input type="text" id="codigop" name="codigop" hidden>
-                                                <input type="text" id="cantidad" name="cantidad" class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
+                                                <input type="text" id="cantidad" name="cantidad" required="required" onkeypress='validate(event)' class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-inverse-success btn-fw float-right" id="btn_agregar">Agregar</button><br><br>
@@ -79,7 +79,7 @@
                                                     <h4 class="popover-header">Total a Pagar</h4>
                                                     <div class="popover-body">
                                                         <p>Cantidad Productos: <strong id="adicionados"> </strong></p>
-                                                        <center><h4>54555540.60</h4></center>
+                                                        <center><h4 class="total"> </h4></center>
                                                         <br>
                                                     </div>
                                                 </div>
@@ -121,9 +121,11 @@
 @endsection
 
 @section('footer_scripts')
-    <script>
-        $(document).ready(function() {
 
+    <script>
+
+        $(document).ready(function() {
+            var i=1;
             $('#producto').autocomplete({
                 source:function (request ,response) {
                       $.ajax({
@@ -182,19 +184,20 @@
                 }
 
             });
+
             $('#btn_agregar').click(function() {
+
                 var nombre = document.getElementById("producto").value;
                 var codigo = document.getElementById("codigop").value;
                 var cantidad = document.getElementById("cantidad").value;
                 var precio = document.getElementById("precio").value;
-
-
                 var monto = parseFloat(cantidad)*parseFloat(precio);
-                var i = 1; //contador para asignar id al boton que borrara la fila
+                 //contador para asignar id al boton que borrara la fila
+                if(cantidad.trim()!=''){
 
-                var fila = '<tr id="row' + i + '"><td>' + nombre + '</td><td>' + codigo + '</td><td>' + cantidad + '</td><td>' + precio + '</td><td>' + monto + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>'; //esto seria lo que contendria la fila
-
-                i++;
+                        var fila = '<tr id="row' + i + '"><td>' + nombre + '</td><td>' + codigo + '</td><td>' + cantidad + '</td><td>' + precio + '</td><td class="monto">' + monto.toFixed(2) + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>'; //esto seria lo que contendria la fila
+                    i++
+                }
 
                 $('#detalle_venta tr:first').after(fila);
                 $("#adicionados").text(""); //esta instruccion limpia el div adicioandos para que no se vayan acumulando
@@ -209,17 +212,59 @@
                 $("#cantidadP").html('0');
                 document.getElementById("producto").focus();
             });
+            //funcion que calcula la suma de los montos para hallar el total de la venta
+            $('#btn_agregar').click(function () {
+                var total=0;
+                $('.monto').each(function () {
+                    total += parseFloat($(this).html());
+                });
+                $('.total').html(total.toFixed(2));
+
+            });
 
             $(document).on('click', '.btn_remove', function() {
                 var button_id = $(this).attr("id");
                 //cuando da click obtenemos el id del boton
                 $('#row' + button_id + '').remove(); //borra la fila
+
                 //limpia el para que vuelva a contar las filas de la tabla
                 $("#adicionados").text("");
                 var nFilas = $("#detalle_venta tr").length;
                 $("#adicionados").append(nFilas - 1);
             });
-        });
+            function sumarMonto(){
+                while (true){
+                    $('.monto').each(function () {
+                        total += parseFloat($(this).html());
+                    });
+                    $('.total').html(total.toFixed(2));
+                    break;
+                }
+            };
 
+            $(document).on('click','.btn_remove',function () {
+                var totalrenew = $('.total').html();
+                var monto = $('.monto').html();
+                var newtotal = parseFloat(totalrenew) - parseFloat(monto);
+                $('.total').html(newtotal.toFixed(2));
+            });
+        });
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if( !regex.test(key) ) {
+                theEvent.returnValue = false;
+                if(theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
     </script>
     @endsection
