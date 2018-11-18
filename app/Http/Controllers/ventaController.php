@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Support\Facades\Input;
 use function MongoDB\BSON\toJSON;
 use SisVentas\detalle_venta;
+use SisVentas\venta;
 
 class ventaController extends Controller
 {
@@ -63,14 +64,23 @@ class ventaController extends Controller
         $idproducto= $dataProducto->{"idproducto"};
         $cantidad= $dataProducto->{"cantidad"};
         $monto= $dataProducto->{"monto"};
+        $model->id_producto=$idproducto;
+        $model->cantidad=$cantidad;
+        $model->precio_venta=$monto;
+        $model->idventa=1;
+        $model->save();
+    }
 
-        $data = array(
-            'idventa'=>'1',
-           'id_producto'=>$idproducto,
-           'cantidad'=>$cantidad,
-           'precio_venta'=>$monto
-        );
+    public function RegistrarVenta(){
+        $model = new venta();
+        $data =$_POST['array2'];
+        $dataVenta = json_decode($data);
+        print_r($dataVenta);
+        //$totalventa=$dataVenta->{"ventatotal"};
+        //$cliente_idcliente=$dataVenta->{"idcliente"};
 
-        $model->save($data);
+        //$model->total_venta=$totalventa;
+        //$model->cliente_idcliente=$cliente_idcliente;
+        //$model->save();
     }
 }

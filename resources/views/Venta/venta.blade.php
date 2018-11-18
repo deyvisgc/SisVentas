@@ -332,7 +332,6 @@
 
             //Registrar venta
             $('#btn_insert_venta').click(function () {
-/*
               var data=[];
 
                 $(".fila").each(function() {
@@ -348,19 +347,16 @@
                 var idcliente=$('#idcliente').val();
                 var ventatotal=$('.total').html();
                 dataVenta=[idcliente,ventatotal];
-                console.log(dataVenta);
-
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
                 $.ajax({
-                    url:'{}}',
+                    url:'{{url('regventa')}}',
                     dataType:'json',
                     type:'post',
-                    data:{'array1':JSON.stringify(data),'array2':JSON.stringify(dataVenta)},
+                    data:{'array2':JSON.stringify(dataVenta)},
                     success:function (response) {
                         swal({
                             position: 'center',
@@ -370,10 +366,7 @@
                             timer: 1500
                         });
                     },
-                    error: function(){
-                        alert("error en tu proceso");
-                    }
-                });*/
+                });
             });
         });
         function calcularVuelto(){
@@ -445,9 +438,6 @@
                         timer: 1500
                     });
                 },
-                error: function(){
-                    alert("error en tu proceso");
-                }
             });
         }
 
