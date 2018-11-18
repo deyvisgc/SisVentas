@@ -20,6 +20,7 @@ class Producto extends Model
         'imagen',
         'estado',
         'cantidad',
+        'Precio_Pro',
         'Fecha_Registro',
 
 

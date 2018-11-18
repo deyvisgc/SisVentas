@@ -14,7 +14,7 @@ class ProvedorController extends Controller
         $produc = DB::table('tipopersona')
             ->join('provedor', 'provedor.tipoPersona_idtipoPersona', '=', 'tipopersona.idtipoPersona')
             ->select([
-                DB::raw("CONCAT(nombre,' ',Apellido_pat,' ',Apellido_Materno) as fullname"),'Direccion', 'dni',
+                DB::raw("CONCAT(nombre,' ',Apellido_paterno,' ',Apellido_Materno) as fullname"),'Direccion', 'dni',
                 'telefono', 'sexo', 'gmail', 'Fecha_Ingreso', 'provedor.idprovedor', 'provedor.estado'
             ]);
         if (request()->ajax()) {
@@ -39,7 +39,7 @@ class ProvedorController extends Controller
     {
         $regla=[
             'nombress'=>'required ',
-            'Apellido_pat'=>'required ',
+            'Apellido_paterno'=>'required ',
             'Apellido_Mat'=>'required ',
             'telefono'=>'required ',
             'Direccion' =>'required ',
@@ -60,7 +60,7 @@ class ProvedorController extends Controller
             DB::beginTransaction();
             $prove=new TipoPer();
             $prove->nombre=$request->get('nombress');
-            $prove->Apellido_pat=$request->get('Apellido_pat');
+            $prove->Apellido_pat=$request->get('Apellido_paterno');
             $prove->Apellido_Materno=$request->get('Apellido_Mat');
             $prove->Direccion=$request->get('Direccion');
             $prove->dni=$request->get('dni');
@@ -84,7 +84,7 @@ class ProvedorController extends Controller
         $prove=DB::table('provedor')
             ->join('tipopersona', 'provedor.tipoPersona_idtipoPersona', '=', 'tipopersona.idtipoPersona')
             ->select([
-             'tipoPersona_idtipoPersona', 'idtipoPersona' , 'nombre', 'Apellido_pat', 'Apellido_Materno' ,'Direccion', 'dni',
+             'tipoPersona_idtipoPersona', 'idtipoPersona' , 'nombre', 'Apellido_paterno', 'Apellido_Materno' ,'Direccion', 'dni',
                 'telefono', 'sexo', 'gmail', 'Fecha_Ingreso','Fecha_nacimiento', 'idprovedor', 'estado'
             ])
             ->where('idprovedor','=',$id)
@@ -114,7 +114,7 @@ class ProvedorController extends Controller
             $prov=Provedor::find($id);
             $prove=TipoPer::find(Input::get('idprove'));
             $prove->nombre=$request->get('nombress');
-            $prove->Apellido_pat=$request->get('Apellido_paterno');
+            $prove->Apellido_paterno=$request->get('Apellido_paterno');
             $prove->Apellido_Materno=$request->get('Apellido_Materno');
             $prove->Direccion=$request->get('Direccion');
             $prove->dni=$request->get('dni');
