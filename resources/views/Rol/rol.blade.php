@@ -143,6 +143,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre Rol</label>
                                     <input type="text" class="form-control" id="nombre_rol" required="Campo Obligatorio" name="nombre_rol" >
+                                    <p class="errorNom text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -152,6 +153,7 @@
                                     <select type="number" class="form-control" id="estado" required="Campo Obligatorio" name="estado"  >
                                         <option value="Activo">Activo</option>
                                         <option value="Inactivo">Inactivo</option>
+                                        <p class="errorEsta text-danger hidden"></p>
                                     </select>
                                 </div>
                             </div>
@@ -159,7 +161,7 @@
                         <center>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit"  class="btn btn-success" id="inser">Registrar</button>
+                                <button type="button"  class="btn btn-success" id="inser">Registrar</button>
                             </div>
                         </center>
                     </form>
@@ -302,15 +304,33 @@
           type:'post',
           data:frm.serialize(),
           success:function (response) {
-              swal({
-                  position: 'center',
-                  type: 'success',
-                  title: 'Registro Exitoso',
-                  showConfirmButton: false,
-                  timer: 1500
-              });
-              $('#formRol').modal('hide');
-              table.ajax.reload();
+
+              $('.errorNom').addClass('hidden');
+
+              if(response.errors) {
+                  if (response.errors.nombre_rol) {
+                      $('.errorNom').removeClass('hidden');
+                      $('.errorNom').text(response.errors.nombre_rol);
+
+                  }
+
+              }
+              if(response.success==true){
+
+                  $('#formRol').modal('hide');
+                  frm.trigger('reset');
+
+                  swal({
+                      position: 'center',
+                      type: 'success',
+                      title: 'Registro Exitoso',
+                      showConfirmButton: false,
+                      timer: 1500
+                  });
+                  table.api().ajax.reload();
+
+              }
+
           },
 
 

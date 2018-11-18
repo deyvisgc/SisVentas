@@ -88,4 +88,5 @@ Route::post('ActualizPro/{idorden_conpra}','ordencomController@actualizarprod');
 Route::resource('compra','compraController');
 Route::get('cargarPrdo','compraController@cargarPrdo');
 Route::get('cargarProve','compraController@cargarProve');
+Route::get('GuardarCompra','compraController@guardar');
 

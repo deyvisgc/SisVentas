@@ -137,13 +137,14 @@
                     <h2 class="modal-title">Registrar Categoria</h2>
                 </div>
                 <div class="modal-body">
-                    <form id="RegisRol"  >
+                    <form id="RegisCate"  >
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre Rol</label>
                                     <input type="text" class="form-control" id="nombre_rol" required="Campo Obligatorio" name="nombre_Cate" >
+                                    <p class="errorNom text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -200,7 +201,6 @@
                                 Estado Categoria<span class="required">*</span>
                             </label>
                             <input type="text" disabled class="form-control" id="esta" name="esta">
-                            <p class="edit_errorName text-danger hidden"></p>
                         </div>
                     </form>
                     <div class="modal-footer">
@@ -285,7 +285,7 @@
 
         $('#cate').click(function () {
             $('#formCate').modal('show');
-        })
+        });
         $('#inser').click(function (e) {
             $.ajaxSetup({
                 headers: {
@@ -293,25 +293,41 @@
                 }
             });
             e.preventDefault();
-            var frm=$('#RegisRol');
+            var frm=$('#RegisCate');
 
             $.ajax({
                 url:'{{url('Categorias')}}',
                 type:'POST',
                 dataType:'json',
                 data :frm.serialize(),
-                success:function (data) {
+                success:function (response) {
+                    $('.errorNom').addClass('hidden');
+
+                    if(response.errors) {
+                        if (response.errors.nombre_Cate) {
+                            $('.errorNom').removeClass('hidden');
+                            $('.errorNom').text(response.errors.nombre_Cate);
+
+                        }
+
+                    }
+                    if(response.success==true){
 
                         $('#formCate').modal('hide');
                         frm.trigger('reset');
-                        table.ajax.reload(null,false);
-                        swal('success!','Se registro Categoria Correctamente','success')
 
+                        swal({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Registro Exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        table.api().ajax.reload();
 
-
-
-
+                    }
                 }
+
 
 
             });

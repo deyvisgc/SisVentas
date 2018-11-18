@@ -20,7 +20,7 @@ class ProductoController extends Controller
         $cate=Categoria::all();
 
 
-        $producto=DB::select("SELECT p.idproducto,p.idcategoria,p.codigo,p.nombre_pro,p.descripcion,p.imagen,p.estado,p.cantidad,p.Precio_Pro,p.Fecha_Registro,categoria.nombre_cate FROM producto as p , categoria  WHERE p.idcategoria=categoria.idcategoria");
+        $producto=DB::select("SELECT p.idproducto,p.idcategoria,p.codigo,p.nombre_pro,p.stock,p.descripcion,p.imagen,p.estado,p.Precio_Pro,p.Fecha_Registro,categoria.nombre_cate FROM producto as p , categoria  WHERE p.idcategoria=categoria.idcategoria");
         if ($request->ajax()){
             return Datatables::of($producto)
                 ->addColumn('action', function ($id){
@@ -54,9 +54,8 @@ class ProductoController extends Controller
          'estado'=>'required',
          'categoria'=>'required',
          'Fecha_Ingreso'=>'required',
-         'imagen'=>'required',
          'precio_pro'=>'required',
-         'stock'=>'required',
+
 
      ];
      $valida=Validator::make(Input::all(),$regla);
@@ -66,15 +65,14 @@ class ProductoController extends Controller
      } else{
          DB::beginTransaction();
         $producto=new  Producto();
-        $producto->	nombre_pro=$request->get('nombre_pro');
+        $producto->nombre_pro=$request->get('nombre_pro');
         $producto->codigo=$request->get('Codigo');
         $producto->descripcion=$request->get('descripccion');
         $producto->idcategoria=$request->get('categoria');
         $producto->estado=$request->get('estado');
         $producto->Fecha_Registro=$request->get('Fecha_Ingreso');
-        $producto->cantidad=$request->get('cantidad');
          $producto->Precio_Pro=$request->get('precio_pro');
-         $producto->stock=$request->get('stock');
+         $producto->stock=$request->get('cantidad');
         if($producto->imagen==null){
             if(Input::HasFile('imagen')){
             $file=Input::file('imagen');
@@ -91,8 +89,7 @@ class ProductoController extends Controller
         $almacen->save();
          DB::commit();
         }
-         $data=array('hecho'=>'si','campos'=>$producto);
-         echo json_encode($data);
+        return response()->json(array("success"=>true));
      }
      public function cargarPro($id){
        $cate=Categoria:: all();
@@ -107,7 +104,7 @@ class ProductoController extends Controller
 
             'nombre_pro'=>'required',
             'Codigo'=>'required',
-            'cantidad'=>'required',
+            'stock'=>'required',
             'descripccion'=>'required',
             'categoria'=>'required',
             'Fecha_Ingreso'=>'required',
@@ -122,7 +119,7 @@ class ProductoController extends Controller
             $produc->descripcion=$request->get('descripccion');
             $produc->idcategoria=$request->get('categoria');
             $produc->Fecha_Registro=$request->get('Fecha_Ingreso');
-            $produc->cantidad=$request->get('cantidad');
+            $produc->stock=$request->get('stock');
             $produc->Precio_Pro=$request->get('precio_pro');
             $produc->update();
         }

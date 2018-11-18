@@ -20,7 +20,7 @@ class vendedorController extends Controller
             ->join('vendedor', 'vendedor.persona_idpersona', '=', 'persona.idpersona')
             ->join('roles', 'persona.rol_idrol','=','roles.idroles')
             ->select([
-                DB::raw("CONCAT(nombre,' ',Apellido_Paterno,' ',Apellido_Mater) as fullname"), 'dni',
+                DB::raw("CONCAT(nombre,' ',Apellido_Pater,' ',Apellido_Mater) as fullname"), 'dni',
                 'telefono', 'email', 'Fecha_ingreso', 'vendedor.idVendedor', 'vendedor.estado','.idroles',
                 'roles.nombre_rol']);
         if (request()->ajax()) {
@@ -46,7 +46,7 @@ class vendedorController extends Controller
 
 ';
                 })->filterColumn('fullname', function($query, $keyword) {
-                    $sql = "CONCAT(nombre,' ',Apellido_Paterno,' ',Apellido_Mater)  like ?";
+                    $sql = "CONCAT(nombre,' ',Apellido_Pater,' ',Apellido_Mater)  like ?";
                     $query->whereRaw($sql, ["%{$keyword}%"]);
                 })->make(true);
         }
@@ -78,7 +78,7 @@ class vendedorController extends Controller
             $perso->Direccion=$request->get('Direccion_ve');
             $perso->telefono=$request->get('telefono_ve');
             $perso->Apellido_Mater=$request->get('apellido_ma_V');
-            $perso->Apellido_Paterno=$request->get('apellido_pa_V');
+            $perso->Apellido_Pater=$request->get('apellido_pa_V');
             $perso->Fecha_nacimiento=$request->get('fecha_naci_ve');
             $perso->rol_idrol=$request->get('rol_ve');
             $perso->Fecha_ingreso=$request->get('fecha_ingreso_ve');
@@ -92,12 +92,12 @@ class vendedorController extends Controller
 
 
         }
-        echo  json_encode($vende);
+        return response()->json(array("success"=>true));
 
     }
     public function cargar($id){
 
-     $ven=DB::select("SELECT p.idpersona,p.nombre,p.dni,p.Direccion,p.telefono,p.email,p.Apellido_Mater,p.Apellido_Paterno,p.Fecha_nacimiento,p.rol_idrol,p.Fecha_ingreso,v.idVendedor,v.estado,v.persona_idpersona FROM vendedor as v 
+     $ven=DB::select("SELECT p.idpersona,p.nombre,p.dni,p.Direccion,p.telefono,p.email,p.Apellido_Mater,p.Apellido_Pater,p.Fecha_nacimiento,p.rol_idrol,p.Fecha_ingreso,v.idVendedor,v.estado,v.persona_idpersona FROM vendedor as v 
 ,persona as p WHERE v.persona_idpersona=p.idpersona and v.idVendedor=$id");
      $rol=Rol::all();
      $data=array('vende'=>$ven,'rol'=>$rol);
@@ -131,7 +131,7 @@ class vendedorController extends Controller
             $perso->Direccion=$request->get('Direccion_ve');
             $perso->telefono=$request->get('telefono_ve');
             $perso->Apellido_Mater=$request->get('apellido_ma_V');
-            $perso->Apellido_Paterno=$request->get('apellido_pa_V');
+            $perso->Apellido_Pater=$request->get('apellido_pa_V');
             $perso->Fecha_nacimiento=$request->get('fecha_naci_ve');
             $perso->rol_idrol=$request->get('rol_ve');
             $perso->Fecha_ingreso=$request->get('fecha_ingreso_ve');

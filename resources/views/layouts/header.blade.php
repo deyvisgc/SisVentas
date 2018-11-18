@@ -113,7 +113,6 @@
                     </a>
                     <div class="collapse" id="page-layouts">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{url('User/redirec')}}">Registrar Usuarios</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{url('Usuario')}}">Listar Usuarios</a></li>
                         </ul>
                     </div>
@@ -210,6 +209,8 @@
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
 
+
+
             <!-- partial -->
         </div>
         <!-- main-panel ends -->
@@ -246,6 +247,11 @@
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>

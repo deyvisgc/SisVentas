@@ -149,7 +149,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre </label>
                                     <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombre_ve" >
-
+                                    <p class="errorName text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -158,6 +158,7 @@
                                     <label for="exampleInputEmail1">Apellido Paterno</label>
                                     <input type="text" class="form-control" id="Codigo_pro" required="Campo Obligatorio"
                                            name="apellido_pa_V"  >
+                                    <p class="errorApe text-danger hidden"></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -165,6 +166,7 @@
                                     <label for="exampleInputEmail1">Apellido Materno</label>
                                     <input type="text" class="form-control" id="cantidad_pro" required="Campo Obligatorio"
                                            name="apellido_ma_V"  >
+                                    <p class="errorAPm text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -172,12 +174,14 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">N# DNI</label>
                                     <input type="number" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="dni_Ve" >
+                                    <p class="errorDni text-danger hidden"></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Direccion</label>
                                     <input type="text" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="Direccion_ve" >
+                                    <p class="errorDire text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -185,6 +189,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">N# Telefono</label>
                                     <input type="number" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="telefono_ve" >
+                                    <p class="errorTele text-danger hidden"></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -213,6 +218,7 @@
                                     <label for="exampleInputEmail1">Fecha Ingreso</label>
                                     <div class="input-group date"  data-provide="datepicker">
                                         <input type="text" name="fecha_ingreso_ve" id="date" class="form-control">
+                                        <p class="errorFecha text-danger hidden"></p>
                                         <div class="input-group-addon">
                                           <span class="input-group-addon input-group-append border-left">
                                           <span class="far fa-calendar-alt input-group-text"></span>
@@ -226,6 +232,7 @@
                                     <label for="exampleInputEmail1">Fecha Nacimiento</label>
                                     <div class="input-group date"  data-provide="datepicker">
                                         <input type="text" name="fecha_naci_ve" id="date" class="form-control">
+                                        <p class="errorFeIn text-danger hidden"></p>
                                         <div class="input-group-addon">
                                           <span class="input-group-addon input-group-append border-left">
                                           <span class="far fa-calendar-alt input-group-text"></span>
@@ -240,7 +247,7 @@
                                     <center>   <label for="exampleInputEmail1">Correo</label> </center>
 
                                     <input type="email"  class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="correo_ve" >
-
+                                    <p class="errorCorr text-danger hidden"></p>
                                 </div>
                             </div>
                         </div>
@@ -409,7 +416,7 @@
 
 
 
-            table =$('#vende-table').DataTable({
+            table=$('#vende-table').DataTable({
                 stateSave: true,
                 responsive: true,
                 processing: false,
@@ -483,17 +490,82 @@
                 type:'post',
                 data:frm.serialize(),
                 success:function (response) {
-                    frm.trigger('reset');
-                    $('#formVendedor').modal('hide');
-                    swal({
-                        position: 'center',
-                        type: 'success',
-                        title: 'Registro Exitoso',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    $('.errorName').addClass('hidden');
+                    $('.errorApe').addClass('hidden');
+                    $('.errorAPm').addClass('hidden');
+                    $('.errorAPm').addClass('hidden');
+                    $('.errorTele').addClass('hidden');
+                    $('.errorDni').addClass('hidden');
+                    $('.errorDire').addClass('hidden');
+                    $('.errorCorr').addClass('hidden');
+                    $('.errorFecha').addClass('hidden');
+                    $('.errorFeIn').addClass('hidden');
+                    if(response.errors){
+                        if(response.errors.nombre_ve){
+                            $('.errorName').removeClass('hidden');
+                            $('.errorName').text(response.errors.nombre_ve);
 
-                    table.ajax.reload();
+                        }
+
+                        if(response.errors.apellido_pa_V){
+                            $('.errorApe').removeClass('hidden');
+                            $('.errorApe').text(response.errors.apellido_pa_V);
+
+                        }
+
+                        if(response.errors.apellido_ma_V){
+                            $('.errorAPm').removeClass('hidden');
+                            $('.errorAPm').text(response.errors.apellido_ma_V);
+
+                        }
+                        if(response.errors.telefono_ve){
+                            $('.errorTele').removeClass('hidden');
+                            $('.errorTele').text(response.errors.telefono_ve);
+
+                        }
+                        if(response.errors.dni_Ve){
+                            $('.errorDni').removeClass('hidden');
+                            $('.errorDni').text(response.errors.dni_Ve);
+
+                        }
+                        if(response.errors.Direccion_ve){
+                            $('.errorDire').removeClass('hidden');
+                            $('.errorDire').text(response.errors.Direccion_ve);
+
+                        }
+                        if(response.errors.correo_ve){
+                            $('.errorCorr').removeClass('hidden');
+                            $('.errorCorr').text(response.errors.correo_ve);
+
+                        }
+
+                        if(response.errors.fecha_naci_ve){
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(response.errors.fecha_naci_ve);
+
+                        }
+                        if(response.errors.fecha_ingreso_ve){
+                            $('.errorFeIn').removeClass('hidden');
+                            $('.errorFeIn').text(response.errors.fecha_ingreso_ve);
+
+                        }
+                    }
+
+                    if(response.success==true){
+
+                        $('#formVendedor').modal('hide');
+                        frm.trigger('reset');
+
+                        swal({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Registro Exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        table.ajax.reload();
+
+                    }
 
                 },
                 error: function(){
