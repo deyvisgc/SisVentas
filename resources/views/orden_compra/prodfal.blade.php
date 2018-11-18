@@ -240,9 +240,9 @@
                     {data: 'Fecha_Registro',name:'Fecha_Registro'},
                     {data: null,
                         render: function ( data, type, row ) {
-                            return ' <center>   <button title="ficha médica"  ' +
-                                '  onclick=editarOrde('+row.idorden_conpra+') type="button" class="btn btn-outline-warning btn-rounded btn-icon">\n' +
-                                '                          <i class="fas fa-user-edit"></i></button></center>';
+                            return ' <center>   <button title="Nuevo Producto"  ' +
+                                '  onclick=editarOrde('+row.idorden_conpra+') type="button" class="btn btn-outline-success btn-rounded btn-icon">\n' +
+                                '                          <i class="fas fa-plus-circle"></i></button></center>';
                         }}
 
 

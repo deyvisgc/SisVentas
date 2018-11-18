@@ -52,7 +52,6 @@ class almacenController extends Controller
             $producto->stock=$request->get('stock');
             $producto->update();
             $inven->idproducto=$producto->idproducto;
-            $inven->update();
             DB::commit();
         }
         $data=array('hecho'=>'si','campos'=>$producto);

@@ -202,7 +202,7 @@
                 {data: 'Fecha_Registro',name:'Fecha_Registro'},
                 {data: null,
                     render: function ( data, type, row ) {
-                        return ' <center>   <button title="ficha médica"  data-toggle="modal" data-target="#AlmaForm" data-cache="false"' +
+                        return ' <center>   <button title="Actualizar "  data-cache="false"' +
                             '  onclick=editarAlm('+row.idalmacen+') type="button" class="btn btn-outline-warning btn-rounded btn-icon">\n' +
                             '                          <i class="fas fa-user-edit"></i></button></center>';
                     }}
@@ -217,6 +217,7 @@
 
     });
     function editarAlm(idalmacen) {
+        $('#AlmaForm').modal('show');
     if (idalmacen){
         $.ajax({
            url:'{{url('alma')}}/'+idalmacen,
@@ -268,15 +269,21 @@
                         Error:function () {
                             alert('Falla en actualizar tus datos');
                         }
-                    })
-                })
+                    });
+                    table.api().ajax.reload();
+                });
 
             }
         });
     }
 
     }
+    $('#AlmaForm').on('hidden.bs.modal', function (e) {
+        // do something...
+        table.api().ajax.reload();
 
+
+    })
     
 
 </script>
