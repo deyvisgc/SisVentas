@@ -81,5 +81,12 @@ Route::resource('Perfil','PerfilController');
 Route::resource('Venta','ventaController');
 Route::get('cargarPro','ventaController@cargar');
 Route::get('cargarClie','ventaController@cargarClie');
+Route::get('almacen','almacenController@index');
+Route::get('alma/{idalmacen}','almacenController@cargarInve');
+Route::post('update/{idalmacen}','almacenController@actualizarInv');
+Route::get('oden_compra','ordencomController@index');
+Route::get('prodfal','ordencomController@ProdFalantes');
+Route::get('cargarPro/{idorden_conpra}','ordencomController@cargarProd');
+Route::post('ActualizPro/{idorden_conpra}','ordencomController@actualizarprod');
 
 

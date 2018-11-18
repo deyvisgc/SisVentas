@@ -9,7 +9,7 @@ use SisVentas\Producto;
 use SisVentas\Categoria;
 use Validator;
 use Redirect;
-
+use SisVentas\almacen;
 use DB;
 use Yajra\Datatables\Datatables;
 use Inventario\Http\Requests;
@@ -56,7 +56,7 @@ class ProductoController extends Controller
          'Fecha_Ingreso'=>'required',
          'imagen'=>'required',
          'precio_pro'=>'required',
-
+         'stock'=>'required',
 
      ];
      $valida=Validator::make(Input::all(),$regla);
@@ -64,6 +64,7 @@ class ProductoController extends Controller
          return response()->json(array('errors' => $valida->getMessageBag()->toArray()));
 
      } else{
+         DB::beginTransaction();
         $producto=new  Producto();
         $producto->	nombre_pro=$request->get('nombre_pro');
         $producto->codigo=$request->get('Codigo');
@@ -73,6 +74,7 @@ class ProductoController extends Controller
         $producto->Fecha_Registro=$request->get('Fecha_Ingreso');
         $producto->cantidad=$request->get('cantidad');
          $producto->Precio_Pro=$request->get('precio_pro');
+         $producto->stock=$request->get('stock');
         if($producto->imagen==null){
             if(Input::HasFile('imagen')){
             $file=Input::file('imagen');
@@ -84,6 +86,10 @@ class ProductoController extends Controller
         }
 
         $producto->save();
+        $almacen=new almacen();
+        $almacen->idproducto=$producto->idproducto;
+        $almacen->save();
+         DB::commit();
         }
          $data=array('hecho'=>'si','campos'=>$producto);
          echo json_encode($data);

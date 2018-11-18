@@ -206,16 +206,19 @@
                                     <input type="file"  class="form-control" id="imagen" name="imagen" placeholder="Imagen.jpg">
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
-                            <div class="form-group">
-                              <center><label for="exampleInputEmail1">Prcio Producto</label></center>
-                                <input type="number" name="precio_pro"  id="precio_pro"  class="form-control">
+                            <div class="col-lg-16 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Prcio Producto</label></center>
+                                    <input type="number" name="precio_pro"  id="precio_pro"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Stock Producto</label></center>
+                                    <input type="number" name="stock"  id="stock"  class="form-control">
+                                </div>
                             </div>
                         </div>
-
-
                         <center>
 
                             <div class="modal-footer">
@@ -415,7 +418,7 @@
                     {data: 'cantidad', name:'cantidad'},
                     {data: 'Precio_Pro', name:'Precio_Pro'},
                     {data: 'imagen', name: 'imagen', orderable: true, searchable: true},
-                {data: 'estado',name:'estado'},
+                     {data: 'estado',name:'estado'},
                     {data: 'Fecha_Registro',name:'Fecha_Registro'},
 
                     {data: 'action', name: 'action', orderable: false, searchable: false}

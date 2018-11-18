@@ -17,7 +17,7 @@ class UsuarioMiddleware
     {
 
         $usuario_actual=\Auth::user();
-        if($usuario_actual->idRol!=3){
+        if($usuario_actual->idRol!=2){
             return redirect()->route('mensaje');
         }
         return $next($request);

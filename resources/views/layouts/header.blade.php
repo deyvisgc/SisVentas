@@ -352,35 +352,23 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" href="pages/forms/text_editor.html">Compra</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{url('Venta')}}">Venta</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{url('almacen')}}">Almacen</a></li>
                         </ul>
                     </div>
                 </li>
 
-
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/ui-features/popups.html">
-                        <i class="fas fa-minus-square menu-icon"></i>
-                        <span class="menu-title">Popups</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="pages/ui-features/notifications.html">
-                        <i class="fas fa-bell menu-icon"></i>
-                        <span class="menu-title">Notifications</span>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
                         <i class="fa fa-stop-circle menu-icon"></i>
-                        <span class="menu-title">Icons</span>
+                        <span class="menu-title">Orden de Conpra</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="icons">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/icons/flag-icons.html">Flag icons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/icons/simple-line-icon.html">Simple line icons</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/icons/themify.html">Themify icons</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{url('oden_compra')}}">Productos bajo limite</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{url('prodfal')}}">Productos Faltantes</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="">Simple line icons</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="">Themify icons</a></li>
                         </ul>
                     </div>
                 </li>
