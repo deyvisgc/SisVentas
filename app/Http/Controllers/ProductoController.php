@@ -129,6 +129,4 @@ class ProductoController extends Controller
          $data=array('hecho'=>'si','campos'=>$produc);
          echo json_encode($data);
      }
-
-
 }
