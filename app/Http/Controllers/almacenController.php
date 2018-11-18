@@ -17,7 +17,7 @@ class almacenController extends Controller
 
     public function index(Request $request){
 
-        $producto=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.descripcion,producto.estado,producto.cantidad,producto.Fecha_Registro,producto.Precio_Pro,almacen.idalmacen,categoria.nombre_cate FROM almacen ,producto,categoria WHERE almacen.idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria");
+        $producto=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.descripcion,producto.estado,producto.Fecha_Registro,producto.Precio_Pro,almacen.idalmacen,categoria.nombre_cate FROM almacen ,producto,categoria WHERE almacen.idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria");
         if ($request->ajax()){
             return Datatables::of($producto)
                 ->make(true);
@@ -27,7 +27,7 @@ class almacenController extends Controller
 
     }
     public function cargarInve($id){
-        $producto=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.descripcion,producto.estado,producto.cantidad,producto.Fecha_Registro,producto.Precio_Pro,almacen.idalmacen,categoria.nombre_cate FROM almacen ,producto,categoria WHERE almacen.idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and almacen.idalmacen=$id");
+        $producto=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.descripcion,producto.estado,producto.Fecha_Registro,producto.Precio_Pro,almacen.idalmacen,categoria.nombre_cate FROM almacen ,producto,categoria WHERE almacen.idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and almacen.idalmacen=$id");
 
          return response()->json($producto);
     }
@@ -36,7 +36,6 @@ class almacenController extends Controller
         $regla=[
 
 
-            'cantidad'=>'required',
             'Fecha_Ingreso'=>'required',
             'stock'=>'required',
 
@@ -50,7 +49,6 @@ class almacenController extends Controller
             $inven=almacen::find($id);
             $producto=Producto::find(Input::get('idprod'));
             $producto->Fecha_Registro=$request->get('Fecha_Ingreso');
-            $producto->cantidad=$request->get('cantidad');
             $producto->stock=$request->get('stock');
             $producto->update();
             $inven->idproducto=$producto->idproducto;

@@ -18,8 +18,9 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
+                    <h4 class="card-title">Reportes de Productos al limite</h4>
                     <div class="row">
+
                         <div class="col-14">
                             <div class="table-responsive">
                                 <table  id="prod" class="table">
@@ -28,12 +29,11 @@
                                         <th>Nombre</th>
                                         <th>Codigo</th>
                                         <th>Categoria</th>
-                                        <th>Cantidad</th>
                                         <th>Precio</th>
                                         <th>Stock</th>
                                         <th>Estado</th>
+                                        <th>Descripcion</th>
                                         <th>Fecha Registro </th>
-                                        <th>Opciones</th>
                                     </thead>
                                     </tr>
 
@@ -42,6 +42,7 @@
                                 </table>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -57,6 +58,47 @@
                 responsive: true,
                 processing: false,
                 serverSide : true,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        title: " Lista de los Productos Faltantes",
+                        text: 'Descargar en PDF',
+                        className: 'btn btn-outline-warning btn-icon-text ',
+                        messageTop: 'Pedidos de Productos',
+
+                        exportOptions: {
+                            columns: [ 0, 1,2, 3, 4, 5,6,7 ]
+                        },
+                        customize:function(doc) {
+                            doc.styles.title = {
+                                fontSize: '20',
+                                alignment: 'center'
+                            },
+                            doc.styles.tableHeader = {
+                                bold:!0,
+                                fontSize:11,
+                                color:'black',
+                                fillColor:'#F0F8FF',
+                                alignment: "left"
+                            }
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        title: " Lista de los Productos Faltantes",
+                        text: 'Imprimir Reporte',
+                        className: 'btn btn-outline-success btn-fw',
+                        messageTop: 'Pedidos de Productos',
+
+                        exportOptions: {
+                            columns: [ 0, 1,2, 3, 4, 5,6,7 ]
+                        },
+                    }
+
+
+
+                ],
                 language: {
 
 
@@ -94,7 +136,6 @@
                     {data: 'nombre_pro', name:'nombre_pro'},
                     {data: 'codigo', name:'codigo'},
                     {data: 'nombre_cate',name:'nombre_cate'},
-                    {data: 'cantidad', name:'cantidad'},
                     {data: 'Precio_Pro', name:'Precio_Pro'},
                     {data: 'stock', name:'stock'},
                     {data: 'estado',name:'estado',
@@ -107,13 +148,8 @@
 
                         }
                     },
+                    {data: 'descripcion',name:'descripcion'},
                     {data: 'Fecha_Registro',name:'Fecha_Registro'},
-                    {data: null,
-                        render: function ( data, type, row ) {
-                            return ' <center>   <button title="ficha médica"  data-toggle="modal" data-target="#AlmaForm" data-cache="false"' +
-                                '  onclick=editarAlm('+row.idalmacen+') type="button" class="btn btn-outline-warning btn-rounded btn-icon">\n' +
-                                '                          <i class="fas fa-user-edit"></i></button></center>';
-                        }}
 
 
 

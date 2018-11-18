@@ -28,7 +28,6 @@
                                         <th>Nombre</th>
                                         <th>Codigo</th>
                                         <th>Categoria</th>
-                                        <th>Cantidad</th>
                                         <th>Precio</th>
                                         <th>Stock</th>
                                         <th>Estado</th>
@@ -78,14 +77,6 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Cantidad</label>
-                                    <input type="number" class="form-control" id="cantidad_pro" required="Campo Obligatorio"
-                                           name="cantidad"  >
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                <div class="form-group">
                                     <label for="exampleInputEmail1">Estado</label>
                                     <input disabled class="form-control" id="estado_pro"  name="estado"  >
 
@@ -114,10 +105,10 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <center><label for="exampleInputEmail1">Stock</label></center>
-                                    <input type="number" readonly="readonly" name="stock"  id="stock"  class="form-control">
+                                    <input type="number"  name="stock"  id="stock"  class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                            <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <center><label for="exampleInputEmail1">Precio Producto</label></center>
                                     <input type="number" readonly="readonly" name="precio_pro"  id="pre_pro"  class="form-control">
@@ -156,6 +147,47 @@
                 responsive: true,
                 processing: false,
                 serverSide : true,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        title: " Lista de los Productos al Limite",
+                        text: 'Descargar en PDF',
+                        className: 'btn btn-outline-warning btn-icon-text ',
+                        messageTop: 'Pedidos de Productos',
+
+                        exportOptions: {
+                            columns: [ 0, 1,2, 3, 4, 5,6,7 ]
+                        },
+                        customize:function(doc) {
+                            doc.styles.title = {
+                                fontSize: '20',
+                                alignment: 'center'
+                            }
+                            doc.styles.tableHeader = {
+                                bold:!0,
+                                fontSize:11,
+                                color:'black',
+                                fillColor:'#F0F8FF',
+                                alignment: "left"
+                            }
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        title: " Lista de los Productos al Limite",
+                        text: 'Imprimir Reporte',
+                        className: 'btn btn-outline-success btn-fw',
+                        messageTop: 'Pedidos de Productos',
+
+                        exportOptions: {
+                            columns: [ 0, 1,2, 3, 4, 5,6,7 ]
+                        },
+                    }
+
+
+
+                ],
                 language: {
 
 
@@ -193,7 +225,6 @@
                     {data: 'nombre_pro', name:'nombre_pro'},
                     {data: 'codigo', name:'codigo'},
                     {data: 'nombre_cate',name:'nombre_cate'},
-                    {data: 'cantidad', name:'cantidad'},
                     {data: 'Precio_Pro', name:'Precio_Pro'},
                     {data: 'stock', name:'stock'},
                     {data: 'estado',name:'estado',

@@ -19,7 +19,6 @@ class Producto extends Model
         'descripcion',
         'imagen',
         'estado',
-        'cantidad',
         'Precio_Pro',
         'Fecha_Registro',
 

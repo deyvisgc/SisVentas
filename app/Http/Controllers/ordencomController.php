@@ -12,13 +12,15 @@ use SisVentas\ordencompra;
 use DB;
 use Yajra\Datatables\Datatables;
 use Inventario\Http\Requests;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 
 class ordencomController extends Controller
 {
     public function index(Request $request){
 
-       $orden=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.estado,producto.cantidad,producto.Fecha_Registro,producto.Precio_Pro,categoria.idcategoria,categoria.nombre_cate , orden_conpra.idorden_conpra,orden_conpra.fecha_Regis_orde FROM orden_conpra ,producto ,categoria WHERE orden_conpra.producto_idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and producto.cantidad<5");
+       $orden=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.estado,producto.descripcion,producto.Fecha_Registro,producto.Precio_Pro,categoria.idcategoria,categoria.nombre_cate , orden_conpra.idorden_conpra,orden_conpra.fecha_Regis_orde FROM orden_conpra ,producto ,categoria WHERE orden_conpra.producto_idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and producto.stock<5");
         if ($request->ajax()){
             return Datatables::of($orden)
                 ->make(true);
@@ -29,7 +31,7 @@ class ordencomController extends Controller
     }
     public function ProdFalantes(Request $request){
 
-        $orden=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.estado,producto.cantidad,producto.Fecha_Registro,producto.Precio_Pro,categoria.idcategoria,categoria.nombre_cate , orden_conpra.idorden_conpra,orden_conpra.fecha_Regis_orde FROM orden_conpra ,producto ,categoria WHERE orden_conpra.producto_idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and producto.cantidad=0");
+        $orden=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.estado,producto.Fecha_Registro,producto.Precio_Pro,categoria.idcategoria,categoria.nombre_cate , orden_conpra.idorden_conpra,orden_conpra.fecha_Regis_orde FROM orden_conpra ,producto ,categoria WHERE orden_conpra.producto_idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and producto.stock=0");
         if ($request->ajax()){
             return Datatables::of($orden)
                 ->make(true);
@@ -39,7 +41,7 @@ class ordencomController extends Controller
 
     }
     public function cargarProd($id){
-       $orden=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.estado,producto.cantidad,producto.Fecha_Registro,producto.Precio_Pro,categoria.idcategoria,categoria.nombre_cate , orden_conpra.idorden_conpra,orden_conpra.fecha_Regis_orde FROM orden_conpra ,producto ,categoria WHERE orden_conpra.producto_idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and orden_conpra.idorden_conpra=$id");
+       $orden=DB::select("SELECT producto.idproducto,producto.idcategoria,producto.codigo,producto.nombre_pro,producto.stock,producto.estado,producto.Fecha_Registro,producto.Precio_Pro,categoria.idcategoria,categoria.nombre_cate , orden_conpra.idorden_conpra,orden_conpra.fecha_Regis_orde FROM orden_conpra ,producto ,categoria WHERE orden_conpra.producto_idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and orden_conpra.idorden_conpra=$id");
        return response()->json($orden);
     }
 
@@ -48,7 +50,7 @@ class ordencomController extends Controller
         $regla=[
 
 
-            'cantidad'=>'required',
+            'stock'=>'required',
             'Fecha_Ingreso'=>'required',
 
 
@@ -62,10 +64,9 @@ class ordencomController extends Controller
             $inven=ordencompra::find($id);
             $producto=Producto::find(Input::get('idprod'));
             $producto->Fecha_Registro=$request->get('Fecha_Ingreso');
-            $producto->cantidad=$request->get('cantidad');
+            $producto->stock=$request->get('stock');
             $producto->update();
             $inven->producto_idproducto=$producto->idproducto;
-            $inven->update();
             DB::commit();
         }
         $data=array('hecho'=>'si','campos'=>$producto);
@@ -73,4 +74,5 @@ class ordencomController extends Controller
 
 
     }
+
 }

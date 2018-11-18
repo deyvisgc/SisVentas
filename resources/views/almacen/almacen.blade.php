@@ -29,7 +29,6 @@
                                         <th>Nombre</th>
                                         <th>Codigo</th>
                                         <th>Categoria</th>
-                                        <th>Cantidad</th>
                                         <th>Precio</th>
                                         <th>Stock</th>
                                         <th>Estado</th>
@@ -78,14 +77,6 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Cantidad</label>
-                                    <input type="number" class="form-control" id="cantidad_pro" required="Campo Obligatorio"
-                                           name="cantidad"  >
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                <div class="form-group">
                                     <label for="exampleInputEmail1">descripccion</label>
                                     <input type="text" readonly="readonly" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="descripccion" >
                                 </div>
@@ -124,17 +115,13 @@
                                     <input type="number" name="stock"  id="stock"  class="form-control">
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <center><label for="exampleInputEmail1">Precio Producto</label></center>
-                                <input type="number" readonly="readonly" name="precio_pro"  id="pre_pro"  class="form-control">
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Precio Producto</label></center>
+                                    <input type="number" readonly="readonly" name="precio_pro"  id="pre_pro"  class="form-control">
+                                </div>
                             </div>
                         </div>
-
-
-
                         <center>
 
                             <div class="modal-footer">
@@ -200,7 +187,6 @@
                 {data: 'nombre_pro', name:'nombre_pro'},
                 {data: 'codigo', name:'codigo'},
                 {data: 'nombre_cate',name:'nombre_cate'},
-                {data: 'cantidad', name:'cantidad'},
                 {data: 'Precio_Pro', name:'Precio_Pro'},
                 {data: 'stock', name:'stock'},
                 {data: 'estado',name:'estado',
@@ -240,7 +226,6 @@
               $.each(response,function (index , val) {
                   $('#nombre').val(val.nombre_pro);
                   $('#Codigo_pro').val(val.codigo);
-                  $('#cantidad_pro').val(val.cantidad);
                   $('#descripccion_pro').val(val.descripcion);
                   $('#estado_pro').val(val.estado);
                   $('#cate').val(val.nombre_cate);
