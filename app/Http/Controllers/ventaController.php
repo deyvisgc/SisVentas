@@ -5,6 +5,7 @@ namespace SisVentas\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Input;
+use function MongoDB\BSON\toJSON;
 
 class ventaController extends Controller
 {
@@ -39,8 +40,8 @@ class ventaController extends Controller
         $query=DB::select("SELECT p.nombre ,p.Apellido_pat,p.Apellido_Materno,p.idtipoPersona,
         c.idcliente FROM cliente as c , tipopersona as p 
         WHERE c.tipoPersona_idtipoPersona=p.idtipoPersona 
-        and p.nombre LIKE '%".$produ."%' OR p.Apellido_pat LIKE '%".$produ."%'
-        OR p.Apellido_Materno LIKE '%".$produ."%'");
+        and p.nombre LIKE '%".$produ."%' AND p.Apellido_pat LIKE '%".$produ."%'
+        AND p.Apellido_Materno LIKE '%".$produ."%'");
 
         foreach ($query as $quer)
         {
@@ -50,5 +51,16 @@ class ventaController extends Controller
         $data=array('hecho'=>'si','list_cliente'=>$resulta);
 
         echo json_encode($data);
+    }
+
+    public function RegistrarProductos(){
+
+        $data = $_POST['array1'];
+
+        $dataProducto = json_decode(json_encode($data),true);
+
+        foreach ($dataProducto as $key=>$value)
+            $idproducto = $value->idproducto;
+        echo $idproducto;
     }
 }

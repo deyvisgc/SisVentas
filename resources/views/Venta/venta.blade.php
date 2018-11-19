@@ -29,6 +29,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text bg-primary text-white">Buscar</span>
                                                 </div>
+                                                <input type="text" id="idcliente" hidden name="idcliente" >
+                                                <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
                                                 <input type="text" autofocus name="cliente" id="cliente"  class="form-control" placeholder="Cliente" aria-label="Amount (to the nearest dollar)">
                                             </div>
                                         </div>
@@ -56,10 +58,18 @@
                                                 </div>
                                                 <input type="text" id="codigop" name="codigop" hidden>
                                                 <input type="text" id="idproducto" name="idproducto" hidden>
-                                                <input type="text" id="cantidad" name="cantidad" required="required" onkeypress='validate(event)' class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
+                                                <input type="text" id="cantidad" name="cantidad" required="required" onkeyup="calcularSubTotal();" onkeypress='validate(event)' class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-inverse-success btn-fw float-right" id="btn_agregar">Agregar</button><br><br>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Sub Total</span>
+                                                </div>
+                                                <input type="text" id="subtotal" name="subtotal" required="required"  readonly  class="form-control" placeholder="$$$" aria-label="Username">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-inverse-success btn-fw float-right" onclick="RegistrarProductos();" id="btn_agregar">Agregar</button><br><br>
                                     </div>
                                 </div>
                               <div class="col-md-6">
@@ -132,7 +142,7 @@
                     <h2 class="modal-title">Registrar Pago</h2>
                 </div>
                 <div class="modal-body">
-                    <form id="RegisVenta"  method="post" >
+                    <form>
                         <div class="row">
 
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
@@ -145,7 +155,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Ingresar Pago: </label>
-                                    <input type="text" class="form-control" id="pago" onkeypress="calcularVuelto();" name="pago" required="">
+                                    <input type="text" class="form-control" id="pago" autofocus onkeypress="calcularVuelto();" name="pago" required="">
                                 </div>
                             </div>
 
@@ -161,7 +171,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="button"  class="btn btn-success" id="RegisV">Registrar</button>
+                                <button type="button"  class="btn btn-success" id="btn_insert_venta">Registrar</button>
                             </div>
                         </center>
 
@@ -234,6 +244,7 @@
                 select:function (event,ui) {
 
                     $('#cliente').val(ui.item.value);
+                    $('#idcliente').val(ui.item.id);
 
                     return false;
                 }
@@ -251,7 +262,15 @@
                  //contador para asignar id al boton que borrara la fila
                 if(cantidad.trim()!=''){
 
-                        var fila = '<tr class="fila" id="row' + i + '"><td hidden id="idproducto">' + idproducto + '</td><td>' + nombre + '</td><td>' + codigo + '</td><td id="cantidad">' + cantidad + '</td><td>' + precio + '</td><td class="monto" id="monto">' + monto.toFixed(2) + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>'; //esto seria lo que contendria la fila
+                        var fila = '<tr class="fila" id="row' + i + '">' +
+                            '<td hidden id="idproducto">' + idproducto + '</td>' +
+                            '<td>' + nombre + '</td>' +
+                            '<td>' + codigo + '</td>' +
+                            '<td id="cantidad">' + cantidad + '</td>' +
+                            '<td>' + precio + '</td>' +
+                            '<td class="monto" id="monto">' + monto.toFixed(2) + '</td>' +
+                            '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>' +
+                            '</tr>'; //esto seria lo que contendria la fila
                     i++
                 }
 
@@ -310,20 +329,39 @@
                 console.log('newtotal:'+newtotal);
             });
 
+
             //Registrar venta
-            $('#btn_venta').click(function () {
+            $('#btn_insert_venta').click(function () {
+/*
+              var data=[];
+
                 $(".fila").each(function() {
-                    var total = $(this).find("td:last-child").text();
-                    alert(total);
+                    var idproducto = $(this).find("#idproducto").text();
+                    var cantidad = $(this).find("#cantidad").text();
+                    var monto = $(this).find("#monto").text();
+                    data.push(idproducto,cantidad,monto);
+                });
+
+                console.log(data);
+
+                var dataVenta=[];
+                var idcliente=$('#idcliente').val();
+                var ventatotal=$('.total').html();
+                dataVenta=[idcliente,ventatotal];
+                console.log(dataVenta);
+
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
                 });
                 $.ajax({
-                    url:'{{url('Vendedor')}}',
+                    url:'{}}',
                     dataType:'json',
                     type:'post',
-                    data:frm.serialize(),
+                    data:{'array1':JSON.stringify(data),'array2':JSON.stringify(dataVenta)},
                     success:function (response) {
-                        frm.trigger('reset');
-                        $('#formVendedor').modal('hide');
                         swal({
                             position: 'center',
                             type: 'success',
@@ -335,8 +373,7 @@
                     error: function(){
                         alert("error en tu proceso");
                     }
-
-                });
+                });*/
             });
         });
         function calcularVuelto(){
@@ -370,6 +407,48 @@
                 theEvent.returnValue = false;
                 if(theEvent.preventDefault) theEvent.preventDefault();
             }
+        }
+        function calcularSubTotal(){
+            var cantidad = document.getElementById("cantidad").value;
+            var precio = document.getElementById("precio").value;
+            var monto = parseFloat(cantidad)*parseFloat(precio);
+
+            $('#subtotal').val(monto.toFixed(2));
+        }
+        //Registrar Productos
+        function  RegistrarProductos() {
+            var idproducto = $('#idproducto').val();
+            var cantidad = $('#cantidad').val();
+            var monto = $('#subtotal').val();
+            var data ={};
+
+            data.idproducto = idproducto;
+            data.cantidad = cantidad;
+            data.monto = monto;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'{{url('shop')}}',
+                dataType:'json',
+                type:'post',
+                data:{'array1':JSON.stringify(data)},
+                success:function (response) {
+                    swal({
+                        position: 'center',
+                        type: 'success',
+                        title: 'Registro Exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function(){
+                    alert("error en tu proceso");
+                }
+            });
         }
 
     </script>

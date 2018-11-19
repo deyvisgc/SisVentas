@@ -4,6 +4,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Melody Admin</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>SIS| Ventas</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('vendors/iconfonts/font-awesome/css/all.min.css')}}">
@@ -204,6 +208,9 @@
 
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
+
+
+
             <!-- partial -->
         </div>
         <!-- main-panel ends -->
@@ -240,6 +247,8 @@
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
 
 
 
