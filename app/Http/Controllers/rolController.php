@@ -54,7 +54,7 @@ class rolController extends Controller
             $rol->rol_estado=$request->get('estado');
             $rol->save();
         }
-        return json_encode($rol);
+        return response()->json(array("success"=>true));
 
     }
 

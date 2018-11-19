@@ -48,7 +48,7 @@
         </div>
         <div class="modal fade modal-slide-in-right" aria-hidden="true"
              role="dialog" tabindex="-1" id="modalRegisterForm">
-            <div class="modal-dialog modal-lg" >
+            <div class="modal-dialog " >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title">Registrar Cliente</h1>
@@ -64,6 +64,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nombre</label>
                                         <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombre" placeholder="nombre" >
+                                        <p class="errorName text-danger hidden"></p>
                                     </div>
                                 </div>
 
@@ -72,6 +73,7 @@
                                         <label for="exampleInputEmail1">Apellido Paterno</label>
                                         <input type="text" class="form-control" id="apellido_pa" required="Campo Obligatorio"
                                                name="Apellido_paterno"  placeholder="Apellido Paterno">
+                                        <p class="errorApe text-danger hidden"></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -79,6 +81,7 @@
                                         <label for="exampleInputEmail1">Apellido Materno</label>
                                         <input type="text" class="form-control" id="apellido_ma" required="Campo Obligatorio"
                                                name="Apellido_Materno" placeholder="Apellido Materno" >
+                                        <p class="errorAPm text-danger hidden"></p>
                                     </div>
                                 </div>
 
@@ -86,6 +89,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Telefono</label>
                                         <input type="number" class="form-control" id="telefono" required="Campo Obligatorio"  name="telefono"  placeholder="Telefono">
+                                        <p class="errorTele text-danger hidden"></p>
                                     </div>
                                 </div>
 
@@ -93,18 +97,21 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">N°DNI</label>
                                         <input type="number" class="form-control" id="dni" required="Campo Obligatorio"  name="dni"  placeholder="DNI">
+                                        <p class="errorDni text-danger hidden"></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Direccion</label>
                                         <input type="text" class="form-control" id="direccion" required="Campo Obligatorio" name="Direccion"  placeholder="direccion">
+                                        <p class="errorDire text-danger hidden"></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Correo</label>
                                         <input type="email" class="form-control" id="direccion" required="Campo Obligatorio" name="gmail"  placeholder="correo">
+                                        <p class="errorCorr text-danger hidden"></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -117,8 +124,32 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <label for="exampleInputEmail1">Fecha Cumpleaños</label>
+                                    <div class="input-group date"  data-provide="datepicker">
+                                        <input type="text" name="Fecha_cumple"  required="Campo Obligatorio" id="date" class="form-control">
+                                        <p class="errorFecha text-danger hidden"></p>
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <label for="exampleInputEmail1">Fecha Ingreso</label>
+                                    <div class="input-group date"  data-provide="datepicker">
+                                        <input type="text" name="Fecha_Ingreso"  required="Campo Obligatorio" id="date" class="form-control">
+                                        <p class="errorFeIn text-danger hidden"></p>
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Sexo</label>
+                                        <label for="exampleInputEmail1">Genero</label>
                                         <select name="sexo" id="sexo" class="form-control" >
                                             <option value="Masculino">Masculino</option>
                                             <option value="Femenino">Femenino</option>
@@ -126,30 +157,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                    <label for="exampleInputEmail1">Fecha Cumpleaños</label>
-                                    <div class="input-group date"  data-provide="datepicker">
-                                        <input type="text" name="Fecha_cumple"  required="Campo Obligatorio" id="date" class="form-control">
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                <label for="exampleInputEmail1">Fecha Ingreso</label>
-                                <div class="input-group date"  data-provide="datepicker">
-                                    <input type="text" name="Fecha_Ingreso"  required="Campo Obligatorio" id="date" class="form-control">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
-                                </div>
 
-
-                            </div>
 
                             <center>
 
@@ -427,19 +436,6 @@
             }
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
         $('#regisP').click(function (e) {
             e.preventDefault();
             var form =$('#RegCliente');
@@ -454,15 +450,89 @@
                 type:'post',
                 data:form.serialize(),
                 success:function (response) {
-                    swal({
-                        position: 'center',
-                        type: 'success',
-                        title: 'Registro Exitoso',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    $('#modalRegisterForm').modal('hide');
-                    setTimeout(window.location.reload.bind(window.location), 1000);
+                    $('.errorName').addClass('hidden');
+                    $('.errorApe').addClass('hidden');
+                    $('.errorAPm').addClass('hidden');
+                    $('.errorAPm').addClass('hidden');
+                    $('.errorTele').addClass('hidden');
+                    $('.errorDni').addClass('hidden');
+                    $('.errorDire').addClass('hidden');
+                    $('.errorCorr').addClass('hidden');
+                    $('.errorFecha').addClass('hidden');
+                    $('.errorFeIn').addClass('hidden');
+                    if(response.errors){
+                        if(response.errors.nombre){
+                            $('.errorName').removeClass('hidden');
+                            $('.errorName').text(response.errors.nombre);
+
+                        }
+
+                        if(response.errors.Apellido_paterno){
+                            $('.errorApe').removeClass('hidden');
+                            $('.errorApe').text(response.errors.Apellido_paterno);
+
+                        }
+
+                        if(response.errors.Apellido_Materno){
+                            $('.errorAPm').removeClass('hidden');
+                            $('.errorAPm').text(response.errors.Apellido_Materno);
+
+                        }
+                        if(response.errors.telefono){
+                            $('.errorTele').removeClass('hidden');
+                            $('.errorTele').text(response.errors.telefono);
+
+                        }
+                        if(response.errors.dni){
+                            $('.errorDni').removeClass('hidden');
+                            $('.errorDni').text(response.errors.dni);
+
+                        }
+                        if(response.errors.Direccion){
+                            $('.errorDire').removeClass('hidden');
+                            $('.errorDire').text(response.errors.Direccion);
+
+                        }
+                        if(response.errors.gmail){
+                            $('.errorCorr').removeClass('hidden');
+                            $('.errorCorr').text(response.errors.gmail);
+
+                        }
+
+                        if(response.errors.Fecha_cumple){
+                            $('.errorFecha').removeClass('hidden');
+                            $('.errorFecha').text(response.errors.Fecha_cumple);
+
+                        }
+                        if(response.errors.Fecha_Ingreso){
+                            $('.errorFeIn').removeClass('hidden');
+                            $('.errorFeIn').text(response.errors.Fecha_Ingreso);
+
+                        }
+
+
+
+
+
+                    }
+
+                    if(response.success==true){
+
+                        $('#modalRegisterForm').modal('hide');
+                        form.trigger('reset');
+
+                        swal({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Registro Exitoso',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        tabla.api().ajax.reload();
+
+                    }
+
+
                 },
                 error: function(){
                     swal({
@@ -478,6 +548,16 @@
             return false;
 
         });
+
+
+        $('#modalRegisterForm').on('hidden.bs.modal', function (e) {
+            tabla.api().ajax.reload();
+
+
+
+
+        })
+
 
     </script>
 @endsection

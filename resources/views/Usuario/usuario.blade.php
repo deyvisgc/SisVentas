@@ -106,6 +106,7 @@
                                             <div class="form-group ">
                                                 <label class="control-label">Apellido Paterno<small>(Campo obligatorio)</small></label>
                                                 <input value="{{old('apellido_pa')}}"  name="apellido_pa" required type="text"  class="form-control">
+
                                             </div>
                                         </div>
                                         </div>

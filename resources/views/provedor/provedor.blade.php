@@ -136,7 +136,7 @@
         </div>
     <div class="modal fade modal-slide-in-right" aria-hidden="true"
          role="dialog" tabindex="-1" id="modalRegisterForm">
-        <div class="modal-dialog modal-lg" >
+        <div class="modal-dialog" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title">Registrar Provedor</h1>
@@ -330,16 +330,14 @@
 
 
                           </div>
-
-                          <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                              <label for="exampleInputEmail1">Fecha Cumpleaños</label>
-                              <div class="input-group date"  data-provide="datepicker">
-                                  <input type="text" name="Fecha_cumple"  required="Campo Obligatorio" id="fecha_naci" class="form-control">
-                                  <div class="input-group-addon">
-                                      <span class="glyphicon glyphicon-th"></span>
-                                  </div>
+                      </div>
+                      <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
+                          <label for="exampleInputEmail1">Fecha Cumpleaños</label>
+                          <div class="input-group date"  data-provide="datepicker">
+                              <input type="text" name="Fecha_cumple"  required="Campo Obligatorio" id="fecha_naci" class="form-control">
+                              <div class="input-group-addon">
+                                  <span class="glyphicon glyphicon-th"></span>
                               </div>
-
                           </div>
 
                       </div>

@@ -43,16 +43,17 @@ class clienteController extends Controller
  public function crear(Request $request)
  {
      $regla=[
-         'nombre'=>'required ',
-         'Apellido_paterno'=>'required ',
-         'Apellido_Materno'=>'required ',
-         'telefono'=>'required ',
-         'Direccion' =>'required ',
-         'dni'=>'required |',
-         'gmail'=>'required |',
-         'Fecha_cumple'=>'required ',
-         'Fecha_Ingreso'=>'required ',
-         'sexo'=>'required ',
+         'nombre'=>'required|min:2|max:32',
+         'Apellido_paterno'=>'required|min:2|max:32',
+         'Apellido_Materno'=>'required|min:2|max:32',
+         'telefono'=>'required|min:2|max:32',
+         'Direccion' =>'required|min:2|max:32',
+         'dni'=>'required|min:2|max:32',
+         'gmail'=>'required|min:2|max:32',
+         'Fecha_cumple'=>'required|min:2|max:32',
+         'Fecha_Ingreso'=>'required|min:2|max:32',
+         'sexo'=>'required|min:2|max:32',
+         'estado'=>'required|min:2|max:32',
 
 
      ];
@@ -64,16 +65,16 @@ class clienteController extends Controller
      } else{
          DB::beginTransaction();
          $prove=new TipoPer();
-         $prove->nombre=$request->get('nombre');
-         $prove->Apellido_pat=$request->get('Apellido_paterno');
-         $prove->Apellido_Materno=$request->get('Apellido_Materno');
-         $prove->Direccion=$request->get('Direccion');
-         $prove->dni=$request->get('dni');
-         $prove->telefono=$request->get('telefono');
-         $prove->sexo=$request->get('sexo');
-         $prove->gmail=$request->get('gmail');
-         $prove->Fecha_Ingreso=$request->get('Fecha_Ingreso');
-         $prove->Fecha_nacimiento=$request->get('Fecha_cumple');
+         $prove->nombre=$request->nombre;
+         $prove->Apellido_pat=$request->Apellido_paterno;
+         $prove->Apellido_Materno=$request->Apellido_Materno;
+         $prove->Direccion=$request->Direccion;
+         $prove->dni=$request->dni;
+         $prove->telefono=$request->telefono;
+         $prove->sexo=$request->sexo;
+         $prove->gmail=$request->gmail;
+         $prove->Fecha_Ingreso=$request->Fecha_Ingreso;
+         $prove->Fecha_nacimiento=$request->Fecha_cumple;
          $prove->save();
 
          $provedor=new Client();
@@ -82,7 +83,7 @@ class clienteController extends Controller
          $provedor->save();
          DB::commit();
      }
-echo json_encode($provedor);
+     return response()->json(array("success"=>true));
 
  }
  public function cargar($id)
