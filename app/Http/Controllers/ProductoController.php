@@ -27,10 +27,7 @@ class ProductoController extends Controller
 
                     return '<a data-toggle="modal" data-target="#formEdir"  onclick="editarPro('. $id->idproducto . ')" >
 <button type="button" class="btn btn-outline-success btn-social-icon-text"><i class="fas fa-pencil-alt btn-icon-append"></i></button></a>
-                       <a data-toggle="modal" data-target="#deletPro"   onclick="eliminarPro('. $id->idproducto . ')" >
-                        <button type="button" class="btn btn-outline-success ">
-                          <i class="fas fa-trash text-danger"></i>                          
-                        </button>
+                                         
 </a>';
                 })->addColumn('imagen', function ($producto){
                     $url= asset('Imagenes/Producto/'.$producto->imagen);
@@ -108,6 +105,7 @@ class ProductoController extends Controller
             'descripccion'=>'required',
             'categoria'=>'required',
             'Fecha_Ingreso'=>'required',
+            'precio_pro'=>'required',
         ];
         $valida=Validator::make(Input::all(),$regla);
         if($valida->fails()){
@@ -123,7 +121,6 @@ class ProductoController extends Controller
             $produc->Precio_Pro=$request->get('precio_pro');
             $produc->update();
         }
-         $data=array('hecho'=>'si','campos'=>$produc);
-         echo json_encode($data);
+         return response()->json(array("success"=>true));
      }
 }

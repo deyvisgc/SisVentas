@@ -252,7 +252,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre Producto</label>
                                     <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombre_pro" >
-
+                                    <p class="errorNom text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -261,13 +261,15 @@
                                     <label for="exampleInputEmail1">Codigo</label>
                                     <input type="number" class="form-control" id="Codigo_pro" required="Campo Obligatorio"
                                            name="Codigo"  >
+                                    <p class="errorCode text-danger hidden"></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Cantidad</label>
                                     <input type="number" class="form-control" id="cantidad_pro" required="Campo Obligatorio"
-                                           name="cantidad"  >
+                                           name="stock"  >
+                                    <p class="errorCanti text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -276,6 +278,7 @@
                                     <label for="exampleInputEmail1">descripccion</label>
                                     <input type="text" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="descripccion" >
                                 </div>
+                                <p class="errorDes text-danger hidden"></p>
                             </div>
 
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -300,6 +303,7 @@
                                     <label for="exampleInputEmail1">Fecha Ingreso</label>
                                     <div class="input-group date"  data-provide="datepicker">
                                         <input type="text" name="Fecha_Ingreso"  required="Campo Obligatorio" id="fecha_ingre_pro" class="form-control">
+                                        <p class="errorfecha text-danger hidden"></p>
                                         <div class="input-group-addon">
                                              <span class="input-group-addon input-group-append border-left">
                                              <span class="far fa-calendar input-group-text"></span></span>
@@ -321,6 +325,7 @@
                                 <div class="form-group">
                                     <center><label for="exampleInputEmail1">Prcio Producto</label></center>
                                     <input type="number" name="precio_pro"  id="pre_pro"  class="form-control">
+                                    <p class="errorPre text-danger hidden"></p>
                                 </div>
                             </div>
 
@@ -331,8 +336,8 @@
                         <center>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit"  class="btn btn-success" id="editar">Registrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit"  class="btn btn-success" id="editar">Actualizar</button>
                             </div>
                         </center>
 
@@ -521,7 +526,7 @@ $('#inser').click(function (e) {
                        if (response.prod) {
                            $('#nombre').val(response.prod.nombre_pro);
                            $('#Codigo_pro').val(response.prod.codigo);
-                           $('#cantidad_pro').val(response.prod.cantidad);
+                           $('#cantidad_pro').val(response.prod.stock);
                            $('#descripccion_pro').val(response.prod.descripcion);
                            $('#estado_pro').val(response.prod.estado);
                            $('#fecha_ingre_pro').val(response.prod.Fecha_Registro);
@@ -549,16 +554,59 @@ $('#inser').click(function (e) {
                             type:'post',
                             dataType:'json',
                             success:function (response) {
-                                form.trigger('reset');
 
-                                swal({
-                                    position: 'center',
-                                    type: 'success',
-                                    title: 'Actualizado Correctamente',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                                $('#formEdir').modal('hide');
+                                $('.errorNom').addClass('hidden');
+                                $('.errorCode').addClass('hidden');
+                                $('.errorCanti').addClass('hidden');
+                                $('.errorDes').addClass('hidden');
+                                $('.errorfecha').addClass('hidden');
+                                $('.errorPre').addClass('hidden');
+
+                                if(response.errors) {
+
+                                    if (response.errors.nombre_pro) {
+                                        $('.errorNom').removeClass('hidden');
+                                        $('.errorNom').text(response.errors.nombre_pro);
+
+                                    }
+                                    if (response.errors.Codigo) {
+                                        $('.errorCode').removeClass('hidden');
+                                        $('.errorCode').text(response.errors.Codigo);
+
+                                    }
+                                    if (response.errors.cantidad) {
+                                        $('.errorCanti').removeClass('hidden');
+                                        $('.errorCanti').text(response.errors.cantidad);
+
+                                    }
+                                    if (response.errors.descripccion) {
+                                        $('.errorDes').removeClass('hidden');
+                                        $('.errorDes').text(response.errors.descripccion);
+
+                                    }
+                                    if (response.errors.Fecha_Ingreso) {
+                                        $('.errorfecha').removeClass('hidden');
+                                        $('.errorfecha').text(response.errors.Fecha_Ingreso);
+
+                                    }
+                                    if (response.errors.precio_pro) {
+                                        $('.errorPre').removeClass('hidden');
+                                        $('.errorPre').text(response.errors.precio_pro);
+
+                                    }
+                                }
+                                if (response.success==true){
+                                    form.trigger('reset');
+                                    $('#formEdir').modal('hide');
+                                    swal({
+                                        position: 'center',
+                                        type: 'success',
+                                        title: 'Actualizado Correctamente',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    table.api().ajax.reload();
+                                }
 
                             },
                             Error:function () {
@@ -567,8 +615,7 @@ $('#inser').click(function (e) {
 
                         });
 
-                               setTimeout(window.location.reload.bind(window.location), 1000);
-                               return false;
+
 
                            });
 
@@ -592,14 +639,7 @@ $('#inser').click(function (e) {
 
 
     });
-       function eliminarPro(idproducto) {
-           if (idproducto){
-             $('#dele').click(function () {
-              alert(idproducto);
 
-             })
-           }
-       }
 
         $('#formProducto').on('hidden.bs.modal', function (e) {
 

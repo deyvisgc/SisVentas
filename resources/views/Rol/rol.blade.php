@@ -240,7 +240,7 @@
 
         var tabla;
     $(document).ready(function () {
-    table= $('#rol').dataTable({
+        tabla= $('#rol').dataTable({
             stateSave: true,
             responsive: true,
             processing: false,
@@ -422,8 +422,7 @@
                       timer: 1500
                   });
                   $('#EditRol').modal('hide');
-                  setTimeout(window.location.reload.bind(window.location), 1000);
-                  return false;
+                  tabla.api().ajax.reload();
 
               }
           })
@@ -445,8 +444,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    $('#EditRol').modal('hide');
-                    setTimeout(window.location.reload.bind(window.location), 1000);
+                    tabla.api().ajax.reload();
                     return false;
 
                 }

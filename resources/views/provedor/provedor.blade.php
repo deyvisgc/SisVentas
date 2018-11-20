@@ -330,14 +330,15 @@
 
 
                           </div>
-                      </div>
-                      <div class="col-lg-12 col-sm-6 col-md-6 col-xs-12">
-                          <label for="exampleInputEmail1">Fecha Cumpleaños</label>
-                          <div class="input-group date"  data-provide="datepicker">
-                              <input type="text" name="Fecha_cumple"  required="Campo Obligatorio" id="fecha_naci" class="form-control">
-                              <div class="input-group-addon">
-                                  <span class="glyphicon glyphicon-th"></span>
+                          <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                              <label for="exampleInputEmail1">Fecha Cumpleaños</label>
+                              <div class="input-group date"  data-provide="datepicker">
+                                  <input type="text" name="Fecha_cumple"  required="Campo Obligatorio" id="fecha_naci" class="form-control">
+                                  <div class="input-group-addon">
+                                      <span class="glyphicon glyphicon-th"></span>
+                                  </div>
                               </div>
+
                           </div>
 
                       </div>
@@ -485,8 +486,6 @@
                                 }
                             });
                             var form=$('#formularioprovedor');
-                                console.log(form.serializeArray());
-
                             $.ajax({
                                 url:'{{url('editar/prove')}}/'+idprovedor,
                                 data:form.serialize(),
@@ -528,56 +527,68 @@
 
         }
 
-        function eliminar(idprovedor){
-
-
+        function Desacti(idprovedor){
             if(idprovedor){
-                $('#delete').click(function () {
 
+                $.ajax({
+                    url:'{{url('Estado/prove')}}/'+idprovedor,
+                    dataType:'json',
+                    type:'get',
+                    success:function (resposne) {
+                        if(resposne.errors){
 
-                     $.ajax({
-                         url:'{{url('delete/prove')}}/'+idprovedor,
-                         type:'get',
-                         dataType:'json',
+                            alert('Error al cambair estado');
+                        }
+                        if(resposne.success==true){
+                            swal({
+                                position: 'center',
+                                type: 'success',
+                                title: 'Exito al cambiar estado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            table.ajax.reload(null,false);
+                        }
 
-                         success:function (response) {
-                         if (response===true){
+                        return false;
 
-                                 swal({
-                                     position: 'center',
-                                     type: 'success',
-                                     title: 'Eliminado Correctamente',
-                                     showConfirmButton: false,
-                                     timer: 1500
-                                 });
-                             $('#deletProv').modal('hide');
-
-
-
-                         }
-
-                         }
-
-                     });
-
-                    table.api().ajax.reload();
-
+                    }
                 })
-
             }
-
-
 
         }
 
+        function Activ(idprovedor){
+            if(idprovedor){
 
+                $.ajax({
+                    url:'{{url('Estado/Act')}}/'+idprovedor,
+                    dataType:'json',
+                    type:'get',
+                    success:function (resposne) {
+                        if(resposne.errors){
 
+                            alert('Error al cambair estado');
+                        }
+                        if(resposne.success==true){
+                            swal({
+                                position: 'center',
+                                type: 'success',
+                                title: 'Exito al cambiar estado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $('#EditRol').modal('hide');
+                            table.ajax.reload(null,false);
+                        }
 
-        $('#deletProv').on('hidden.bs.modal', function (e) {
-            // do something...
-            location.reload();
+                        return false;
 
+                    }
+                })
+            }
 
-        })
+        }
+
     </script>
 @endsection

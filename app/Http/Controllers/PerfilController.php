@@ -131,4 +131,8 @@ class PerfilController extends Controller
         }
 
     }
+
+    public function ventas(){
+        return redirect('Perfil');
+    }
 }

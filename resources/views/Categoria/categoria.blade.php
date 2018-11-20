@@ -174,12 +174,8 @@
     <!-- start endmodal-->
     <div class="modal fade" tabindex="-1" role="dialog" id="mdlEditData">
         <div class="modal-dialog" role="document">
-
             <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="modal-header">
-
-
                     <h4 class="modal-title">Actualizar Categoria</h4>
                 </div>
                 <div class="modal-body">
@@ -212,27 +208,6 @@
         </div>
     </div>
 
-    <div id="deletD" class="modal fade">
-        <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <div class="icon-box">
-                        <i class="fa fa-trash"></i>
-                    </div>
-                    <h4 class="modal-title">Estas seguro?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Realmente quieres borrar estos registro? Este proceso no se puede deshacer.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="cancel"  class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    <button type="submit"  id="delete"   class="btn btn-danger" >Eliminar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 @endsection
 @section('footer_scripts')
@@ -395,40 +370,7 @@
                 }
             });
         });
-        function eliminar(idcategoria) {
-            if(idcategoria){
-                $('#delete').click(function () {
 
-                    $.ajax({
-                        url:'delete/'+idcategoria,
-                        dataType:'json',
-                        type:'get',
-                        success:function (response) {
-                            swal({
-                                position: 'center',
-                                type: 'success',
-                                title: 'Eliminado Correctamente',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-
-                            $('#deletD').modal('hide');
-                            table.ajax.reload(null,false);
-
-
-                        },
-
-
-
-                    });
-
-
-
-
-
-                });
-            }
-        }
         $('body').on('hidden.bs.modal', '.modal', function () {
 
             table.ajax.reload(null,false);

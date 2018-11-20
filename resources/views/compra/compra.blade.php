@@ -61,7 +61,15 @@
                                             </div>
                                             <input type="text" id="codigop" name="codigop" hidden >
                                             <input type="text" id="idproducto" name="idproducto" hidden>
-                                            <input type="text" id="cantidad" name="cantidad" class="form-control" placeholder="Ingresar Cantidad" aria-label="Username">
+                                            <input type="text" id="cantidad" name="cantidad" class="form-control" onkeyup="calculasubtotal();" placeholder="Ingresar Cantidad" aria-label="Username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Subtotal</span>
+                                            </div>
+                                            <input type="number" readonly="readonly" id="Subto" name="Subtotal" class="form-control" placeholder="$$$" aria-label="Username">
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-inverse-success btn-fw float-right" id="btn_agregar">Agregar</button>
@@ -231,7 +239,7 @@
                 var fila = '<tr class="fila" id="row' + i + '">' +
                     '<td hidden id="idproducto">' + idprodcuto + '</td>' +
                     '<td hidden id="idprove">' + idprove + '</td>' +
-                    '<td id="nombre">' + nombre + '</td><td>' + codigo + '</td>' +
+                    '<td>' + nombre + '</td><td>' + codigo + '</td>' +
                     '<td id="can">' + cantidad + '</td>' +
                     '<td id="precio">' + precio + '</td>' +
                     '<td class="monto" id="monto" >' + monto.toFixed(2) + '</td>' +
@@ -258,6 +266,7 @@
             document.getElementById("cantidad").value ="";
             document.getElementById("codigop").value = "";
             document.getElementById("producto").value = "";
+            document.getElementById("Subto").value = "";
             $("#dprecio").html('0');
             $("#cantidadP").html('0');
             document.getElementById("producto").focus();
@@ -300,34 +309,45 @@
             console.log('newtotal:'+newtotal);
         });
 
-        $('#btn_comprar').click(function () {
 
-            $(".fila").each(function() {
-                var total = $('.toalApa').html();
-                var id = $('#idproducto').val();
-               var cantidad=$('#can').html();
-               var idpr=$('#idprove').val();
-                  var data=[total,id,idpr,cantidad];
+        function calculasubtotal(){
+                var cantidad=document.getElementById("cantidad").value;
+                var precio=document.getElementById("precio").value;
+                var subtotal=parseFloat(cantidad)*parseFloat(precio);
+            $('#Subto').val(subtotal.toFixed(2));
+
+        }
+        $('#btn_comprar').click(function () {
+            var array = [];
+            var headers = [];
+            var data=[];
+            $('#detalle_compra th').each(function(index, item) {
+                headers[index] = $(item).html();
+            });
+            $('#detalle_compra tr').has('td').each(function() {
+                var arrayItem = {};
+                $('td', $(this)).each(function(index, item) {
+                    arrayItem[headers[index]] = $(item).html();
+                });
+                array.push(arrayItem);
                 $.ajax({
                     url:'{{url('GuardarCompra')}}',
-                    type:'get',
                     dataType:'json',
-                    data:{'array':JSON.stringify(data)},
-                    success:function (response) {
-                        alert(response);
-
-                    },
-                    Error:function () {
-                        alert('error');
-
+                    type:'get',
+                    data:{'array':JSON.stringify(arrayItem)},
+                    success:function (reponse) {
+                        alert(reponse);
                     }
-
                 })
 
 
             });
 
 
-        })
+
+
+
+        });
+
     </script>
     @endsection

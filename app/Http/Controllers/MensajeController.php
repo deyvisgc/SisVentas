@@ -12,4 +12,8 @@ class MensajeController extends Controller
 
         return view('Return.direcciones');
     }
+    public function paginas(){
+        return view('home');
+    }
+
 }

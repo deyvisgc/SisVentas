@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Melody Admin</title>
+    <title>Sistemas Ventas Rolast</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>SIS| Ventas</title>
+    <title>Rolast</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('vendors/iconfonts/font-awesome/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
@@ -33,7 +33,7 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="#">SisVentas</a>
+            <a class="navbar-brand brand-logo" href="#">Rolast</a>
             <a class="navbar-brand brand-logo-mini" href="#"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -45,7 +45,11 @@
 
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                        <img src="{{asset('Imagenes/Usuario/'.Auth::user()->imagen)}}" alt="profile"/>
+                        @if(Auth::user()->imagen=='')
+                        <img src="{{asset('assets/img/default-avatar.png')}}" alt="profile"/>
+                            @elseif(Auth::user()->imagen)
+                            <img src="{{asset('Imagenes/Usuario/'.Auth::user()->imagen)}}" alt="profile"/>
+                            @endif
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                         <a class="dropdown-item">
@@ -80,8 +84,11 @@
                 <li class="nav-item nav-profile">
                     <div class="nav-link">
                         <div class="profile-image">
-                            <img src="{{asset('Imagenes/Usuario/'.Auth::user()->imagen)}}" alt="image"/>
-
+                            @if(Auth::user()->imagen=='')
+                                <img src="{{asset('assets/img/default-avatar.png')}}" alt="profile"/>
+                            @elseif(Auth::user()->imagen)
+                                <img src="{{asset('Imagenes/Usuario/'.Auth::user()->imagen)}}" alt="profile"/>
+                            @endif
                         </div>
                         <div class="profile-name">
                             <p class="name">

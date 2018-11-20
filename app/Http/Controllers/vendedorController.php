@@ -27,13 +27,11 @@ class vendedorController extends Controller
             return Datatables::of($vende)
                 ->addColumn('action', function ($id){
                     return '
-<a data-toggle="modal" data-target="#mUpdate"  onclick="editarV('. $id->idVendedor . ')" >
-<button type="button" class="btn btn-outline-success btn-social-icon-text"><i class="fas fa-pencil-alt btn-icon-append"></i></button></a>
                           <button class="btn btn-outline-warning btn-sm dropdown-toggle"  type="button" id="dropdownMenuIconButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-globe"></i>
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton1">
-                                    <a data-toggle="modal" data-target="#deletVen"  class="dropdown-item"  style="color: #1b5e20" onclick="eliminarV('. $id->idVendedor .')">Eliminar</a>
+                                    <a data-toggle="modal" data-target="#mUpdate"  onclick="editarV('. $id->idVendedor . ')"  class="dropdown-item"  style="color: #1b5e20" ">Actualizar</a>
                             <a class="dropdown-item"  style="color: #002a80" onclick="Activar('. $id->idVendedor .')">Activar</a>
                              <a class="dropdown-item"  style="color: red" onclick="Desactivar('. $id->idVendedor .')">Desactivar</a>
                             <div class="dropdown-divider"></div>

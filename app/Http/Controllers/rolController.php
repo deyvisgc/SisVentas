@@ -18,8 +18,7 @@ class rolController extends Controller
                 ->addColumn('action',function($rol){
                     return
                         '<button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#EditRol"   onclick="editRol('.$rol->idroles.')">Editar</button>
-               <a data-toggle="modal" data-target="#deletRol" onclick="eliminar('.$rol->idroles.')"> <button type="button" class="btn btn-outline-danger " id=""><i class="glyphicon glyphicon-remove">Eliminar</button></a>
-          
+
               <span class="dropdown-toggle btn btn-outline-success" id="languageDropdown" data-toggle="dropdown">Estado</span>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
                 <a class="dropdown-item font-weight-normal" onclick="Cambiaresta('.$rol->idroles.')" >

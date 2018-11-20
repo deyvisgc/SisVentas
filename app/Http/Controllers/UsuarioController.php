@@ -63,18 +63,18 @@ class UsuarioController extends Controller
         $validate=Validator::make(Input::all(),$regla);
 
         if($validate->fails()){
-            return Redirect('User/redirec')->withErrors($validate);
-        } else{
+            return Redirect('Usuario')->withErrors($validate);
+        } else {
             DB::beginTransaction();
-            $per=new Persona();
-            $per->Apellido_Pater=$request->get('apellido_pa');
-            $per->Apellido_Mater=$request->get('apellido_ma');
-            $per->dni=$request->get('dni');
-            $per->Fecha_nacimiento=$request->get('Fecha_cumple');
-            $per->direccion=$request->get('direccion');
-            $per->telefono=$request->get('telefono');
-            $per->rol_idrol=$request->get('rol');
-            $per->nombre=$request->get('nombre');
+            $per = new Persona();
+            $per->Apellido_Pater = $request->get('apellido_pa');
+            $per->Apellido_Mater = $request->get('apellido_ma');
+            $per->dni = $request->get('dni');
+            $per->Fecha_nacimiento = $request->get('Fecha_cumple');
+            $per->direccion = $request->get('direccion');
+            $per->telefono = $request->get('telefono');
+            $per->rol_idrol = $request->get('rol');
+            $per->nombre = $request->get('nombre');
             $per->save();
             /**
              * hasfile: es una clase que tiene Imput para captural la imagen qu mandamos d nustro formulario
@@ -84,24 +84,27 @@ class UsuarioController extends Controller
              *
              */
 
-            $user=new User();
+            $user = new User();
             $user->persona_idpersona = $per->idpersona;
-            $user->email=$request->get('email');
-            $user->password=bcrypt($request->get('password'));
-            $user->username=$request->get('username');
-            $user->idRol= $request->get('rol');
-            if(Input::hasFile('imagen')){
-                $file=Input::file('imagen');
-                $file->move(public_path().'/Imagenes/Usuario/',$file->getClientOriginalName());
-                $user->imagen=$file->getClientOriginalName();
+            $user->email = $request->get('email');
+            $user->password = bcrypt($request->get('password'));
+            $user->username = $request->get('username');
+            $user->idRol = $request->get('rol');
+            if ($user->imagen == null) {
+                if (Input::hasFile('imagen')) {
+                    $file = Input::file('imagen');
+                    $file->move(public_path() . '/Imagenes/Usuario/', $file->getClientOriginalName());
+                    $user->imagen = $file->getClientOriginalName();
 
 
+                } else{
+                    $user->imagen='default-avatar.png';
+                }
+                $user->save();
+                DB::commit();
             }
-            $user->save();
-            DB::commit();
+            return Redirect('Usuario');
         }
-        return Redirect('Usuario');
-
 
     }
 

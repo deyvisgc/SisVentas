@@ -24,8 +24,6 @@ class categoriaController extends Controller
                 ->addColumn('action',function($cate){
                     return
                         '<button type="button" class="btn btn-outline-warning btnEdit" data-edit="/Categorias/'.$cate->idcategoria.'/edit">Editar</button>
-                 <a data-toggle="modal" data-target="#deletD" onclick="eliminar('.$cate->idcategoria.')"> <button type="button" class="btn btn-outline-danger" id=""><i class="glyphicon glyphicon-remove">Eliminar</button></a>
-                 
               <span class="dropdown-toggle btn btn-outline-success" id="languageDropdown" data-toggle="dropdown">Estado</span>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
                 <a class="dropdown-item font-weight-normal" onclick="CambiarEsta('.$cate->idcategoria.')" >

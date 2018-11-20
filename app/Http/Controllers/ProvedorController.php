@@ -20,13 +20,24 @@ class ProvedorController extends Controller
         if (request()->ajax()) {
             return Datatables::of($produc)
                 ->addColumn('action', function ($id){
-                    return '<a data-toggle="modal" data-target="#modal-editProve"  onclick="editar('. $id->idprovedor . ')" >
-<button type="button" class="btn btn-outline-success btn-social-icon-text"><i class="fas fa-pencil-alt btn-icon-append"></i></button></a>
-                       <a data-toggle="modal" data-target="#deletProv"   onclick="eliminar('. $id->idprovedor . ')" >
-                        <button type="button" class="btn btn-outline-success ">
-                          <i class="fas fa-trash text-danger"></i>                          
-                        </button>
-</a>';
+                    return '
+                       <span class="dropdown-toggle btn btn-outline-dark" id="languageDropdown" data-toggle="dropdown">Opciones</span>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                <a class="dropdown-item font-weight-normal" onclick="Desacti('.$id->idprovedor.')" >
+              <label style="color:#0d47a1;">Desactivar</label>    
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item font-weight-normal" onclick="Activ('.$id->idprovedor.')">
+                <label style="color:red;">Activar</label>  
+                </a>
+                  <div class="dropdown-divider"></div>
+                <a  class="dropdown-item font-weight-normal" data-toggle="modal" data-target="#modal-editProve"  onclick="editar('. $id->idprovedor . ')"">
+                <label style="color:#0f1531;">Actualizar</label>  
+                       
+                       
+                       
+                       
+                       ';
                 })->filterColumn('fullname', function($query, $keyword) {
                     $sql = "CONCAT(nombre,' ',Apellido_pat,' ',Apellido_Materno)  like ?";
                     $query->whereRaw($sql, ["%{$keyword}%"]);
@@ -95,7 +106,7 @@ class ProvedorController extends Controller
         $regla=
             [
                 'nombress'=>'required ',
-                'Apellido_paterno'=>'required ',
+                'Apellido_pat'=>'required ',
                 'Apellido_Materno'=>'required ',
                 'Direccion' =>'required ',
                 'dni'=>'required |',
@@ -114,7 +125,7 @@ class ProvedorController extends Controller
             $prov=Provedor::find($id);
             $prove=TipoPer::find(Input::get('idprove'));
             $prove->nombre=$request->get('nombress');
-            $prove->Apellido_pat=$request->get('Apellido_paterno');
+            $prove->Apellido_pat=$request->get('Apellido_pat');
             $prove->Apellido_Materno=$request->get('Apellido_Materno');
             $prove->Direccion=$request->get('Direccion');
             $prove->dni=$request->get('dni');
@@ -130,11 +141,22 @@ class ProvedorController extends Controller
             $prov->update();
             DB::commit();
         }
-        return json_encode($prov);
+        return response()->json(array("success"=>true));
     }
-    public function eliminarProve($id){
-        $prove=Provedor::find($id);
-        $data=   $prove->delete();
-        echo  json_encode($data);
+
+
+    public function Desactivar($id){
+        DB::table('provedor')
+            ->where('idprovedor', $id)
+            ->update(['estado' => 'Desactivado']);
+        return response()->json(array("success"=>true));
+
+
+    }
+    public function Activar($id){
+        DB::table('provedor')
+            ->where('idprovedor', $id)
+            ->update(['estado' => 'Activado']);
+        return response()->json(array("success"=>true));
     }
 }

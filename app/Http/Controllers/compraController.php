@@ -58,21 +58,34 @@ class compraController extends Controller
         echo json_encode($data);
     }
     public function guardar(Request $request){
-        $com=$request->get('array');
-        $co=explode(',',$com);
 
         $compra=new  compra();
-
-            foreach ($co as $pro){
-                dd($co);
-                    $compra->$pro->precio_compra;
-                    $compra->$pro->provedor_idprovedor;
-                    $compra->$pro->producto_idproducto;
-                    $compra->$pro->cantidad;
-
-
-            }
+        $data =$request->get('array');
+        $data = implode(',', (array)$data);
+        $compra->provedor_idprovedor=$data;
+        $compra->producto_idproducto=$data;
+        $compra->cantidad=$data;
+        $compra->precio_compra=$data;
         $compra->save();
         return json_encode($compra);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

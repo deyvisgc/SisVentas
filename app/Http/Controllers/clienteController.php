@@ -24,13 +24,19 @@ class clienteController extends Controller
      if (request()->ajax()) {
          return Datatables::of($cliente)
              ->addColumn('action', function ($id){
-                 return '<a data-toggle="modal" data-target="#modal-editProve"  onclick="editarClient('. $id->idcliente . ')" >
-<button type="button" class="btn btn-outline-success btn-social-icon-text"><i class="fas fa-pencil-alt btn-icon-append"></i></button></a>
-                       <a data-toggle="modal" data-target="#deletProv"   onclick="eliminarCliente('. $id->idcliente . ')" >
-                        <button type="button" class="btn btn-outline-success ">
-                          <i class="fas fa-trash text-danger"></i>                          
-                        </button>
-</a>';
+                 return '    <span class="dropdown-toggle btn btn-outline-danger" id="languageDropdown" data-toggle="dropdown">Opciones</span>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
+                <a class="dropdown-item font-weight-normal" onclick="DesactiCl('.$id->idcliente.')" >
+              <label style="color:#0d47a1;">Desactivar</label>    
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item font-weight-normal" onclick="ActivCli('.$id->idcliente.')">
+                <label style="color:red;">Activar</label>  
+                </a>
+                  <div class="dropdown-divider"></div>
+                <a  class="dropdown-item font-weight-normal" 
+data-toggle="modal" data-target="#modal-editProve"  onclick="editarClient('. $id->idcliente . ')"">
+                <label style="color:#0f1531;">Actualizar</label>  ';
              })->filterColumn('fullname', function($query, $keyword) {
                  $sql = "CONCAT(nombre,' ',Apellido_pat,' ',Apellido_Materno)  like ?";
                  $query->whereRaw($sql, ["%{$keyword}%"]);
@@ -140,6 +146,21 @@ class clienteController extends Controller
 echo  json_encode($clien);
 
  }
+
+ public  function Desactivar($id){
+     DB::table('cliente')
+         ->where('idcliente', $id)
+         ->update(['clien_estado' => 'Desactivado']);
+     return response()->json(array("success"=>true));
+
+ }
+    public  function Activar($id){
+        DB::table('cliente')
+            ->where('idcliente', $id)
+            ->update(['clien_estado' => 'Activado']);
+        return response()->json(array("success"=>true));
+
+    }
 
 
 }

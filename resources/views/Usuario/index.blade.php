@@ -84,6 +84,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nombre</label>
                             <input value="{{old('nombre')}}" name="nombre" required="Campo Obligatorio"   type="text" class="form-control" placeholder="nombre">
+                            <p class="errorName text-danger hidden"></p>
                         </div>
                     </div>
 
@@ -91,12 +92,14 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Apellido Paterno</label>
                             <input value="{{old('apellido_pa')}}"  name="apellido_pa" required="Campo Obligatorio" type="text"  class="form-control" placeholder="Apellido Paterno">
+                            <p class="errorApe text-danger hidden"></p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Apellido Materno</label>
                             <input  value="{{old('apellido_ma')}}" name="apellido_ma" required="Campo Obligatorio" type="text" class="form-control" placeholder="Apellido Materno">
+                            <p class="errorAPm text-danger hidden"></p>
                         </div>
                     </div>
 
@@ -104,6 +107,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Telefono</label>
                             <input name="telefono" type="number" required="Campo Obligatorio" value="{{old('telefono')}}" class="form-control">
+                            <p class="errorTele text-danger hidden"></p>
                         </div>
                     </div>
 
@@ -111,6 +115,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">EMAIL</label>
                             <input value="{{old('email')}}" name="email" required="Campo Obligatorio"  type="email" placeholder="example@gmail.com"  class="form-control">
+                            <p class="errorCorr text-danger hidden"></p>
                         </div>
                     </div>
 
@@ -119,6 +124,7 @@
                             <label class="control-label">Usuario</label>
                             <div>
                                 <input value="{{old('username')}}"  name="username" required="Campo Obligatorio"  type="text" class="form-control" placeholder="usuario">
+                                <p class="errorUser text-danger hidden"></p>
                             </div>
                         </div>
                     </div>
@@ -126,6 +132,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">N°DNI</label>
                             <input value="{{old('dni')}}" name="dni" required="Campo Obligatorio"  type="number" class="form-control" placeholder="DNI">
+                            <p class="errorDni text-danger hidden"></p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -145,6 +152,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Direccion</label>
                             <input value="{{old('direccion')}}" required="Campo Obligatorio" placeholder="direccion"  name="direccion" type="text" class="form-control">
+                            <p class="errorDire text-danger hidden"></p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -152,6 +160,7 @@
                             <label for="exampleInputEmail1">Password</label>
 
                             <input name="password" value="{{old('password')}}" required="Campo Obligatorio"  type="password" class="form-control" placeholder="*******">
+                            <p class="errorPas text-danger hidden"></p>
                         </div>
                     </div>
 
@@ -159,7 +168,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Imagen</label>
                             <input type="file"  class="form-control" id="imagen" name="imagen" placeholder="Imagen.jpg">
-
+                            <p class="errorIma text-danger hidden"></p>
 
                         </div>
                     </div>
@@ -168,6 +177,7 @@
                         <label for="exampleInputEmail1">Fecha Nacimiento</label>
                         <div class="input-group date"  data-provide="datepicker">
                             <input type="text" value="{{old("Fecha_cumple")}}" name="Fecha_cumple" placeholder="Fecha Nacimiento" id="date" class="form-control">
+                            <p class="errorFecha text-danger hidden"></p>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>

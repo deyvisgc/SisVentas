@@ -556,8 +556,67 @@
 
 
 
-        })
+        });
+
+        function DesactiCl(idcliente) {
+            if(idcliente){
+                $.ajax({
+                    url:'{{url('DesacCliente')}}/'+idcliente,
+                    dataType:'json',
+                    type:'get',
+                    success:function (resposne) {
+                        if(resposne.errors){
+
+                            alert('Error al cambair estado');
+                        }
+                        if(resposne.success==true){
+                            swal({
+                                position: 'center',
+                                type: 'success',
+                                title: 'Exito al cambiar estado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            tabla.api().ajax.reload();
+                        }
+
+                        return false;
+
+                    }
+                })
+            }
+
+        }
 
 
+        function ActivCli(idcliente) {
+            if(idcliente){
+                $.ajax({
+                    url:'{{url('ActiCliente')}}/'+idcliente,
+                    dataType:'json',
+                    type:'get',
+                    success:function (resposne) {
+                        if(resposne.errors){
+
+                            alert('Error al cambair estado');
+                        }
+                        if(resposne.success==true){
+                            swal({
+                                position: 'center',
+                                type: 'success',
+                                title: 'Exito al cambiar estado',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            tabla.api().ajax.reload();
+                        }
+
+                        return false;
+
+                    }
+                })
+            }
+
+        }
     </script>
 @endsection
