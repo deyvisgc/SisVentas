@@ -332,24 +332,13 @@
 
             //Registrar venta
             $('#btn_insert_venta').click(function () {
-/*
-              var data=[];
+                var dataVenta={};
 
-                $(".fila").each(function() {
-                    var idproducto = $(this).find("#idproducto").text();
-                    var cantidad = $(this).find("#cantidad").text();
-                    var monto = $(this).find("#monto").text();
-                    data.push(idproducto,cantidad,monto);
-                });
-
-                console.log(data);
-
-                var dataVenta=[];
                 var idcliente=$('#idcliente').val();
                 var ventatotal=$('.total').html();
-                dataVenta=[idcliente,ventatotal];
-                console.log(dataVenta);
 
+                dataVenta.idcliente = idcliente;
+                dataVenta.ventatotal=ventatotal;
 
                 $.ajaxSetup({
                     headers: {
@@ -357,10 +346,10 @@
                     }
                 });
                 $.ajax({
-                    url:'{}}',
+                    url:'{{url('regventa')}}',
                     dataType:'json',
                     type:'post',
-                    data:{'array1':JSON.stringify(data),'array2':JSON.stringify(dataVenta)},
+                    data:{'array2':JSON.stringify(dataVenta)},
                     success:function (response) {
                         swal({
                             position: 'center',
@@ -370,10 +359,7 @@
                             timer: 1500
                         });
                     },
-                    error: function(){
-                        alert("error en tu proceso");
-                    }
-                });*/
+                });
             });
         });
         function calcularVuelto(){
@@ -445,9 +431,6 @@
                         timer: 1500
                     });
                 },
-                error: function(){
-                    alert("error en tu proceso");
-                }
             });
         }
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Input;
 use function MongoDB\BSON\toJSON;
+use SisVentas\detalle_venta;
+use SisVentas\venta;
 
 class ventaController extends Controller
 {
@@ -55,12 +57,31 @@ class ventaController extends Controller
 
     public function RegistrarProductos(){
 
+        $model = new detalle_venta();
         $data = $_POST['array1'];
 
-        $dataProducto = json_decode(json_encode($data),true);
-
-        foreach ($dataProducto as $key=>$value)
-            $idproducto = $value->idproducto;
-        echo $idproducto;
+        $dataProducto = json_decode($data);
+        $idproducto= $dataProducto->{"idproducto"};
+        $cantidad= $dataProducto->{"cantidad"};
+        $monto= $dataProducto->{"monto"};
+        $model->id_producto=$idproducto;
+        $model->cantidad=$cantidad;
+        $model->precio_venta=$monto;
+        $model->idventa=1;
+        $model->save();
     }
+
+    public function RegistrarVenta(){
+        $model = new venta();
+        $data =$_POST['array2'];
+        $dataVenta = json_decode($data);
+
+        $totalventa=$dataVenta->{"ventatotal"};
+        $cliente_idcliente=$dataVenta->{"idcliente"};
+
+        $model->total_venta=$totalventa;
+        $model->cliente_idcliente=$cliente_idcliente;
+        $model->save();
+    }
+
 }

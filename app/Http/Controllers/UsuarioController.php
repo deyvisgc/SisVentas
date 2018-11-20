@@ -106,6 +106,7 @@ class UsuarioController extends Controller
             return Redirect('Usuario');
         }
 
+
     }
 
     /**
