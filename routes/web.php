@@ -52,11 +52,10 @@ Route::get('Cate/Desactivar/{idcategoria}','CategoriaController@canDesactivo');
 Route::get('Cate/Activar/{idroles}','CategoriaController@canActivo');
 Route::resource('Vendedor','vendedorController');
 Route::post('shop','ventaController@RegistrarProductos');
-<<<<<<< HEAD
-=======
+Route::post('imprimir','ventaController@ImprimirBoleta');
+
 Route::post('regventa','ventaController@RegistrarVenta');
 
->>>>>>> 3d9589c5c4c109a19fc03f4606b42ad3b0b9d049
 Route::get('cargar/Vende/{idVendedor}','vendedorController@cargar');
 Route::post('Update/Vende/{idVendedor}','vendedorController@actualizar');
 Route::post('Activar/{idVendedor}','vendedorController@Activar');
