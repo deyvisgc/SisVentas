@@ -54,6 +54,10 @@ Route::resource('Vendedor','vendedorController');
 
 
 
+Route::post('shop','ventaController@RegistrarProductos');
+Route::post('imprimir','ventaController@ImprimirBoleta');
+
+
 Route::post('regventa','ventaController@RegistrarVenta');
 
 Route::get('cargar/Vende/{idVendedor}','vendedorController@cargar');

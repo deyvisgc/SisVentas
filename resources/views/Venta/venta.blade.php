@@ -96,6 +96,7 @@
                                                 </div>
                                                 <div class="clearfix"></div><br><br><br>
                                                <button type="button" class="btn btn-inverse-danger btn-fw" data-toggle="modal" data-target="#ventaModal" id="btn_venta">Procesar Venta</button><br><br>
+                                               <button type="button" class="btn btn-inverse-danger btn-fw" data-toggle="modal" data-target="#ventaModal" onclick="ImprimirBoleta();">Imprimir Venta</button><br><br>
                                             </div>
                                        </center>
                                   </div>
@@ -187,9 +188,9 @@
 @section('footer_scripts')
 
     <script>
-
         $(document).ready(function() {
             var i=1;
+
             $('#producto').autocomplete({
                 source:function (request ,response) {
                       $.ajax({
@@ -264,7 +265,7 @@
 
                         var fila = '<tr class="fila" id="row' + i + '">' +
                             '<td hidden id="idproducto">' + idproducto + '</td>' +
-                            '<td>' + nombre + '</td>' +
+                            '<td id="nproducto">' + nombre + '</td>' +
                             '<td>' + codigo + '</td>' +
                             '<td id="cantidad">' + cantidad + '</td>' +
                             '<td>' + precio + '</td>' +
@@ -359,8 +360,19 @@
                             timer: 1500
                         });
                     },
+                    error: function(){
+                        swal({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Venta Exitosa',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
                 });
+                self.setInterval(location.reload(true),8000);
             });
+
         });
         function calcularVuelto(){
 
@@ -422,6 +434,27 @@
                 dataType:'json',
                 type:'post',
                 data:{'array1':JSON.stringify(data)},
+                success:function (response) {
+                    swal({
+                        position: 'center',
+                        type: 'success',
+                        title: 'Registro Exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+            });
+        }
+        function ImprimirBoleta(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'{{url('imprimir')}}',
+                dataType:'json',
+                type:'post',
                 success:function (response) {
                     swal({
                         position: 'center',
