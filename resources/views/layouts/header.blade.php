@@ -33,7 +33,9 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="#">Rolast</a>
+            <a class="navbar-brand brand-logo" href="#">
+                <img src="images/logo.svg" alt="logo">
+            </a>
             <a class="navbar-brand brand-logo-mini" href="#"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -102,19 +104,19 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('Provedor')}}">
-                        <i class="fa fa-home menu-icon"></i>
+                        <i class="fa fa-user-circle menu-icon"></i>
                         <span class="menu-title">Provedor</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{'Cliente'}}">
-                        <i class="fa fa-puzzle-piece menu-icon"></i>
+                        <i class="far fa-user menu-icon"></i>
                         <span class="menu-title">Cliente</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
-                        <i class="fab fa-trello menu-icon"></i>
+                        <i class="far fa-handshake menu-icon"></i>
                         <span class="menu-title">Panel de Administracio</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -139,7 +141,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                        <i class="far fa-compass menu-icon"></i>
+                        <i class="fa fa-id-card menu-icon"></i>
                         <span class="menu-title">Roles</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -166,7 +168,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-                        <i class="fab fa-wpforms menu-icon"></i>
+                        <i class="far fa-user-circle menu-icon"></i>
                         <span class="menu-title">Vendedor</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -179,7 +181,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
-                        <i class="fas fa-pen-square menu-icon"></i>
+                        <i class="fas fa-shopping-cart menu-icon"></i>
                         <span class="menu-title">Movimiento</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -188,13 +190,15 @@
                             <li class="nav-item"><a class="nav-link" href="{{url('compra')}}">Compra</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{url('Venta')}}">Venta</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{url('almacen')}}">Almacen</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{url('listarVentas')}}">Compras de Productos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{url('ListarComprasNuevas')}}">Compra de productos nuevos</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                        <i class="fa fa-stop-circle menu-icon"></i>
+                        <i class="fas fa-shopping-cart menu-icon"></i>
                         <span class="menu-title">Orden de Conpra</span>
                         <i class="menu-arrow"></i>
                     </a>

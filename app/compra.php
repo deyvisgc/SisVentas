@@ -11,8 +11,7 @@ protected $primaryKey='compra_id';
 public $timestamps=false;
 protected $fillable=[
     'provedor_idprovedor',
-    'producto_idproducto',
-    'cantidad',
     'precio_compra',
+    'fecha_comp',
 ];
 }

@@ -51,12 +51,11 @@ Route::get('delete/{idcategoria}','CategoriaController@eliminar');
 Route::get('Cate/Desactivar/{idcategoria}','CategoriaController@canDesactivo');
 Route::get('Cate/Activar/{idroles}','CategoriaController@canActivo');
 Route::resource('Vendedor','vendedorController');
-Route::post('shop','ventaController@RegistrarProductos');
-<<<<<<< HEAD
-=======
+
+
+
 Route::post('regventa','ventaController@RegistrarVenta');
 
->>>>>>> 3d9589c5c4c109a19fc03f4606b42ad3b0b9d049
 Route::get('cargar/Vende/{idVendedor}','vendedorController@cargar');
 Route::post('Update/Vende/{idVendedor}','vendedorController@actualizar');
 Route::post('Activar/{idVendedor}','vendedorController@Activar');
@@ -98,5 +97,12 @@ Route::resource('compra','compraController');
 Route::get('cargarPrdo','compraController@cargarPrdo');
 Route::get('cargarProve','compraController@cargarProve');
 Route::get('GuardarCompra','compraController@guardar');
-Route::get(' /{slug?}','PerfilController@ventas');
+Route::post('shop','ventaController@RegistrarProductos');
+Route::post('agregarpro','compraController@RegistrarProductos');
+Route::post('RegisCompra','compraController@RegisCompra');
+Route::post('RegistrarCompra','compraController@RegistrarCompra');
+Route::get('listarVentas','compraController@listado');
+Route::get('ListarComprasExis','compraController@listarCompras');
+Route::get('ListarComprasNuevas','compraController@ListarComprasNuevas');
+
 

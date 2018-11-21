@@ -20,6 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4><i class="fa fa-cart-arrow-down"></i> <span id="sp_etiqueta">REALIZAR COMPRA</span></h4><br>
+                            <button type="button" class="btn btn-inverse-success btn-fw float-right" data-toggle="modal" data-target="#ComprarModa"id="addPro">Agregar Producto</button>
                             <p class="card-description">
                             </p>
                             <div class="row">
@@ -70,9 +71,18 @@
                                                 <span class="input-group-text">Subtotal</span>
                                             </div>
                                             <input type="number" readonly="readonly" id="Subto" name="Subtotal" class="form-control" placeholder="$$$" aria-label="Username">
+                                        </div> <br><br>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Fecha Registro</span>
+                                                </div>
+                                                <input type="text" readonly="readonly"  value="<?php  date_default_timezone_set('America/Lima'); echo date('d:m:y');  echo date('  H:i:s')?>" id="fecha_com" name="fecha" class="form-control" placeholder="Fecha" aria-label="Username">
+                                            </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-inverse-success btn-fw float-right" id="btn_agregar">Agregar</button>
+                                    <button type="button" class="btn btn-inverse-success btn-fw float-right" onclick="RegistrarProdu();" id="btn_agregar">Agregar</button>
 
                                 </div>
 
@@ -155,7 +165,107 @@
         </footer>
         <!-- partial -->
     </div>
+    <!--registrar compra de productos inexistentes-->
+    <div class="modal fade modal-slide-in-right" aria-hidden="true"
+         role="dialog" tabindex="-1" id="ComprarModa">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Comprar Productos</h2>
+                </div>
+                <div class="modal-body">
+                    <form id="ComProd"  method="post">
+                        <?php  $contador = 0?>
+                            <input hidden type="number" class="form-control" name="contadir" value="<?php echo $contador++?>"  >
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nombre Producto</label>
+                                    <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombre_pro" >
 
+                                    <p class="errorNom text-danger hidden"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Precio de Producto</label>
+                                    <input type="number" class="form-control" id="pre_pro" required="Campo Obligatorio"
+                                           name="pre_pro"  >
+                                    <p class="errorCanti text-danger hidden"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1"></label>Cantidad producto</center>
+                                    <input type="number" onkeyup="totall();" name="cantidad_pro"  required="campo Obligatorio"   id="cantidad_pro"  class="form-control">
+                                    <p class="errorPre text-danger hidden"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">total a pagar</label></center>
+                                    <input type="number" name="total_pago"  id="total_pago" required="campo Obligatorio"  class="form-control">
+                                    <p class="errorPre text-danger hidden"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Provedor</label></center>
+                                    <select  name="prove"  id="prove"  class="form-control">
+                                        @foreach($prove as $pro)
+                                            <option class="form-control" value="{{$pro->idprovedor}}">{{$pro->fullname}}</option>
+                                            @endforeach
+                                        <p class="errorPre text-danger hidden"></p>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Categoria</label></center>
+                                    <select  name="idcategoria"  id="idcategoria"  class="form-control">
+                                        @foreach($cate as $cat)
+                                            <option class="form-control" value="{{$cat->idcategoria}}">{{$cat->nombre_cate}}</option>
+                                        @endforeach
+                                        <p class="errorPre text-danger hidden"></p>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Fecha Registro</label></center>
+                                    <input type="text" name="fecha" readonly="readonly" value="<?php  date_default_timezone_set('America/Lima'); echo date('d:m:y');  echo date('  H:i:s')?>" id="total_pago"  class="form-control">
+                                    <p class="errorPre text-danger hidden"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <center><label for="exampleInputEmail1">Codigo Producto</label></center>
+                                    <input type="codigo" onkeyup="codigo();" value="<?php echo mt_rand(400,1000000);?>" name="codigo" readonly="readonly"  id="codigo"  class="form-control">
+                                    <p class="errorPre text-danger hidden"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <center>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit"  class="btn btn-success" id="RegiCom">Registrar Compra</button>
+                            </div>
+                        </center>
+
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     @endsection
 
@@ -239,9 +349,9 @@
                 var fila = '<tr class="fila" id="row' + i + '">' +
                     '<td hidden id="idproducto">' + idprodcuto + '</td>' +
                     '<td hidden id="idprove">' + idprove + '</td>' +
-                    '<td>' + nombre + '</td><td>' + codigo + '</td>' +
+                    '<td id="nom">' + nombre + '</td><td>' + codigo + '</td>' +
                     '<td id="can">' + cantidad + '</td>' +
-                    '<td id="precio">' + precio + '</td>' +
+                    '<td id="pre">' + precio + '</td>' +
                     '<td class="monto" id="monto" >' + monto.toFixed(2) + '</td>' +
                     '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Borrar</button>' +
                     '</td></tr>'; //esto seria lo que contendria la fila
@@ -318,35 +428,107 @@
 
         }
         $('#btn_comprar').click(function () {
-            var array = [];
-            var headers = [];
-            var data=[];
-            $('#detalle_compra th').each(function(index, item) {
-                headers[index] = $(item).html();
+            var dataVenta={};
+
+            var idpro=$('#idprove').val();
+            var ventatotal=$('.toalApa').html();
+            var fechaRegi=$('#fecha_com').val();
+            dataVenta.idpro = idpro;
+            dataVenta.ventatotal=ventatotal;
+            dataVenta.fechaRegi=fechaRegi;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
-            $('#detalle_compra tr').has('td').each(function() {
-                var arrayItem = {};
-                $('td', $(this)).each(function(index, item) {
-                    arrayItem[headers[index]] = $(item).html();
-                });
-                array.push(arrayItem);
-                $.ajax({
-                    url:'{{url('GuardarCompra')}}',
-                    dataType:'json',
-                    type:'get',
-                    data:{'array':JSON.stringify(arrayItem)},
-                    success:function (reponse) {
-                        alert(reponse);
+
+            $.ajax({
+                url:'{{url('RegisCompra')}}',
+                dataType:'json',
+                type:'post',
+                data:{'array2':JSON.stringify(dataVenta)},
+                success:function (response) {
+                   alert(response);
+                },
+            });
+
+
+
+
+
+        });
+        function  RegistrarProdu() {
+            var idproducto = $('#idproducto').val();
+            var cantidad = $('#cantidad').val();
+            var monto = $('#Subto').val();
+
+            console.log(idproducto, cantidad, monto);
+            var data = {};
+
+            data.idproducto = idproducto;
+            data.cantidad = cantidad;
+            data.monto = monto;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '{{url('agregarpro')}}',
+                dataType: 'json',
+                type: 'post',
+                data: {'array1': JSON.stringify(data)},
+                success: function (response) {
+
+                },
+
+            })
+
+        }
+
+        function totall() {
+            var cantidad=document.getElementById("cantidad_pro").value;
+            var precio=document.getElementById("pre_pro").value;
+            var monto=parseFloat(cantidad)*parseFloat(precio);
+            $('#total_pago').val(monto.toFixed(2));
+
+
+        }
+            $('#RegiCom').click(function (e) {
+                e.preventDefault();
+                var frm = $('#ComProd');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                });
+                $.ajax({
+                    url: '{{url('RegistrarCompra')}}',
+                    dataType: 'json',
+                    type: 'post',
+                    data: frm.serialize(),
+                    success: function (response) {
+
+                        $('#ComprarModa').modal('hide');
+                        swal({
+                        position: 'center',
+                        type: 'success',
+                        title: 'Compra Exitosa',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                        setTimeout(window.location.reload.bind(window.location), 1000);
+                        return false;
+
+                    }
+
                 })
 
 
-            });
+            })
 
-
-
-
-
+        $('#ComprarModa').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
         });
 
     </script>
