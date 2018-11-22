@@ -118,8 +118,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Estado</label>
                                         <select name="estado" class="form-control" >
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
+                                            <option value="Activado">Activado</option>
+                                            <option value="Desactivado">Desactivado</option>
                                         </select>
                                     </div>
                                 </div>

@@ -97,7 +97,6 @@
                           </span>
                                         </p>
                                     </div>
-                                    <button class="btn btn-primary btn-block">Perfil</button>
                                 </div>
                                 @include('Perfil.updaUser')
                                 <div class="col-lg-8 pl-lg-5">
@@ -116,31 +115,6 @@
                                                     <small class="ml-4 text-muted"><i class="far fa-clock mr-1"></i>10 hours</small>
                                                 </h6>
                                                 <img src="../../images/samples/1280x768/12.jpg" alt="sample" class="rounded mw-100"/>
-                                                <p class="small text-muted mt-2 mb-0">
-                              <span>
-                                <i class="fa fa-star mr-1"></i>4
-                              </span>
-                                                    <span class="ml-2">
-                                <i class="fa fa-comment mr-1"></i>11
-                              </span>
-                                                    <span class="ml-2">
-                                <i class="fa fa-mail-reply"></i>
-                              </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-start profile-feed-item">
-                                            <img src="../../images/faces/face19.html" alt="profile" class="img-sm rounded-circle"/>
-                                            <div class="ml-4">
-                                                <h6>
-                                                    Dylan Silva
-                                                    <small class="ml-4 text-muted"><i class="far fa-clock mr-1"></i>10 hours</small>
-                                                </h6>
-                                                <p>
-                                                    When I first got into the online advertising business, I was looking for the magical combination
-                                                    that would put my website into the top search engine rankings
-                                                </p>
-                                                <img src="../../images/samples/1280x768/5.jpg" alt="sample" class="rounded mw-100"/>
                                                 <p class="small text-muted mt-2 mb-0">
                               <span>
                                 <i class="fa fa-star mr-1"></i>4

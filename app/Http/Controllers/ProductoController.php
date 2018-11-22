@@ -77,7 +77,7 @@ class ProductoController extends Controller
             $producto->imagen=$file->getClientOriginalName();
             }
         } else{
-            $producto->imagen='imagen-default.jpg';
+            $producto->imagen='descarga.jpg';
         }
 
         $producto->save();

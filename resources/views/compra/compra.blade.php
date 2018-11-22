@@ -51,7 +51,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-primary text-white">$</span>
                                             </div>
-                                            <input type="text" onkeypress="return controltag(event)" name="precio" id="precio"  class="form-control" placeholder="Precio" aria-label="Amount (to the nearest dollar)">
+                                            <input type="number"  name="precio" id="precio"  class="form-control" placeholder="Precio" aria-label="Amount (to the nearest dollar)">
 
                                         </div>
                                     </div>
@@ -92,14 +92,6 @@
                                 <div id="dragula-right" class="py-2">
                                     <center>
                                         <div class="popover-static-demo">
-                                            <div class="popover bs-popover-bottom bs-popover-bottom-demo popover-success">
-                                                <div class="arrow"></div>
-                                                <h4 class="popover-header">Detalle del Producto</h4>
-                                                <div class="popover-body">
-                                                    <p>Precio Unitario: <strong id="dprecio"> 0</strong></p>
-                                                    <p>Stock: <strong id="cantidadP">0.0</strong></p><br>
-                                                </div>
-                                            </div>
                                             <div class="popover bs-popover-bottom bs-popover-bottom-demo popover-warning">
                                                 <div class="arrow"></div>
                                                 <h4 class="popover-header">Total a Pagar</h4>

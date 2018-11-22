@@ -69,8 +69,8 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Estado</label>
                                     <select type="number" class="form-control" id="estado" required="Campo Obligatorio" name="estado"  >
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
+                                        <option value="Activado">Activado</option>
+                                        <option value="Desactivado">Desactivado</option>
                                         <p class="errorEsta text-danger hidden"></p>
                                     </select>
                                 </div>

@@ -202,7 +202,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Estado</label>
                                     <select  class="form-control" id="estado_pro"  name="estado_ve">
-                                      <option value="Activo">Activo</option>
+                                      <option value="Activado">Activado</option>
                                         <option value="Desactivado">Desactivado</option>
                                     </select>
 
