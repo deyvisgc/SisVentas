@@ -106,7 +106,7 @@
                                 <div class="row">
                                     <div  class="col-lg-12">
                                         <h5 hidden class="text-center titulo">TICKET DE VENTA</h5>
-                                        <p hidden class="text-center empresa">Rolast</p>
+                                        <p hidden class="text-center empresa">Abarrotes <strong>Rolast</strong></p>
                                         <p hidden id="fechab">Fecha: <span id="fecha"> </span></p>
                                         <p hidden id="codigob">Codigo: <span id="codigo"> </span></p>
                                         <p hidden id="clienteb">Cliente: <span id="namecliente"> </span></p>

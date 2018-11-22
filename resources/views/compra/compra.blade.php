@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4><i class="fa fa-cart-arrow-down"></i> <span id="sp_etiqueta">REALIZAR COMPRA</span></h4><br>
-                            <button type="button" class="btn btn-inverse-success btn-fw float-right" data-toggle="modal" data-target="#ComprarModa"id="addPro">Agregar Producto</button>
+                            <button type="button" class="btn btn-inverse-success btn-fw float-right" data-toggle="modal" data-target="#ComprarModa"id="addPro">Comprar Producto</button>
                             <p class="card-description">
                             </p>
                             <div class="row">
