@@ -96,26 +96,29 @@
                                                 </div>
                                                 <div class="clearfix"></div><br><br><br>
                                                <button type="button" class="btn btn-inverse-danger btn-fw" data-toggle="modal" data-target="#ventaModal" id="btn_venta">Procesar Venta</button><br><br>
-                                               <button type="button" class="btn btn-inverse-danger btn-fw" data-toggle="modal" data-target="#ventaModal" onclick="ImprimirBoleta();">Imprimir Venta</button><br><br>
                                             </div>
                                        </center>
                                   </div>
                               </div>
                             </div>
                         <!--Tabla con el listado de productos para vender-->
-                            <div class="container">
+                            <div class="container" id="imprimir">
                                 <div class="row">
                                     <div  class="col-lg-12">
+                                        <h5 hidden class="text-center titulo">TICKET DE VENTA</h5>
+                                        <p hidden class="text-center empresa">Rolast</p>
+                                        <p hidden id="fechab">Fecha: <span id="fecha"> </span></p>
+                                        <p hidden id="codigob">Codigo: <span id="codigo"> </span></p>
+                                        <p hidden id="clienteb">Cliente: <span id="namecliente"> </span></p>
+
                                         <div class="table-responsive">
                                             <center>  <table  id="detalle_venta" class="table">
                                                     <thead>
                                                     <tr>
-                                                        <th>Nombre</th>
-                                                        <th>Código</th>
-                                                        <th>Cantidad</th>
-                                                        <th>Precio</th>
-                                                        <th>Monto</th>
-                                                        <th>Opciones</th>
+                                                        <th id="ntable">Nombre</th>
+                                                        <th id="ctable">Cantidad</th>
+                                                        <th id="mtable">Monto</th>
+                                                        <th id="opcionest">Opciones</th>
                                                     </thead>
                                                     </tr>
                                                     </thead>
@@ -125,6 +128,7 @@
                                                 </table>
                                             </center>
                                         </div>
+                                        <p hidden class="totalb">Total: <strong class="totalP"> </strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +176,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="button"  class="btn btn-success" id="btn_insert_venta">Registrar</button>
+                                <button type="button"  class="btn btn-success" onclick="imprimir();" id="btn_insert_venta">Registrar</button>
                             </div>
                         </center>
 
@@ -256,7 +260,6 @@
 
                 var nombre = document.getElementById("producto").value;
                 var idproducto = document.getElementById("idproducto").value;
-                var codigo = document.getElementById("codigop").value;
                 var cantidad = document.getElementById("cantidad").value;
                 var precio = document.getElementById("precio").value;
                 var monto = parseFloat(cantidad)*parseFloat(precio);
@@ -266,11 +269,9 @@
                         var fila = '<tr class="fila" id="row' + i + '">' +
                             '<td hidden id="idproducto">' + idproducto + '</td>' +
                             '<td id="nproducto">' + nombre + '</td>' +
-                            '<td>' + codigo + '</td>' +
                             '<td id="cantidad">' + cantidad + '</td>' +
-                            '<td>' + precio + '</td>' +
                             '<td class="monto" id="monto">' + monto.toFixed(2) + '</td>' +
-                            '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>' +
+                            '<td id="optionf"><button type="button" name="remove" id="' + i + '" class="btn btn-danger float-right btn_remove">Quitar</button></td>' +
                             '</tr>'; //esto seria lo que contendria la fila
                     i++
                 }
@@ -295,6 +296,7 @@
                     total += parseFloat($(this).html());
                 });
                 $('.total').html(total.toFixed(2));
+                $('.totalP').html(total.toFixed(2));
 
             });
 
@@ -324,10 +326,7 @@
                     total += parseFloat($(this).html());
                 });
                 $('.total').html(total.toFixed(2));
-
-                console.log('totalrenew:'+totalrenew);
-                console.log('monto:'+monto);
-                console.log('newtotal:'+newtotal);
+                $('.totalP').html(total.toFixed(2));
             });
 
 
@@ -465,6 +464,46 @@
                     });
                 },
             });
+        }
+        function imprimir(){
+
+            $('#mtable').css({"font-size": "10px"});
+            $('#ntable').css({"font-size": "10px"});
+            $('#ctable').css({"font-size": "10px"});
+            var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHJKMNPQRTUVWXYZ2346789";
+            var contraseña = "";
+            for (i=0; i<5; i++) contraseña +=caracteres.charAt(Math.floor(Math.random()*caracteres.length));
+
+            var hello =$('#cliente').val();
+            $('#namecliente').html(hello);
+            $('#codigo').html(contraseña);
+            $('#opcionest').hide();
+
+            $('#optionf').each(function () {
+                $('.btn_remove').hide();
+            });
+
+
+
+            var f = new Date();
+            var ddate=(f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear());
+            $('#fecha').html(ddate);
+
+            $('.titulo').show();
+            $('.empresa').show();
+            $('#fechab').show();
+            $('#codigob').show();
+            $('#clienteb').show();
+            $('.totalb').show();
+
+            var printme= document.getElementById("imprimir");
+            var wme= window.open("","","width=600");
+            wme.document.write(printme.outerHTML);
+            wme.document.close();
+            wme.focus();
+            wme.print();
+            wme.close();
+
         }
 
     </script>
