@@ -4,18 +4,24 @@ namespace SisVentas\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use SisVentas\Categoria;
 use SisVentas\compra;
 use SisVentas\Producto;
+use SisVentas\Provedor;
 use Validator;
 use Redirect;
 use DB;
+use SisVentas\almacen;
 use Yajra\Datatables\Datatables;
 use Inventario\Http\Requests;
 use Illuminate\Support\Facades\Input;
+use SisVentas\detallecompra;
 class compraController extends Controller
 {
     public function index(){
-        return view('compra.compra');
+        $cate=Categoria::all();
+        $prove=DB::select("SELECT provedor.idprovedor,Concat(tipopersona.nombre,' ',tipopersona.Apellido_pat,' ',tipopersona.Apellido_Materno)as fullname FROM provedor , tipopersona WHERE provedor.tipoPersona_idtipoPersona=tipopersona.idtipoPersona");
+        return view('compra.compra',['prove'=>$prove,'cate'=>$cate]);
     }
 
     public function cargarPrdo(){
@@ -46,7 +52,7 @@ class compraController extends Controller
         c.idprovedor FROM provedor as c , tipopersona as p 
         WHERE c.tipoPersona_idtipoPersona=p.idtipoPersona 
         and p.nombre LIKE '%".$prove."%' and p.Apellido_pat LIKE '%".$prove."%'
-        and p.Apellido_Materno LIKE '%".$prove."%' and c.estado='activo'");
+        and p.Apellido_Materno LIKE '%".$prove."%' and c.estado='Activado'");
 
         foreach ($query as $quer)
         {
@@ -67,8 +73,90 @@ class compraController extends Controller
         $compra->cantidad=$data;
         $compra->precio_compra=$data;
         $compra->save();
-        return json_encode($compra);
+        echo json_encode($compra);
 
+    }
+
+    public function RegistrarProductos(){
+
+        $model = new detallecompra();
+        $data = $_POST['array1'];
+        $dataProducto = json_decode($data);
+        $idproducto= $dataProducto->{"idproducto"};
+        $cantidad= $dataProducto->{"cantidad"};
+        $monto= $dataProducto->{"monto"};
+        $model->id_producto=$idproducto;
+        $model->cantidad=$cantidad;
+        $model->precio_venta=$monto;
+        $model->idcompra=1;
+        $model->save();
+    }
+    public function RegisCompra(){
+        $model = new compra();
+        $data =$_POST['array2'];
+        $dataVenta = json_decode($data);
+
+        $totalventa=$dataVenta->{"ventatotal"};
+        $provedor_idprovedor=$dataVenta->{"idpro"};
+        $fecha=$dataVenta->{'fechaRegi'};
+        $model->precio_compra=$totalventa;
+        $model->provedor_idprovedor=$provedor_idprovedor;
+        $model->fecha_comp=$fecha;
+        $model->save();
+    }
+
+    public function RegistrarCompra(Request $request){
+        DB::beginTransaction();
+        $producto=new Producto();
+
+        $producto->codigo=$request->get('codigo');
+        $producto->nombre_pro=$request->get('nombre_pro');
+        $producto->idcategoria=$request->get('idcategoria');
+        $producto->stock=$request->get('cantidad_pro');
+        $producto->descripcion="Prodcuto bueno";
+        $producto->imagen="prodcuto_Default.png";
+        $producto->estado='Producto Activado';
+        $producto->Precio_Pro=$request->get('pre_pro');
+        $producto->Fecha_Registro=$request->get('fecha');
+        $producto->save();
+        $compra=new compra();
+        $compra->producto_idproducto=$producto->idproducto;
+        $compra->provedor_idprovedor=$request->get('prove');
+        $compra->precio_compra=$request->get('total_pago');
+        $compra->fecha_comp=$request->get('fecha');
+        $compra->save();
+        $almacen=new almacen();
+        $almacen->compra_compra_id=$compra->compra_id;
+        $almacen->idproducto=$compra->producto_idproducto;
+        $almacen->save();
+        DB::commit();
+        echo json_encode($almacen);
+
+    }
+
+    public function listado(){
+
+
+        return view('compra.listarcompra');
+    }
+
+    public function listarCompras(Request $request){
+        $compras=DB::select("SELECT compra.precio_compra,compra.fecha_comp ,concat(tipopersona.nombre,' ',tipopersona.Apellido_pat,' ',tipopersona.Apellido_Materno) as fullname FROM compra ,provedor,tipopersona WHERE compra.provedor_idprovedor=provedor.idprovedor and provedor.tipoPersona_idtipoPersona=tipopersona.idtipoPersona");
+        if ($request->ajax()){
+            return Datatables::of($compras)
+                ->make(true);
+        }
+
+    }
+
+    public function ListarComprasNuevas(Request $request){
+        $com=DB::select("SELECT compra.precio_compra,compra.fecha_comp,tipopersona.idtipoPersona ,Concat(tipopersona.nombre,' ',tipopersona.Apellido_pat,' ',tipopersona.Apellido_Materno)as fullname,producto.codigo,producto.nombre_pro,producto.stock,producto.Fecha_Registro,producto.Precio_Pro,categoria.nombre_cate FROM compra ,almacen,producto,categoria,provedor,tipopersona WHERE almacen.compra_compra_id=compra.compra_id and compra.provedor_idprovedor=provedor.idprovedor and almacen.idproducto=producto.idproducto and producto.idcategoria=categoria.idcategoria and provedor.tipoPersona_idtipoPersona=tipopersona.idtipoPersona");
+
+        if ($request->ajax()){
+            return Datatables::of($com)
+                ->make(true);
+        }
+        return view('compra.lisProduNuevos');
     }
 
 

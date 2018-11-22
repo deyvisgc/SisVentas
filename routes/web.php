@@ -51,8 +51,12 @@ Route::get('delete/{idcategoria}','CategoriaController@eliminar');
 Route::get('Cate/Desactivar/{idcategoria}','CategoriaController@canDesactivo');
 Route::get('Cate/Activar/{idroles}','CategoriaController@canActivo');
 Route::resource('Vendedor','vendedorController');
+
+
+
 Route::post('shop','ventaController@RegistrarProductos');
 Route::post('imprimir','ventaController@ImprimirBoleta');
+
 
 Route::post('regventa','ventaController@RegistrarVenta');
 
@@ -97,5 +101,12 @@ Route::resource('compra','compraController');
 Route::get('cargarPrdo','compraController@cargarPrdo');
 Route::get('cargarProve','compraController@cargarProve');
 Route::get('GuardarCompra','compraController@guardar');
-Route::get(' /{slug?}','PerfilController@ventas');
+Route::post('shop','ventaController@RegistrarProductos');
+Route::post('agregarpro','compraController@RegistrarProductos');
+Route::post('RegisCompra','compraController@RegisCompra');
+Route::post('RegistrarCompra','compraController@RegistrarCompra');
+Route::get('listarVentas','compraController@listado');
+Route::get('ListarComprasExis','compraController@listarCompras');
+Route::get('ListarComprasNuevas','compraController@ListarComprasNuevas');
+
 

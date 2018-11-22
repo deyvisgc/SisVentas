@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:53 GMT -->
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Melody Admin</title>
-    <!-- plugins:css -->
+    <title>Sistemas Ventas Rolast | LOGIN</title>
+    <link rel="icon" type="image/png" href="" />
     <link rel="stylesheet" href="../../vendors/iconfonts/font-awesome/css/all.min.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../../vendors/css/vendor.bundle.addons.css">
@@ -19,87 +14,58 @@
     <link rel="stylesheet" href="../../css/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="../../images/favicon.png" />
+
+    <style>
+        form {
+            max-width: 360px;
+            border: 2px solid #dedede;
+            padding: 38px;
+            margin-top: 25px;
+            border-radius: 25px;
+            background-color:transparent ;
+
+            /* background: #fff; */
+        }
+        body {
+            background-color: #ecf0f5;
+            background-image: url('../assets/img/fondologin.png');
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
-
 <body>
-<div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
-            <div class="row flex-grow">
-                <div class="col-lg-6 d-flex align-items-center justify-content-center">
-                    <div class="auth-form-transparent text-left p-3">
-                        <div class="brand-logo">
-                            <img src="../../images/logo.svg" alt="logo">
-                        </div>
-                        <h4>Welcome back!</h4>
-                        <h6 class="font-weight-light">Happy to see you again!</h6>
-                        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="exampleInputEmail">Username</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend bg-transparent">
-                      <span class="input-group-text bg-transparent border-right-0">
-                        <i class="fa fa-user text-primary"></i>
-                      </span>
-                                        </div>
-                                        <input type="text" class="form-control form-control-lg border-left-0"  name="email" value="{{ old('email') }}" id="exampleInputEmail" placeholder="Username">
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <label for="exampleInputPassword">Password</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend bg-transparent">
-                      <span class="input-group-text bg-transparent border-right-0">
-                        <i class="fa fa-lock text-primary"></i>
-                      </span>
-                                            </div>
-                                            <input type="password" class="form-control form-control-lg border-left-0" id="exampleInputPassword" name="password" placeholder="Password">
-                                            @if ($errors->has('password'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="my-2 d-flex justify-content-between align-items-center">
-                                        <div class="form-check">
-                                            <label class="form-check-label text-muted">
-                                                <input type="checkbox"  name="remember" {{ old('remember') ? 'checked' : '' }} class="form-check-input">
-                                                Recordar
-                                            </label>
-
-                                        </div>
-                                        <a href="{{ route('password.request') }}" class="auth-link text-black">Forgot password?</a>
-                                    </div>
-                                    <div class="my-3">
-                                        <button type="submit" class="btn btn-primary btn-icon-text">
-                                            <i class="far fa-check-square btn-icon-prepend"></i>
-                                            Submit
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-6 login-half-bg d-flex flex-row">
-                    <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2018  All rights reserved.</p>
-                </div>
-            </div>
+<center>
+    <form class="form-signin" method="POST" action="{{ route('login') }}">
+        {{ csrf_field() }}
+        <h2 class="h3 mb-3 font-weight-normal" style="color:black">Sistema de Ventas</h2>
+        <hr>
+        <div class="form-group">
+            <label for="in_usu_nombre" >Usuario</label>
+            <input type="text" id="email" alue="{{old("email")}}" name="email" class="form-control" placeholder="Usuario" required >
+            @if ($errors->has('email'))
+                <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+            @endif
         </div>
-        <!-- content-wrapper ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-</div>
+        <div class="form-group">
+            <label for="in_usu_clave" >Contraseña</label>
+
+            <input type="password" id="password" name="password" class="form-control" placeholder="*******" required>
+            @if ($errors->has('password'))
+                <span class="help-block"><strong>{{ $errors->first('password') }}</strong>
+                    </span>
+            @endif
+        </div>
+        <label class="checkbox">
+            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordar
+            <span class="pull-right"> <a href="{{ route('password.request') }}"> Olvido su Contraseña?</a></span>
+        </label>
+        <hr>
+        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Ingresar</button>
+        <a>
+
+        </a>
+    </form>
+</center>
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
@@ -113,7 +79,4 @@
 <script src="../../js/todolist.js"></script>
 <!-- endinject -->
 </body>
-
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/login-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:53 GMT -->
 </html>
