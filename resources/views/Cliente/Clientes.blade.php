@@ -88,7 +88,7 @@
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Telefono</label>
-                                        <input type="number" class="form-control" id="telefono" required="Campo Obligatorio"  name="telefono"  placeholder="Telefono">
+                                        <input type="text"  onkeypress="return controltag(event)" maxlength="9" class="form-control" id="telefono" required="Campo Obligatorio"  name="telefono"  placeholder="Telefono">
                                         <p class="errorTele text-danger hidden"></p>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">N°DNI</label>
-                                        <input type="number" class="form-control" id="dni" required="Campo Obligatorio"  name="dni"  placeholder="DNI">
+                                        <input type="text" onkeypress="return controltag(event)" maxlength="9" class="form-control" id="dni" required="Campo Obligatorio"  name="dni"  placeholder="DNI">
                                         <p class="errorDni text-danger hidden"></p>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                             <center>
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     <button type="button"  class="btn btn-success" id="regisP">Registrar</button>
                                 </div>
                             </center>
@@ -172,6 +172,12 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank"></a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">SYS | VENTAS Version 1.0 <i class="far fa-heart text-danger"></i></span>
+            </div>
+        </footer>
     </div>
     <!--modal editar-->
     <div class="modal fade modal-slide-in-right" aria-hidden="true"
@@ -269,7 +275,7 @@
                         <center>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <button type="button"  class="btn btn-success" id="editar">Actualizar</button>
                             </div>
                         </center>
@@ -371,6 +377,15 @@
 
 
         });
+
+        function controltag(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla==8) return true; // para la tecla de retroseso
+            else if (tecla==0||tecla==9)  return true; //<-- PARA EL TABULADOR-> su keyCode es 9 pero en tecla se esta transformando a 0 asi que porsiacaso los dos
+            patron =/[0-9\s]/;// -> solo numeros
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
 
         function editarClient(idcliente) {
             if(idcliente){
@@ -550,14 +565,6 @@
         });
 
 
-        $('#modalRegisterForm').on('hidden.bs.modal', function (e) {
-            tabla.api().ajax.reload();
-
-
-
-
-        });
-
         function DesactiCl(idcliente) {
             if(idcliente){
                 $.ajax({
@@ -618,5 +625,9 @@
             }
 
         }
+        $('#modalRegisterForm').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        });
+
     </script>
 @endsection

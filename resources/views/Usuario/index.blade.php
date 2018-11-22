@@ -1,5 +1,93 @@
 @extends('layouts.header')
 @section('contenido')
+    <style type="text/css">
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
+        .modal-confirm {
+            color: #636363;
+            width: 400px;
+        }
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+        }
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -10px;
+        }
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -2px;
+        }
+        .modal-confirm .modal-body {
+            color: #999;
+        }
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 10px 15px 25px;
+        }
+        .modal-confirm .modal-footer a {
+            color: #999;
+        }
+        .modal-confirm .icon-box {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            z-index: 9;
+            text-align: center;
+            border: 3px solid #f15e5e;
+        }
+        .modal-confirm .icon-box i {
+            color: #f15e5e;
+            font-size: 46px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #60c7c1;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            min-width: 120px;
+            border: none;
+            min-height: 40px;
+            border-radius: 3px;
+            margin: 0 5px;
+            outline: none !important;
+        }
+        .modal-confirm .btn-info {
+            background: #c1c1c1;
+        }
+        .modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
+            background: #a8a8a8;
+        }
+        .modal-confirm .btn-danger {
+            background: #f15e5e;
+        }
+        .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+            background: #ee3535;
+        }
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+    </style>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
@@ -9,14 +97,13 @@
             </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data table</li>
+                    <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
                 </ol>
             </nav>
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Data table</h4>
+                <h4 class="card-title"></h4>
                 <div class="row">
                     <div class="col-14">
                         <div class="table-responsive">
@@ -66,6 +153,12 @@
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank"></a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">SYS | VENTAS Version 1.0 <i class="far fa-heart text-danger"></i></span>
+        </div>
+    </footer>
 </div>
 
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
@@ -106,7 +199,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Telefono</label>
-                            <input name="telefono" type="number" required="Campo Obligatorio" value="{{old('telefono')}}" class="form-control">
+                            <input name="telefono" onkeypress="return controltag(event)" maxlength="9"   required="Campo Obligatorio" value="{{old('telefono')}}" class="form-control">
                             <p class="errorTele text-danger hidden"></p>
                         </div>
                     </div>
@@ -114,7 +207,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">EMAIL</label>
-                            <input value="{{old('email')}}" name="email" required="Campo Obligatorio"  type="email" placeholder="example@gmail.com"  class="form-control">
+                            <input value="{{old('email')}}"   name="email" required="Campo Obligatorio"  type="email" placeholder="example@gmail.com"  class="form-control">
                             <p class="errorCorr text-danger hidden"></p>
                         </div>
                     </div>
@@ -131,7 +224,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="exampleInputEmail1">N°DNI</label>
-                            <input value="{{old('dni')}}" name="dni" required="Campo Obligatorio"  type="number" class="form-control" placeholder="DNI">
+                            <input value="{{old('dni')}}" name="dni" required="Campo Obligatorio" onkeypress="return controltag(event)" maxlength="8"  type="text" class="form-control" placeholder="DNI">
                             <p class="errorDni text-danger hidden"></p>
                         </div>
                     </div>
@@ -202,4 +295,17 @@
         </div>
     </div>
 </div>
+    @endsection
+
+@section('footer_scripts')
+    <script>
+        function controltag(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla==8) return true; // para la tecla de retroseso
+            else if (tecla==0||tecla==9)  return true; //<-- PARA EL TABULADOR-> su keyCode es 9 pero en tecla se esta transformando a 0 asi que porsiacaso los dos
+            patron =/[0-9\s]/;// -> solo numeros
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+    </script>
     @endsection

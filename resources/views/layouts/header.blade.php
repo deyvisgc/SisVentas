@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Sistemas Ventas Rolast</title>
+    <link rel="icon" type="image/png" href="{{asset('assets\img/logo.png')}}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Rolast</title>
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <link rel="stylesheet" href="{{asset('css/stylipce.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- endinject -->
     <link rel="shortcut icon" href="#" />
 </head>
@@ -93,11 +94,11 @@
                             @endif
                         </div>
                         <div class="profile-name">
-                            <p class="name">
-                                Welcome {{ Auth::user()->username }}
+                            <p style="color: white">
+                                Bienvenido : {{ Auth::user()->username }}
                             </p>
                             <p class="designation">
-                                Super Admin
+                                <label><i class="fa fa-circle text-success"></i>  Activo</label>
                             </p>
                         </div>
                     </div>
@@ -114,6 +115,7 @@
                         <span class="menu-title">Cliente</span>
                     </a>
                 </li>
+                @if(Auth::user()->idRol==1)
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
                         <i class="far fa-handshake menu-icon"></i>
@@ -126,6 +128,7 @@
                         </ul>
                     </div>
                 </li>
+                @endif
                 <li class="nav-item d-none d-lg-block">
                     <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">
                         <i class="fas fa-columns menu-icon"></i>
@@ -139,6 +142,7 @@
                         </ul>
                     </div>
                 </li>
+                @if(Auth::user()->idRol==1)
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="fa fa-id-card menu-icon"></i>
@@ -153,6 +157,7 @@
                         </ul>
                     </div>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
                         <i class="fas fa-clipboard-list menu-icon"></i>
@@ -166,6 +171,7 @@
                         </ul>
                     </div>
                 </li>
+                @if(Auth::user()->idRol==1)
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                         <i class="far fa-user-circle menu-icon"></i>
@@ -179,6 +185,7 @@
                         </ul>
                     </div>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
                         <i class="fas fa-shopping-cart menu-icon"></i>
@@ -190,8 +197,8 @@
                             <li class="nav-item"><a class="nav-link" href="{{url('compra')}}">Compra</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{url('Venta')}}">Venta</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{url('almacen')}}">Almacen</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{url('listarVentas')}}">Compras de Productos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{url('ListarComprasNuevas')}}">Compra de productos nuevos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{url('listarVentas')}}">Listar  Productos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{url('ListarComprasNuevas')}}">Listar productos nuevos</a></li>
                         </ul>
                     </div>
                 </li>

@@ -90,7 +90,7 @@ class rolController extends Controller
 public function canActivo($id){
     $ro=DB::table('roles')
         ->where('idroles', $id)
-        ->update(['rol_estado' => 'Activo']);
+        ->update(['rol_estado' => 'Activado']);
 
     echo json_encode($ro);
 }

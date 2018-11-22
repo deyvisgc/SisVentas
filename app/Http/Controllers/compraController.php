@@ -19,8 +19,8 @@ use SisVentas\detallecompra;
 class compraController extends Controller
 {
     public function index(){
-        $cate=Categoria::all();
-        $prove=DB::select("SELECT provedor.idprovedor,Concat(tipopersona.nombre,' ',tipopersona.Apellido_pat,' ',tipopersona.Apellido_Materno)as fullname FROM provedor , tipopersona WHERE provedor.tipoPersona_idtipoPersona=tipopersona.idtipoPersona");
+        $cate=DB::select("Select * from categoria where estado='Activado'");
+        $prove=DB::select("SELECT provedor.idprovedor,Concat(tipopersona.nombre,' ',tipopersona.Apellido_pat,' ',tipopersona.Apellido_Materno)as fullname FROM provedor , tipopersona WHERE provedor.tipoPersona_idtipoPersona=tipopersona.idtipoPersona and provedor.estado='Activado' ");
         return view('compra.compra',['prove'=>$prove,'cate'=>$cate]);
     }
 
@@ -103,6 +103,7 @@ class compraController extends Controller
         $model->provedor_idprovedor=$provedor_idprovedor;
         $model->fecha_comp=$fecha;
         $model->save();
+        return response()->json(array('succes',true));
     }
 
     public function RegistrarCompra(Request $request){
@@ -118,6 +119,7 @@ class compraController extends Controller
         $producto->estado='Producto Activado';
         $producto->Precio_Pro=$request->get('pre_pro');
         $producto->Fecha_Registro=$request->get('fecha');
+        $producto->estado='producto activado';
         $producto->save();
         $compra=new compra();
         $compra->producto_idproducto=$producto->idproducto;

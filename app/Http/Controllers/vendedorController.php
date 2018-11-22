@@ -15,7 +15,7 @@ class vendedorController extends Controller
 {
 
     public function index(){
-        $rol=Rol::all();
+        $rol=DB::select("SELECT * FROM roles where rol_estado='Activado'");
         $vende = DB::table('persona')
             ->join('vendedor', 'vendedor.persona_idpersona', '=', 'persona.idpersona')
             ->join('roles', 'persona.rol_idrol','=','roles.idroles')
@@ -151,7 +151,7 @@ class vendedorController extends Controller
 
     }
     public function Activar($id){
-        $ven=vendedor::where('idVendedor',$id)->update(['estado'=>'Activo']);
+        $ven=vendedor::where('idVendedor',$id)->update(['estado'=>'Activado']);
         echo json_encode($ven);
 
 

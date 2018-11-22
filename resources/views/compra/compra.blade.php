@@ -51,7 +51,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-primary text-white">$</span>
                                             </div>
-                                            <input type="text" name="precio" id="precio"  class="form-control" placeholder="Precio" aria-label="Amount (to the nearest dollar)">
+                                            <input type="text" onkeypress="return controltag(event)" name="precio" id="precio"  class="form-control" placeholder="Precio" aria-label="Amount (to the nearest dollar)">
 
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                             </div>
                                             <input type="text" id="codigop" name="codigop" hidden >
                                             <input type="text" id="idproducto" name="idproducto" hidden>
-                                            <input type="text" id="cantidad" name="cantidad" class="form-control" onkeyup="calculasubtotal();" placeholder="Ingresar Cantidad" aria-label="Username">
+                                            <input type="text" onkeypress="return controltag(event)" id="cantidad" name="cantidad" class="form-control" onkeyup="calculasubtotal();" placeholder="Ingresar Cantidad" aria-label="Username">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -159,8 +159,8 @@
         <!-- partial:../../partials/_footer.html -->
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank">Urbanui</a>. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="far fa-heart text-danger"></i></span>
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank"></a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">SYS | VENTAS Version 1.0 <i class="far fa-heart text-danger"></i></span>
             </div>
         </footer>
         <!-- partial -->
@@ -174,23 +174,21 @@
                     <h2 class="modal-title">Comprar Productos</h2>
                 </div>
                 <div class="modal-body">
-                    <form id="ComProd"  method="post">
-                        <?php  $contador = 0?>
-                            <input hidden type="number" class="form-control" name="contadir" value="<?php echo $contador++?>"  >
+                    <form id="ComProd"  method="post" onsubmit="return validacion()">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombre Producto</label>
-                                    <input type="text" class="form-control" id="nombre" required="Campo Obligatorio" name="nombre_pro" >
+                                    <input type="text" class="form-control" id="nombre" required="" name="nombre_pro" >
 
-                                    <p class="errorNom text-danger hidden"></p>
+                                    <p class="alert-danger" id="nombre_pro"></p>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Precio de Producto</label>
-                                    <input type="number" class="form-control" id="pre_pro" required="Campo Obligatorio"
+                                    <input type="number" class="form-control" id="pre_pro" required=""
                                            name="pre_pro"  >
                                     <p class="errorCanti text-danger hidden"></p>
                                 </div>
@@ -198,7 +196,7 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <center><label for="exampleInputEmail1"></label>Cantidad producto</center>
-                                    <input type="number" onkeyup="totall();" name="cantidad_pro"  required="campo Obligatorio"   id="cantidad_pro"  class="form-control">
+                                    <input type="number" onkeyup="totall();" name="cantidad_pro"  required=""   id="cantidad_pro"  class="form-control">
                                     <p class="errorPre text-danger hidden"></p>
                                 </div>
                             </div>
@@ -206,7 +204,7 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <center><label for="exampleInputEmail1">total a pagar</label></center>
-                                    <input type="number" name="total_pago"  id="total_pago" required="campo Obligatorio"  class="form-control">
+                                    <input type="number" readonly="readonly" name="total_pago"  id="total_pago" required=""  class="form-control">
                                     <p class="errorPre text-danger hidden"></p>
                                 </div>
                             </div>
@@ -254,7 +252,7 @@
                         <center>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="submit"  class="btn btn-success" id="RegiCom">Registrar Compra</button>
+                                <button type="submit"   class="btn btn-success" id="RegiCom">Registrar Compra</button>
                             </div>
                         </center>
 
@@ -332,7 +330,17 @@
                 }
 
             });
-            })
+
+            });
+        function controltag(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla==8) return true; // para la tecla de retroseso
+            else if (tecla==0||tecla==9)  return true; //<-- PARA EL TABULADOR-> su keyCode es 9 pero en tecla se esta transformando a 0 asi que porsiacaso los dos
+            patron =/[0-9\s]/;// -> solo numeros
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+
 
         $('#btn_agregar').click(function () {
 //capturo los datos de los imput para registrarlo en la tabla
@@ -448,7 +456,14 @@
                 type:'post',
                 data:{'array2':JSON.stringify(dataVenta)},
                 success:function (response) {
-                   alert(response);
+                    swal({
+                        position: 'center',
+                        type: 'success',
+                        title: 'Compra Exitosa',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(window.location.reload.bind(window.location), 1000);
                 },
             });
 
@@ -497,39 +512,47 @@
             $('#RegiCom').click(function (e) {
                 e.preventDefault();
                 var frm = $('#ComProd');
+                var nombre=$('#nombre');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                $.ajax({
-                    url: '{{url('RegistrarCompra')}}',
-                    dataType: 'json',
-                    type: 'post',
-                    data: frm.serialize(),
-                    success: function (response) {
+                    $.ajax({
+                        url: '{{url('RegistrarCompra')}}',
+                        dataType: 'json',
+                        type: 'post',
+                        data: frm.serialize(),
+                        success: function (response) {
 
-                        $('#ComprarModa').modal('hide');
-                        swal({
-                        position: 'center',
-                        type: 'success',
-                        title: 'Compra Exitosa',
-                        showConfirmButton: false,
-                        timer: 1500
+                            $('#ComprarModa').modal('hide');
+                            swal({
+                                position: 'center',
+                                type: 'success',
+                                title: 'Compra Exitosa',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            setTimeout(window.location.reload.bind(window.location), 1000);
+
+
+                        }
+
                     });
-                        setTimeout(window.location.reload.bind(window.location), 1000);
-                        return false;
-
-                    }
-
-                })
 
 
-            })
+                return false;
+
+            });
 
         $('#ComprarModa').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset');
         });
+
+$('#RegiCom').click(function () {
+
+
+})
 
     </script>
     @endsection

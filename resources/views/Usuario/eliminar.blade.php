@@ -1,22 +1,22 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
 role="dialog" tabindex="-1" id="modal-delete-{{$use->id}}">
   {{Form::Open(array('action'=>array('UsuarioController@destroy',$use->id),'method'=>'delete'))}}
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-confirm">
     <div class="modal-content">
+
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" 
-        aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Eliminar Usuario</h4>
+        <div class="icon-box">
+          <i class="fa fa-trash"></i>
+        </div>
+        <h4 class="modal-title">Estas seguro?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
-        <p>Confirme si desea Eliminar este Usuario</p><strong >
-          {{$use->email}}</strong>
+        <p>¿Realmente quieres borrar estos registro? Este proceso no se puede deshacer.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <button type="button"   class="btn btn-info" data-dismiss="modal">Cancel</button>
+        <button type="submit"  id="deleRol" class="btn btn-danger" >Eliminar</button>
       </div>
     </div>
   </div>

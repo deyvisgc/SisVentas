@@ -131,6 +131,12 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank"></a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">SYS | VENTAS Version 1.0 <i class="far fa-heart text-danger"></i></span>
+            </div>
+        </footer>
     </div>
 
     <!--modal registrar-->
@@ -173,7 +179,7 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">N# DNI</label>
-                                    <input type="number" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="dni_Ve" >
+                                    <input type="text" maxlength="8" onkeypress="return controltag(event)" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="dni_Ve" >
                                     <p class="errorDni text-danger hidden"></p>
                                 </div>
                             </div>
@@ -188,7 +194,7 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">N# Telefono</label>
-                                    <input type="number" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="telefono_ve" >
+                                    <input type="text" maxlength="9" onkeypress="return controltag(event)" class="form-control" id="descripccion_pro" required="Campo Obligatorio"  name="telefono_ve" >
                                     <p class="errorTele text-danger hidden"></p>
                                 </div>
                             </div>
@@ -305,7 +311,7 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">N# DNI</label>
-                                    <input type="number" class="form-control" id="dni_Ve" required="Campo Obligatorio"  name="dni_Ve" >
+                                    <input type="text"  maxlength="8" onkeypress="return controltag(event)" class="form-control" id="dni_Ve" required="Campo Obligatorio"  name="dni_Ve" >
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -317,7 +323,7 @@
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">N# Telefono</label>
-                                    <input type="number" class="form-control" id="telefono_ve" required="Campo Obligatorio"  name="telefono_ve" >
+                                    <input type="text"  maxlength="9" onkeypress="return controltag(event)" class="form-control" id="telefono_ve" required="Campo Obligatorio"  name="telefono_ve" >
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -475,6 +481,14 @@
 
 
         });
+        function controltag(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla==8) return true; // para la tecla de retroseso
+            else if (tecla==0||tecla==9)  return true; //<-- PARA EL TABULADOR-> su keyCode es 9 pero en tecla se esta transformando a 0 asi que porsiacaso los dos
+            patron =/[0-9\s]/;// -> solo numeros
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
 
         $('#RegisV').click(function (e) {
             $.ajaxSetup({

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 class ProductoController extends Controller
 {
     public  function index(Request $request){
-        $cate=Categoria::all();
+        $cate=DB::select("Select * from categoria where estado='Activado'");
 
 
         $producto=DB::select("SELECT p.idproducto,p.idcategoria,p.codigo,p.nombre_pro,p.stock,p.descripcion,p.imagen,p.estado,p.Precio_Pro,p.Fecha_Registro,categoria.nombre_cate FROM producto as p , categoria  WHERE p.idcategoria=categoria.idcategoria");

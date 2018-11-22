@@ -107,7 +107,7 @@ public function canDesactivo($id){
 
 }
     public function canActivo($id){
-        $cate=Categoria::where('idcategoria',$id)->update(['estado'=>'Activcado']);
+        $cate=Categoria::where('idcategoria',$id)->update(['estado'=>'Activado']);
         echo json_encode($cate);
 
     }

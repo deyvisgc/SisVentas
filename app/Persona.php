@@ -16,7 +16,7 @@ class Persona extends Model
         'dni',
         'Fecha_nacimiento',
         'Direccion',
-        'Estado',
+        'estado',
         'roles_idroles',
         'telefono',
 

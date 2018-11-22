@@ -23,7 +23,7 @@ class UsuarioController extends Controller
     }
 
     public function index(Request $request){
-        $rol=Rol::all();
+        $rol=DB::select("SELECT * FROM roles where rol_estado='Activado'");
         if($request ){
             $query=trim($request->get('buscar'));
             $users=DB::table('users as us')

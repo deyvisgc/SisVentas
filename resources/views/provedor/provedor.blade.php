@@ -1,97 +1,5 @@
 @extends('layouts.header')
-
-
 @section('contenido')
-
-
-    <style type="text/css">
-        body {
-            font-family: 'Varela Round', sans-serif;
-        }
-        .modal-confirm {
-            color: #636363;
-            width: 400px;
-        }
-        .modal-confirm .modal-content {
-            padding: 20px;
-            border-radius: 5px;
-            border: none;
-            text-align: center;
-            font-size: 14px;
-        }
-        .modal-confirm .modal-header {
-            border-bottom: none;
-            position: relative;
-        }
-        .modal-confirm h4 {
-            text-align: center;
-            font-size: 26px;
-            margin: 30px 0 -10px;
-        }
-        .modal-confirm .close {
-            position: absolute;
-            top: -5px;
-            right: -2px;
-        }
-        .modal-confirm .modal-body {
-            color: #999;
-        }
-        .modal-confirm .modal-footer {
-            border: none;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 13px;
-            padding: 10px 15px 25px;
-        }
-        .modal-confirm .modal-footer a {
-            color: #999;
-        }
-        .modal-confirm .icon-box {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto;
-            border-radius: 50%;
-            z-index: 9;
-            text-align: center;
-            border: 3px solid #f15e5e;
-        }
-        .modal-confirm .icon-box i {
-            color: #f15e5e;
-            font-size: 46px;
-            display: inline-block;
-            margin-top: 13px;
-        }
-        .modal-confirm .btn {
-            color: #fff;
-            border-radius: 4px;
-            background: #60c7c1;
-            text-decoration: none;
-            transition: all 0.4s;
-            line-height: normal;
-            min-width: 120px;
-            border: none;
-            min-height: 40px;
-            border-radius: 3px;
-            margin: 0 5px;
-            outline: none !important;
-        }
-        .modal-confirm .btn-info {
-            background: #c1c1c1;
-        }
-        .modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
-            background: #a8a8a8;
-        }
-        .modal-confirm .btn-danger {
-            background: #f15e5e;
-        }
-        .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-            background: #ee3535;
-        }
-        .trigger-btn {
-            display: inline-block;
-            margin: 100px auto;
-        }
-    </style>
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
@@ -101,14 +9,13 @@
                 </h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data table</li>
+                        <li class="breadcrumb-item active" aria-current="page">Provedor</li>
                     </ol>
                 </nav>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Data table</h4>
+                    <h4 class="card-title"></h4>
                     <div class="row">
                         <div class="col-14">
                             <div class="table-responsive">
@@ -160,28 +67,28 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Apellido Paterno</label>
                                 <input type="text" class="form-control" id="apellido_pa" required="Campo Obligatorio"
-                                  name="Apellido_pat"  placeholder="Apellido Paterno">
+                                  name="Apellido_pat"   placeholder="Apellido Paterno">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Apellido Materno</label>
                                 <input type="text" class="form-control" id="apellido_ma" required="Campo Obligatorio"
-                                        name="Apellido_Mat" placeholder="Apellido Materno" >
+                                        name="Apellido_Mat"  placeholder="Apellido Materno" >
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Telefono</label>
-                                <input type="number" class="form-control" id="telefono" required="Campo Obligatorio"  name="telefono"  placeholder="Telefono">
+                                <input type = "text" maxlength="9" onkeypress="return controltag(event)" class="form-control telef" id="telefono" required="Campo Obligatorio"  name="telefono"  placeholder="Telefono">
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">N°DNI</label>
-                                <input type="number" class="form-control" id="dni" required="Campo Obligatorio"  name="dni"  placeholder="DNI">
+                                <input type = "text" maxlength="8" onkeypress="return controltag(event)" class="form-control" id="dni" required="Campo Obligatorio"  name="dni"  placeholder="DNI">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -243,7 +150,7 @@
                     <center>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             <button type="submit"  class="btn btn-success" id="regisP">Registrar</button>
                         </div>
                     </center>
@@ -291,7 +198,7 @@
                           <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                               <div class="form-group">
                                   <label for="exampleInputEmail1">Telefono</label>
-                                  <input type="number" class="form-control" id="telefono_pro" required="Campo Obligatorio"  name="telefono" >
+                                  <input type="text" maxlength="5"  lass="form-control" id="telefono_pro" required="Campo Obligatorio"  name="telefono" >
                               </div>
                           </div>
 
@@ -348,7 +255,7 @@
                       <center>
 
                           <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                               <button type="submit"  class="btn btn-success" id="editar">Actualizar</button>
                           </div>
                       </center>
@@ -360,31 +267,12 @@
             </div>
         </div>
     </div>
-
-    <div id="deletProv" class="modal fade">
-        <div class="modal-dialog modal-confirm">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <div class="icon-box">
-                        <i class="fa fa-trash"></i>
-                    </div>
-                    <h4 class="modal-title">Estas seguro?</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Realmente quieres borrar estos registro? Este proceso no se puede deshacer.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="cancel" onreset="eliminar()" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    <button type="submit"  id="delete" class="btn btn-danger" >Eliminar</button>
-                </div>
+        <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.urbanui.com/" target="_blank"></a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">SYS | VENTAS Version 1.0 <i class="far fa-heart text-danger"></i></span>
             </div>
-        </div>
-    </div>
-
-
-
+        </footer>
 </div>
 
 @endsection
@@ -454,7 +342,16 @@
             })
 
 
-        })
+        });
+        function controltag(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla==8) return true; // para la tecla de retroseso
+            else if (tecla==0||tecla==9)  return true; //<-- PARA EL TABULADOR-> su keyCode es 9 pero en tecla se esta transformando a 0 asi que porsiacaso los dos
+           patron =/[0-9\s]/;// -> solo numeros
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+
 
 
         function editar(idprovedor) {
