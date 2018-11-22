@@ -46,7 +46,7 @@ class ventaController extends Controller
         c.idcliente FROM cliente as c , tipopersona as p 
         WHERE c.tipoPersona_idtipoPersona=p.idtipoPersona 
         and p.nombre LIKE '%".$produ."%' AND p.Apellido_pat LIKE '%".$produ."%'
-        AND p.Apellido_Materno LIKE '%".$produ."%'");
+        AND p.Apellido_Materno LIKE '%".$produ."%' and c.clien_estado='Activado'");
 
         foreach ($query as $quer)
         {
